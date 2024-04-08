@@ -14,15 +14,13 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
-import WorkspacesIcon from '@/assets/icons/workspaces.svg'
+import HomeIcon from '@/assets/icons/home.svg'
 
 defineProps<{
   pageTitle?: string
 }>()
 
 const route = useRoute()
-console.log('------------------------------------')
-// console.log(route.matched)
 
 interface BreadcrumbOutputItem {
   path: string
@@ -70,9 +68,9 @@ function replaceDynamicPathSegments(path: string) {
         <BreadcrumbItem>
           <Tooltip>
             <TooltipTrigger as-child>
-              <BreadcrumbLink href="/"><WorkspacesIcon class="w-5 h-5" /></BreadcrumbLink>
+              <BreadcrumbLink href="/"><HomeIcon class="w-5 h-5" /></BreadcrumbLink>
             </TooltipTrigger>
-            <TooltipContent>Workspaces</TooltipContent>
+            <TooltipContent>Home</TooltipContent>
           </Tooltip>
         </BreadcrumbItem>
       </TooltipProvider>
@@ -90,7 +88,6 @@ function replaceDynamicPathSegments(path: string) {
       </template>
     </BreadcrumbList>
   </Breadcrumb>
-  <!-- <pre>{{ breadcrumbs }}</pre> -->
 </template>
 
 <style scoped></style>

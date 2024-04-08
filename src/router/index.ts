@@ -10,8 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: RootView,
-      alias: '/w'
+      component: RootView
     },
     {
       path: '/w/:workspace',
@@ -122,7 +121,8 @@ const router = createRouter({
     {
       path: '/workspaces',
       name: 'Workspaces',
-      component: () => WorkspacesRootView
+      component: WorkspacesRootView,
+      alias: '/w'
     },
     {
       path: '/:pathMatch(.*)*',
