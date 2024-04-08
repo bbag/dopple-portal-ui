@@ -1,0 +1,1 @@
+import{ag as e,o,c as t,a as s}from"./index-CygWWM6N.js";const c={},n={class:"p-8"},a=s("h1",null,"Config matrix stuff will go here...",-1),r=[a];function _(i,f){return o(),t("div",n,r)}const l=e(c,[["render",_]]);export{l as default};
