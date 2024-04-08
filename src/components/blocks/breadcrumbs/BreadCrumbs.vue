@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, type ComputedRef } from 'vue'
 import { useRoute, type RouteParams, type RouteRecordName } from 'vue-router'
 
 import { useProductsStore } from '@/stores/products'
@@ -21,52 +21,45 @@ defineProps<{
 }>()
 
 const route = useRoute()
+console.log('------------------------------------')
+// console.log(route.matched)
 
 interface BreadcrumbOutputItem {
   path: string
-  name?: RouteRecordName | string[]
+  name?: RouteRecordName
 }
 
 const breadcrumbs = computed<BreadcrumbOutputItem[]>(() => {
-  return route.matched.reduce<BreadcrumbOutputItem[]>((acc, curr) => {
-    const formattedPath = replaceDynamicSegments(curr.path, route.params)
-    const existingItem = acc.find((item) => item.path === formattedPath)
-    if (!existingItem) {
-      acc.push({
-        path: formattedPath,
-        name: getDynamicName(curr.name || 'N/A', route.params)
+  const arr = [] as BreadcrumbOutputItem[]
+  route.matched.forEach((match) => {
+    const formattedPath = replaceDynamicPathSegments(match.path)
+    const hasExistingPath = arr.find((crumb) => crumb.path === formattedPath)
+    if (!hasExistingPath) {
+      let itemName = match.name as RouteRecordName
+      if (itemName === 'Product') {
+        itemName =
+          useProductsStore().products.find(
+            (product) =>
+              product.name === route.params.name && product.workspace === route.params.workspace
+          )?.title || 'N/A'
+      } else if (itemName === 'Workspace') {
+        itemName = route.params.workspace.toString()
+      }
+      arr.push({
+        name: itemName,
+        path: formattedPath
       })
     }
-    return acc
-  }, [])
+  })
+  return arr
 })
 
-// function replaceDynamicSegments(path: string, params: RouteParams): string {
-//   return path.replace(/:(\w+)/g, (_, paramName) => params[paramName] || '')
-// }
-
-function replaceDynamicSegments(path: string, params: RouteParams): string {
-  return path.replace(/:(\\w+)/g, (_, paramName) => {
-    const value = params[paramName]
-    if (Array.isArray(value)) {
-      return value.map((v) => encodeURIComponent(v)).join('/')
-    }
-    return value ? encodeURIComponent(value) : 'N/A'
+function replaceDynamicPathSegments(path: string) {
+  const params = route.params as RouteParams
+  Object.entries(params).forEach(([key, value]) => {
+    path = path.replace(`:${key}`, value as string)
   })
-}
-
-function getDynamicName(name: string[] | RouteRecordName, params: RouteParams) {
-  if (name === 'Workspace') {
-    return params.workspace
-  }
-
-  if (name === 'Product') {
-    const { workspace, name: productName } = params
-    const productTitle = useProductsStore().getProductTitle(productName, workspace)
-    return `${productTitle || 'N/A'}`
-  }
-
-  return name || 'N/A'
+  return path
 }
 </script>
 
@@ -97,6 +90,7 @@ function getDynamicName(name: string[] | RouteRecordName, params: RouteParams) {
       </template>
     </BreadcrumbList>
   </Breadcrumb>
+  <!-- <pre>{{ breadcrumbs }}</pre> -->
 </template>
 
 <style scoped></style>

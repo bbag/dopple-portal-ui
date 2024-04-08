@@ -32,8 +32,6 @@ const productData = useProductsStore().products.find(
   (p) => p.name === name && p.workspace === workspace
 )
 
-console.log(productData)
-
 const product = ref({
   prodName: productData?.name,
   prodWorkspace: productData?.workspace

@@ -12,6 +12,7 @@ defineProps<{
 
 <template>
   <div class="h-12 bg-white border-b flex items-center gap-4 px-8">
+    <!-- <div class="bg-white border-b gap-4 px-8"> -->
     <BreadCrumbs v-if="!hideBreadcrumbs" />
     <div class="flex gap-4 ml-auto">
       <Button variant="outline" size="sm">
