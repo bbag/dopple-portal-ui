@@ -1,0 +1,20 @@
+<script setup lang="ts">
+import { Card } from '@/components/ui/card'
+import Motorcycle from '@/assets/img/motorcycle.jpg'
+</script>
+
+<template>
+  <div class="grid gap-8 grid-cols-[minmax(0,_1fr)_32rem]">
+    <div class="p-8">
+      <Card
+        class="w-full h-full bg-no-repeat bg-contain bg-center"
+        :style="{ backgroundImage: `url(${Motorcycle})` }"
+      />
+    </div>
+    <div class="bg-white border-l p-8">
+      <h1>Environment Settings</h1>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
