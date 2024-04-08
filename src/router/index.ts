@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import RootView from '../views/RootView.vue'
 import NotFound from '../views/NotFound.vue'
 import WorkspacesRootView from '../views/WorkspacesRootView.vue'
 import WorkspaceView from '../views/WorkspaceView.vue'
@@ -8,8 +9,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Workspaces',
-      component: WorkspacesRootView,
+      name: 'Home',
+      component: RootView,
       alias: '/w'
     },
     {
@@ -86,7 +87,6 @@ const router = createRouter({
           name: 'Analytics',
           component: () => import('@/views/analytics/AnalyticsRootView.vue')
         },
-
         {
           path: 'editor',
           name: 'glTF Editor',
@@ -103,6 +103,26 @@ const router = createRouter({
           component: () => import('@/views/tools/UiBuilderView.vue')
         }
       ]
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: () => import('@/views/settings/AccountSettingsView.vue')
+    },
+    {
+      path: '/domains',
+      name: 'Domains',
+      component: () => import('@/views/settings/DomainsView.vue')
+    },
+    {
+      path: '/team',
+      name: 'Team',
+      component: () => import('@/views/settings/TeamView.vue')
+    },
+    {
+      path: '/workspaces',
+      name: 'Workspaces',
+      component: () => WorkspacesRootView
     },
     {
       path: '/:pathMatch(.*)*',

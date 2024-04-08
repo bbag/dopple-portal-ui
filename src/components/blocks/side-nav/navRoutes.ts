@@ -3,8 +3,13 @@ import {
   IconChartDots,
   IconExternalLink,
   IconFileCode,
-  IconSlideshow
+  IconSettings,
+  IconSlideshow,
+  IconUsers,
+  IconWorld
 } from '@tabler/icons-vue'
+
+import WorkspacesIcon from '@/assets/icons/workspaces.svg'
 
 import GltfEditor from '@/assets/icons/gltf-editor.svg'
 import HomeIcon from '@/assets/icons/home.svg'
@@ -14,7 +19,7 @@ import TextureIcon from '@/assets/icons/texture.svg'
 import UiBuilder from '@/assets/icons/ui-builder.svg'
 
 interface RouteCategory {
-  title: string | null
+  title: string
   routes: Route[]
 }
 
@@ -27,7 +32,7 @@ interface Route {
 
 export const routes: RouteCategory[] = [
   {
-    title: null,
+    title: '',
     routes: [
       {
         name: 'Overview',
@@ -115,12 +120,37 @@ export const routes: RouteCategory[] = [
         path: 'ui-builder'
       }
     ]
+  },
+  {
+    title: 'Settings',
+    routes: [
+      {
+        name: 'Workspaces',
+        icon: WorkspacesIcon,
+        path: '/workspaces'
+      },
+      {
+        name: 'Domains',
+        icon: IconWorld,
+        path: '/domains'
+      },
+      {
+        name: 'Team',
+        icon: IconUsers,
+        path: '/team'
+      },
+      {
+        name: 'Account Settings',
+        icon: IconSettings,
+        path: '/settings'
+      }
+    ]
+  },
+  {
+    title: 'Resources',
+    routes: [
+      { name: 'Documentation', icon: IconFileCode, path: 'https://docs.dopple.io' },
+      { name: 'Dopple.io', icon: IconExternalLink, path: 'https://www.dopple.io' }
+    ]
   }
-  // {
-  //   title: 'Resources',
-  //   routes: [
-  //     { name: 'Documentation', icon: IconFileCode, path: 'https://docs.dopple.io' },
-  //     { name: 'Dopple.io', icon: IconExternalLink, path: 'https://www.dopple.io' }
-  //   ]
-  // }
 ]

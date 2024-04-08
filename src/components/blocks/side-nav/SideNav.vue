@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
@@ -14,6 +15,21 @@ defineProps<{
 }>()
 
 const route = useRoute()
+
+function itemPath(path: string) {
+  if (path.startsWith('/')) {
+    return path
+  } else {
+    return `/w/${route.params.workspace}/${path}`
+  }
+}
+
+const filteredSidenavItems = computed(() => {
+  if (!route.params.workspace) {
+    return routes.filter((item) => ['Settings', 'Resources'].includes(item.title))
+  }
+  return routes
+})
 </script>
 
 <template>
@@ -26,9 +42,9 @@ const route = useRoute()
       <component
         :is="DoppleLogoStacked"
         v-show="!isCollapsed"
-        class="max-w-32 mx-auto my-8 h-auto"
+        class="max-w-24 mx-auto my-4 h-auto"
       />
-      <component :is="DoppleLogoIcon" v-show="isCollapsed" class="w-8 mx-auto my-4 h-auto" />
+      <component :is="DoppleLogoIcon" v-show="isCollapsed" class="w-6 mx-auto my-4 h-auto" />
     </RouterLink>
     <button
       @click="$emit('toggle-collapsed')"
@@ -38,11 +54,15 @@ const route = useRoute()
         <path d="M10 3l-5 5 5 5" />
       </svg>
     </button>
-    <nav :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
+    <nav class="overflow-y-auto" :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
       <TooltipProvider>
-        <div v-for="(category, categoryIndex) in routes" :key="categoryIndex" class="grid gap-1">
+        <div
+          v-for="(category, categoryIndex) in filteredSidenavItems"
+          :key="categoryIndex"
+          class="grid"
+        >
           <h2
-            v-if="category.title && !isCollapsed"
+            v-if="category.title !== '' && !isCollapsed"
             class="mt-4 px-2 py-2 text-xs text-slate-500 font-bold uppercase"
           >
             {{ category.title }}
@@ -54,8 +74,19 @@ const route = useRoute()
           <template v-for="(item, itemIndex) in category.routes" :key="itemIndex">
             <Tooltip>
               <TooltipTrigger as-child v-show="!$props.isCollapsed">
+                <a
+                  v-if="item.path.startsWith('http')"
+                  :href="item.path"
+                  target="_blank"
+                  v-show="$props.isCollapsed"
+                  class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full whitespace-nowrap transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 after:-left-3"
+                  :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
+                >
+                  <component :is="item.icon" class="size-6" />
+                </a>
                 <RouterLink
-                  :to="`/w/${$route.params.workspace}/${item.path}`"
+                  v-else
+                  :to="itemPath(item.path)"
                   v-show="$props.isCollapsed"
                   class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full whitespace-nowrap transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 after:-left-3"
                   :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
@@ -66,8 +97,20 @@ const route = useRoute()
               <TooltipContent side="right" :side-offset="5">
                 {{ item.name }}
               </TooltipContent>
+              <a
+                v-if="item.path.startsWith('http')"
+                :href="item.path"
+                target="_blank"
+                v-show="!$props.isCollapsed"
+                class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full whitespace-nowrap transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
+                :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
+              >
+                <component :is="item.icon" class="size-6" />
+                {{ item.name }}
+              </a>
               <RouterLink
-                :to="`/w/${$route.params.workspace}/${item.path}`"
+                v-else
+                :to="itemPath(item.path)"
                 v-show="!$props.isCollapsed"
                 class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full whitespace-nowrap transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
                 :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
@@ -84,15 +127,15 @@ const route = useRoute()
 </template>
 
 <style scoped>
-a::after {
+nav a::after {
   @apply content-[''] absolute top-0 h-full bg-blue-500 rounded-r-lg w-1 transition duration-500 -translate-x-[calc(100%+1px)];
 }
-a.router-link-exact-active,
-a.router-link-active:not(.workspace-overview-link) {
+nav a.router-link-exact-active,
+nav a.router-link-active:not(.workspace-overview-link) {
   @apply text-blue-500 bg-opacity-5;
 }
-a.router-link-exact-active::after,
-a.router-link-active:not(.workspace-overview-link)::after {
+nav a.router-link-exact-active::after,
+nav a.router-link-active:not(.workspace-overview-link)::after {
   @apply translate-x-0;
 }
 </style>

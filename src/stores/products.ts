@@ -129,7 +129,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: 'dd79a89b-c610-4254-9809-755dd0824629',
       title: 'Boat',
       name: 'arrow_boat',
       workspace: 'demo-assets',
@@ -148,7 +148,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '642773f1-4e99-4354-8504-ee85b597a173',
       title: 'Restoration Hardware - Couch',
       name: 'rh-couch',
       workspace: 'rh-assets',
@@ -167,7 +167,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '669b3f4c-3adf-49fd-ab12-dac0ab182539',
       title: 'Crate & Barrel Table',
       name: 'crate-barrel-demo',
       workspace: 'crate-barrel-assets',
@@ -186,7 +186,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '0105f181-c92f-4e67-a7e6-06fe8ac43921',
       title: 'Bike',
       name: 'arrow_bicycle_mvp',
       workspace: 'demo-assets',
@@ -205,7 +205,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '7eaabb1c-fa7b-48d7-94aa-9629c19164bb',
       title: 'Luggage',
       name: 'arrow_luggage',
       workspace: 'demo-assets',
@@ -224,7 +224,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '1aad0a2c-52d7-4afe-9137-3f9c1db328bc',
       title: 'Mixer',
       name: 'arrow_mixer',
       workspace: 'demo-assets',
@@ -243,7 +243,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '593b46c4-50c5-40ac-9cfb-c1eec09ef579',
       title: 'Sofa',
       name: 'arrow_sofa',
       workspace: 'test-workspace',
@@ -262,7 +262,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: 'e3d1b823-d95a-42b8-9830-c6071f257fc7',
       title: 'Sneaker',
       name: 'arrow_sneaker',
       workspace: 'demo-assets',
@@ -281,7 +281,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '8b25b00c-62f0-45b2-b2a1-429b1a190921',
       title: 'Ring',
       name: 'arrow_ring',
       workspace: 'test-workspace',
@@ -300,7 +300,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '19538769-4812-43e8-8392-55a76b469534',
       title: 'Guitar',
       name: 'arrow_guitar',
       workspace: 'test-workspace',
@@ -319,7 +319,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '26910000-d7d3-4f7f-97e8-aac3328c1225',
       title: 'Power Saw',
       name: 'arrow_saw',
       workspace: 'test-workspace',
@@ -338,7 +338,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '6d70fe4f-b9db-4685-b88c-6e3020df38d4',
       title: 'Watch',
       name: 'arrow_watch',
       workspace: 'demo-assets',
@@ -357,7 +357,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '7a48f86c-e07e-47b9-a8f3-2664de1d6451',
       title: 'Helmet',
       name: 'arrow_helmet',
       workspace: 'demo-assets',
@@ -376,7 +376,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: '39017d41-7b70-4292-9aa4-5647aafae2ce',
       title: 'Chair',
       name: 'arrow_chair',
       workspace: 'demo-assets',
@@ -395,7 +395,7 @@ export const useProductsStore = defineStore('products', () => {
       hotspots: []
     },
     {
-      id: '',
+      id: 'e3f9b709-fb13-4b24-b075-d47b617665c2',
       title: 'Golf Caddy',
       name: 'golf_caddy',
       workspace: 'demo-assets',

@@ -12,7 +12,6 @@ import Button from '@/components/ui/button/Button.vue'
 import DataTable from '@/components/blocks/data-table/DataTable.vue'
 import { columns } from '@/components/blocks/data-table/columns'
 
-// import { IconPlus } from '@tabler/icons-vue'
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
 </script>
 
