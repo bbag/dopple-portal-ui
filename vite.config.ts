@@ -10,7 +10,8 @@ import autoprefixer from 'autoprefixer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/dopple-portal-ui/',
+  // '/dopple-portal-ui/' = the repo name
+  base: process.env.NODE_ENV === 'production' ? '/dopple-portal-ui/' : '',
   css: {
     postcss: {
       plugins: [tailwind(), autoprefixer()]

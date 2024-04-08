@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import NotFound from '../views/NotFound.vue'
 import WorkspacesRootView from '../views/WorkspacesRootView.vue'
 import WorkspaceView from '../views/WorkspaceView.vue'
 
@@ -103,6 +103,11 @@ const router = createRouter({
           component: () => import('@/views/tools/UiBuilderView.vue')
         }
       ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound
     }
   ]
 })
