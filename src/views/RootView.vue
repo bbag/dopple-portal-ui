@@ -33,7 +33,7 @@ workspaces.forEach((workspace) => {
 <template>
   <LayoutMain>
     <div class="p-8">
-      <h1 class="text-3xl font-bold mb-8">Welcome!</h1>
+      <h1 class="text-3xl font-bold mb-8">Dopple Platform</h1>
     </div>
   </LayoutMain>
 </template>
