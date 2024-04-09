@@ -13,7 +13,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
           <CardTitle>Title</CardTitle>
           <CardDescription>Description</CardDescription>
         </CardHeader>
-        <CardContent>Content</CardContent>
+        <CardContent>
+          <table>
+            <tr>
+              <td>Name</td>
+              <td>John Doe</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>UZUeh@example.com</td>
+            </tr>
+            <tr>
+              <td>Client ID</td>
+              <td>1234567890</td>
+            </tr>
+          </table>
+        </CardContent>
       </Card>
     </div>
   </LayoutMain>

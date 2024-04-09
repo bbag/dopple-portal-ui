@@ -46,7 +46,8 @@ const sections = [
 
 <template>
   <div class="p-8 max-w-[104rem] mx-auto">
-    <h1 class="text-3xl font-bold mb-8">Welcome!</h1>
+    <h1 class="text-3xl font-bold">Overview</h1>
+    <h2 class="text-2xl text-slate-600 mb-8">{{ $route.params.workspace }}</h2>
     <div class="mb-4">
       <Select>
         <SelectTrigger class="w-[180px]">
