@@ -21,6 +21,7 @@ import { ref } from 'vue'
 import DataTablePagination from './DataTablePagination.vue'
 import DataTableToolbar from './DataTableToolbar.vue'
 import { valueUpdater } from '@/lib/utils'
+import { HoverCard } from '@/components/ui/hover-card'
 import {
   Table,
   TableBody,
@@ -47,7 +48,8 @@ const sorting = ref<SortingState>([
 ])
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({
-  versions: false
+  dateCreated: false,
+  workspace: false
 })
 const rowSelection = ref({})
 
@@ -109,7 +111,11 @@ const table = useVueTable({
               :key="row.id"
               :data-state="row.getIsSelected() && 'selected'"
             >
-              <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
+              <TableCell
+                v-for="cell in row.getVisibleCells()"
+                :key="cell.id"
+                class="[&:first-child]:w-12 [&:first-child]:pr-0"
+              >
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
               </TableCell>
             </TableRow>

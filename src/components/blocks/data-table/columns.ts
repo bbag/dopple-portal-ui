@@ -7,8 +7,13 @@ import { labels, statuses } from './data'
 import { type IProduct, type IVersion } from '@/stores/products'
 import DataTableColumnHeader from './DataTableColumnHeader.vue'
 import DataTableRowActions from './DataTableRowActions.vue'
-import { Checkbox } from '@/components/ui/checkbox'
+// import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+
+import IconInfo from '@/assets/icons/info.svg'
+
+import MotorcycleThumbnail from '@/assets/img/motorcycle.jpg'
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -22,29 +27,48 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 
 export const columns: ColumnDef<IProduct>[] = [
   {
-    id: 'select',
-    header: ({ table }) =>
-      h(Checkbox, {
-        checked:
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate'),
-        'onUpdate:checked': (value) => table.toggleAllPageRowsSelected(!!value),
-        ariaLabel: 'Select all',
-        class: 'translate-y-0.5'
-      }),
-    cell: ({ row }) =>
-      h(Checkbox, {
-        checked: row.getIsSelected(),
-        'onUpdate:checked': (value) => row.toggleSelected(!!value),
-        ariaLabel: 'Select row',
-        class: 'translate-y-0.5'
-      }),
-    enableSorting: false
+    id: 'info',
+    header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
+    cell: () =>
+      h(Popover, {}, [
+        h(
+          PopoverTrigger,
+          { class: 'font-medium flex items-center w-8' },
+          h(IconInfo, { class: 'text-slate-400 h-4 w-4 mx-auto' })
+        ),
+        h(
+          PopoverContent,
+          { class: 'w-48' },
+          h('img', { src: MotorcycleThumbnail, class: 'w-full h-auto' })
+        )
+      ]),
+    enableSorting: false,
+    enableHiding: false
   },
+  // {
+  //   id: 'select',
+  //   header: ({ table }) =>
+  //     h(Checkbox, {
+  //       checked:
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && 'indeterminate'),
+  //       'onUpdate:checked': (value) => table.toggleAllPageRowsSelected(!!value),
+  //       ariaLabel: 'Select all',
+  //       class: 'translate-y-0.5'
+  //     }),
+  //   cell: ({ row }) =>
+  //     h(Checkbox, {
+  //       checked: row.getIsSelected(),
+  //       'onUpdate:checked': (value) => row.toggleSelected(!!value),
+  //       ariaLabel: 'Select row',
+  //       class: 'translate-y-0.5'
+  //     }),
+  //   enableSorting: false
+  // },
   {
     accessorKey: 'title',
+    meta: { displayName: 'Title' },
     header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Title' }),
-
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
       return h(RouterLink, { to: `products/${row.original.name}`, class: 'flex space-x-2' }, [
@@ -63,12 +87,14 @@ export const columns: ColumnDef<IProduct>[] = [
   // },
   {
     accessorKey: 'name',
+    meta: { displayName: 'Name' },
     header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Name' }),
     cell: ({ row }) => h('div', { class: 'w-30 font-mono' }, row.getValue('name')),
     enableSorting: true
   },
   {
     accessorKey: 'workspace',
+    meta: { displayName: 'Workspace' },
     header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Workspace' }),
     cell: ({ row }) => h('div', { class: 'w-30 font-mono' }, row.getValue('workspace')),
     filterFn: (row, id, value) => {
@@ -78,13 +104,26 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   {
     accessorKey: 'versions',
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Versions' }),
-    cell: ({ row }) =>
-      h('div', { class: 'w-10 text-right' }, row.getValue<Array<IVersion>>('versions').length),
+    meta: { displayName: 'Version' },
+    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Version' }),
+    // cell: ({ row }) => {
+    //   const label = labels.find((label) => label.value === row.original.label)
+    //   return h(RouterLink, { to: `products/${row.original.name}`, class: 'flex space-x-2' }, [
+    //     h('span', { class: 'max-w-[500px] truncate font-medium' }, row.getValue('title')),
+    //     label ? h(Badge, { variant: 'outline', class: 'bg-background' }, () => label.label) : null
+    //   ])
+    // },
+    cell: ({ row }) => {
+      const currentVersion = row
+        .getValue<Array<IVersion>>('versions')
+        .find((version) => version.isDefault)
+      return h('div', { class: 'w-10 text-right' }, currentVersion?.draftRevision)
+    },
     enableSorting: false
   },
   {
     accessorKey: 'status',
+    meta: { displayName: 'Status' },
     header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Status' }),
     cell: ({ row }) => {
       const status = statuses.find((status) => status.value === row.getValue('status'))
@@ -99,7 +138,20 @@ export const columns: ColumnDef<IProduct>[] = [
     }
   },
   {
+    accessorKey: 'dateCreated',
+    meta: { displayName: 'Date Created' },
+    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Date Created' }),
+    cell: ({ row }) =>
+      h(
+        'div',
+        { class: 'whitespace-nowrap' },
+        dateFormatter.format(row.getValue<Date>('dateCreated'))
+      ),
+    enableSorting: true
+  },
+  {
     accessorKey: 'dateModified',
+    meta: { displayName: 'Date Modified' },
     header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Date Modified' }),
     cell: ({ row }) =>
       h(

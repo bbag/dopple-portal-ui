@@ -8,10 +8,7 @@ import {
   IconArrowRight,
   IconArrowUp,
   IconCircleCheck,
-  IconCircle,
-  IconCircleX,
-  IconHelpCircle,
-  IconClockHour4
+  IconCircle
 } from '@tabler/icons-vue'
 
 export const labels = [
@@ -36,31 +33,6 @@ export const statuses = [
     label: 'Draft',
     icon: h(IconCircle, { class: 'text-amber-500' })
   }
-  // {
-  //   value: 'backlog',
-  //   label: 'Backlog',
-  //   icon: h(IconHelpCircle)
-  // },
-  // {
-  //   value: 'todo',
-  //   label: 'Todo',
-  //   icon: h(IconCircle)
-  // },
-  // {
-  //   value: 'in progress',
-  //   label: 'In Progress',
-  //   icon: h(IconClockHour4)
-  // },
-  // {
-  //   value: 'done',
-  //   label: 'Done',
-  //   icon: h(IconCircleCheck)
-  // },
-  // {
-  //   value: 'canceled',
-  //   label: 'Canceled',
-  //   icon: h(IconCircleX)
-  // }
 ]
 
 export const priorities = [

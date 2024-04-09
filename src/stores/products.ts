@@ -8,6 +8,7 @@ export interface IProduct {
   workspace: string
   status: 'draft' | 'published'
   label: string
+  dateCreated: Date
   dateModified: Date
   models: string[]
   versions: IVersion[]
@@ -36,6 +37,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      dateCreated: new Date('2024-04-03T13:01:51'),
       dateModified: new Date('2024-04-03T13:01:51'),
       models: ['0wRtfJqUrw', 'bIEoS3Ad9g'],
       versions: [
@@ -73,6 +75,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      dateCreated: new Date('2024-04-02T12:08:59'),
       dateModified: new Date('2024-04-02T12:08:59'),
       models: ['7fC431d8dB'],
       versions: [
@@ -116,6 +119,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-03-29T20:03:27'),
       dateModified: new Date('2024-03-29T20:03:27'),
       models: ['F0601aA92d'],
       versions: [
@@ -135,6 +139,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-03-29T18:40:03'),
       dateModified: new Date('2024-03-29T18:40:03'),
       models: [],
       versions: [
@@ -154,6 +159,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'rh-assets',
       status: 'published',
       label: 'client',
+      dateCreated: new Date('2024-03-26T08:27:31'),
       dateModified: new Date('2024-03-26T08:27:31'),
       models: [],
       versions: [
@@ -173,6 +179,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'crate-barrel-assets',
       status: 'published',
       label: 'client',
+      dateCreated: new Date('2024-03-12T17:16:44'),
       dateModified: new Date('2024-03-12T17:16:44'),
       models: [],
       versions: [
@@ -192,6 +199,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-03-07T23:58:21'),
       dateModified: new Date('2024-03-07T23:58:21'),
       models: [],
       versions: [
@@ -211,6 +219,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-02-14T12:34:56'),
       dateModified: new Date('2024-02-14T12:34:56'),
       models: [],
       versions: [
@@ -230,6 +239,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-02-12T09:36:50'),
       dateModified: new Date('2024-02-12T09:36:50'),
       models: [],
       versions: [
@@ -249,6 +259,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-02-09T20:05:15'),
       dateModified: new Date('2024-02-09T20:05:15'),
       models: [],
       versions: [
@@ -268,6 +279,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-01-30T13:02:45'),
       dateModified: new Date('2024-01-30T13:02:45'),
       models: [],
       versions: [
@@ -287,6 +299,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'published',
       label: 'demo',
+      dateCreated: new Date('2024-01-30T13:01:51'),
       dateModified: new Date('2024-01-30T13:01:51'),
       models: [],
       versions: [
@@ -306,6 +319,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-01-30T12:58:19'),
       dateModified: new Date('2024-01-30T12:58:19'),
       models: [],
       versions: [
@@ -325,6 +339,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2024-01-29T17:04:30'),
       dateModified: new Date('2024-01-29T17:04:30'),
       models: [],
       versions: [
@@ -344,6 +359,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      dateCreated: new Date('2024-01-11T11:22:33'),
       dateModified: new Date('2024-01-11T11:22:33'),
       models: [],
       versions: [
@@ -363,6 +379,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2023-12-25T07:30:31'),
       dateModified: new Date('2023-12-25T07:30:31'),
       models: [],
       versions: [
@@ -382,6 +399,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2023-12-04T14:53:00'),
       dateModified: new Date('2023-12-04T14:53:00'),
       models: [],
       versions: [
@@ -401,6 +419,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      dateCreated: new Date('2023-11-27T14:01:28'),
       dateModified: new Date('2023-11-27T14:01:28'),
       models: [],
       versions: [

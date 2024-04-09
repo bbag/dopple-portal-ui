@@ -33,7 +33,7 @@ const columns = computed(() =>
     <DropdownMenuTrigger as-child>
       <Button variant="outline" size="sm" class="ml-auto hidden h-8 lg:flex">
         <IconAdjustmentsHorizontal class="mr-2 h-4 w-4" />
-        View
+        Columns
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end" class="w-[150px]">
@@ -42,11 +42,10 @@ const columns = computed(() =>
       <DropdownMenuCheckboxItem
         v-for="column in columns"
         :key="column.id"
-        class="capitalize"
         :checked="column.getIsVisible()"
         @update:checked="(value) => column.toggleVisibility(!!value)"
       >
-        {{ column.id }}
+        {{ column.columnDef.meta?.displayName || column.id }}
       </DropdownMenuCheckboxItem>
     </DropdownMenuContent>
   </DropdownMenu>
