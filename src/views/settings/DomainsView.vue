@@ -1,21 +1,17 @@
 <script setup lang="ts">
 import LayoutMain from '@/components/layouts/LayoutMain.vue'
 
+import { useDomainsStore } from '@/stores/domains'
+
+const domains = useDomainsStore().domains
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 import { IconTrash } from '@tabler/icons-vue'
-
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
-
-const domains = [
-  'https://www.mywebsite.com',
-  'https://www.example.net',
-  'http://localhost:1337',
-  'http://192.168.0.001:3000'
-]
 </script>
 
 <template>
@@ -38,7 +34,7 @@ const domains = [
                 </Label>
               </td>
               <td class="w-full py-1 relative">
-                <Input :id="`${domain}-${i}`" v-model="domains[i]" />
+                <Input :id="`${domain}-${i}`" v-model="domains[i].url" type="text" />
                 <Button size="icon-sm" variant="ghost" class="absolute right-1 top-2">
                   <IconTrash class="w-4 h-4" />
                 </Button>

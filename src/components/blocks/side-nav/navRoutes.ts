@@ -9,14 +9,13 @@ import {
   IconWorld
 } from '@tabler/icons-vue'
 
-import WorkspacesIcon from '@/assets/icons/workspaces.svg'
-
-import GltfEditor from '@/assets/icons/gltf-editor.svg'
-import HomeIcon from '@/assets/icons/home.svg'
-import ShoppingBagIcon from '@/assets/icons/shopping-bag.svg'
-import MaterialIcon from '@/assets/icons/material.svg'
-import TextureIcon from '@/assets/icons/texture.svg'
-import UiBuilder from '@/assets/icons/ui-builder.svg'
+import IconGltfEditor from '@/assets/icons/gltf-editor.svg'
+import IconHomeIcon from '@/assets/icons/home.svg'
+import IconShoppingBagIcon from '@/assets/icons/shopping-bag.svg'
+import IconMaterialIcon from '@/assets/icons/material.svg'
+import IconTextureIcon from '@/assets/icons/texture.svg'
+import IconUiBuilder from '@/assets/icons/ui-builder.svg'
+import IconWorkspaces from '@/assets/icons/workspaces.svg'
 
 interface RouteCategory {
   title: string
@@ -36,7 +35,7 @@ export const routes: RouteCategory[] = [
     routes: [
       {
         name: 'Overview',
-        icon: HomeIcon,
+        icon: IconHomeIcon,
         path: ''
       }
     ]
@@ -46,7 +45,7 @@ export const routes: RouteCategory[] = [
     routes: [
       {
         name: 'Products',
-        icon: ShoppingBagIcon,
+        icon: IconShoppingBagIcon,
         path: 'products'
       },
       {
@@ -56,12 +55,12 @@ export const routes: RouteCategory[] = [
       },
       {
         name: 'Materials',
-        icon: MaterialIcon,
+        icon: IconMaterialIcon,
         path: 'materials'
       },
       {
         name: 'Textures',
-        icon: TextureIcon,
+        icon: IconTextureIcon,
         path: 'textures'
       }
     ]
@@ -106,7 +105,7 @@ export const routes: RouteCategory[] = [
       },
       {
         name: 'glTF Editor',
-        icon: GltfEditor,
+        icon: IconGltfEditor,
         path: 'editor'
       },
       {
@@ -116,7 +115,7 @@ export const routes: RouteCategory[] = [
       },
       {
         name: 'UI Builder',
-        icon: UiBuilder,
+        icon: IconUiBuilder,
         path: 'ui-builder'
       }
     ]
@@ -126,7 +125,7 @@ export const routes: RouteCategory[] = [
     routes: [
       {
         name: 'Workspaces',
-        icon: WorkspacesIcon,
+        icon: IconWorkspaces,
         path: '/workspaces'
       },
       {
