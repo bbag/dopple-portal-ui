@@ -102,3 +102,7 @@ body {
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
+
+.shiki {
+  @apply p-4 rounded text-sm;
+}

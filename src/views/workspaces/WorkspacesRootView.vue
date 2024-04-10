@@ -1,11 +1,27 @@
 <script setup lang="ts">
+import { h, ref } from 'vue'
+
 import { RouterLink } from 'vue-router'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
+
 import { useProductsStore } from '@/stores/products'
 
 import LayoutMain from '@/components/layouts/LayoutMain.vue'
 
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +30,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/toast'
 
 import { IconDots } from '@tabler/icons-vue'
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
@@ -39,6 +65,27 @@ workspaces.forEach((workspace) => {
     (product) => product.workspace === workspace.value
   ).length
 })
+
+const newWorkspaceName = ref('')
+
+const formSchema = toTypedSchema(
+  z.object({
+    'new-workspace': z.string().regex(/^(?![-_])(?!.*[-_]$)[a-z\d-_]+$/)
+  })
+)
+
+const { handleSubmit } = useForm({
+  validationSchema: formSchema
+})
+
+const onSubmit = handleSubmit((values) => {
+  console.log('values')
+  console.log(values)
+  toast({
+    title: 'Workspace created:',
+    description: h('code', { class: 'text-white' }, 'my-workspace-name')
+  })
+})
 </script>
 
 <template>
@@ -46,10 +93,45 @@ workspaces.forEach((workspace) => {
     <div class="p-8 max-w-[104rem] mx-auto">
       <header class="flex justify-between gap-4 mb-8">
         <h1 class="text-3xl font-bold">Workspaces</h1>
-        <Button>
-          <IconPlusSmall class="mr-2 w-5 h-5" />
-          Add Workspace
-        </Button>
+        <Dialog>
+          <DialogTrigger>
+            <Button>
+              <IconPlusSmall class="mr-2 w-5 h-5" />
+              Add Workspace
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add Workspace</DialogTitle>
+              <DialogDescription>
+                <form class="space-y-4 my-4 text-slate-900" @submit="onSubmit">
+                  <FormField v-slot="{ componentField }" name="new-workspace">
+                    <FormItem>
+                      <FormLabel>Workspace name</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="my-workspace-name"
+                          v-bind="componentField"
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Must contain only lowercase letters, numbers, hyphens, and underscores, and
+                        must not start or end with a hyphen or underscore.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  </FormField>
+                  <div class="flex justify-end">
+                    <DialogClose as-child>
+                      <Button type="submit"> Create </Button>
+                    </DialogClose>
+                  </div>
+                </form>
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </header>
       <ul class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(22rem,1fr))]">
         <li v-for="workspace in workspaces" :key="workspace.value">

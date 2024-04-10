@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import SectionPreview from '@/components/sections/product-overview/ProductPreview.vue'
@@ -136,7 +136,12 @@ function scrollToSection(linkId: string) {
             </Select>
           </div>
         </header>
-        <Card v-for="section in productOverviewSections" :key="section.linkId" :id="section.linkId">
+        <Card
+          v-for="section in productOverviewSections"
+          :key="section.linkId"
+          :id="section.linkId"
+          class="overflow-hidden"
+        >
           <CardHeader>
             <CardTitle>{{ section.title }}</CardTitle>
             <CardDescription v-if="section.description">{{ section.description }}</CardDescription>
