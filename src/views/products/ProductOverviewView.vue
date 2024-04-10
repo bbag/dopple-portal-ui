@@ -25,6 +25,9 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+import { IconSlideshow } from '@tabler/icons-vue'
+import IconUiBuilder from '@/assets/icons/ui-builder.svg'
+
 import { useProductsStore } from '@/stores/products'
 const { name, workspace } = useRoute().params
 
@@ -121,6 +124,18 @@ function scrollToSection(linkId: string) {
       <div class="order-first grid gap-4">
         <header class="flex gap-4 justify-between">
           <h1 class="text-3xl font-bold">{{ productData?.title }}</h1>
+        </header>
+        <div class="flex flex-wrap gap-4 justify-between">
+          <div class="flex flex-wrap gap-4">
+            <Button variant="outline">
+              <IconSlideshow class="w-6 h-6 mr-2" />
+              Open in Virtual Studio
+            </Button>
+            <Button variant="outline">
+              <IconUiBuilder class="w-6 h-6 mr-2" />
+              Open in UI Builder
+            </Button>
+          </div>
           <div class="flex gap-4 items-center">
             <Label for="product-status">Status:</Label>
             <Select id="product-status" v-model="productStatus">
@@ -135,7 +150,7 @@ function scrollToSection(linkId: string) {
               </SelectContent>
             </Select>
           </div>
-        </header>
+        </div>
         <Card
           v-for="section in productOverviewSections"
           :key="section.linkId"

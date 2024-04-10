@@ -13,8 +13,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 import IconInfo from '@/assets/icons/info.svg'
 
-import MotorcycleThumbnail from '@/assets/img/motorcycle.jpg'
-
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
@@ -27,19 +25,27 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 
 export const columns: ColumnDef<IProduct>[] = [
   {
-    id: 'info',
+    id: 'thumbnail',
     header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
-    cell: () =>
+    cell: ({ row }) =>
       h(Popover, {}, [
         h(
           PopoverTrigger,
           { class: 'font-medium flex items-center w-8' },
-          h(IconInfo, { class: 'text-slate-400 h-4 w-4 mx-auto' })
+          h(
+            // IconInfo,
+            // { class: 'text-slate-400 h-4 w-4 mx-auto' }
+            'img',
+            {
+              src: row.original.thumbnail,
+              class: 'h-8 w-8 mx-auto rounded-sm border object-cover'
+            }
+          )
         ),
         h(
           PopoverContent,
-          { class: 'w-48' },
-          h('img', { src: MotorcycleThumbnail, class: 'w-full h-auto' })
+          { class: 'w-72' },
+          h('img', { src: row.original.thumbnail, class: 'w-full h-auto' })
         )
       ]),
     enableSorting: false,

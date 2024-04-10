@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { useProductsStore } from '@/stores/products'
 import { Card } from '@/components/ui/card'
-import Motorcycle from '@/assets/img/motorcycle.jpg'
+
+const product = useProductsStore().products.find(
+  (product) => product.name === useRoute().params.name
+)
+const thumbnail = product?.thumbnail
 </script>
 
 <template>
@@ -8,7 +14,7 @@ import Motorcycle from '@/assets/img/motorcycle.jpg'
     <div class="p-8">
       <Card
         class="w-full h-full bg-no-repeat bg-contain bg-center"
-        :style="{ backgroundImage: `url(${Motorcycle})` }"
+        :style="{ backgroundImage: `url(${thumbnail})` }"
       />
     </div>
     <div class="bg-white border-l p-8">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { Button } from '@/components/ui/button'
 
 const { name, workspace } = useRoute().params
 
@@ -29,11 +30,14 @@ const tabs = [
 
 <template>
   <div class="h-full grid grid-rows-[auto_minmax(0,_1fr)]">
-    <ul class="bg-white border-b flex align-end px-4">
+    <ul class="bg-white border-b flex items-center px-4">
       <li v-for="{ name, path } in tabs" :key="name">
         <RouterLink :to="path" class="tab-link text-sm">
           {{ name }}
         </RouterLink>
+      </li>
+      <li class="ml-auto">
+        <Button size="sm" disabled variant="outline"> Save </Button>
       </li>
     </ul>
     <RouterView />

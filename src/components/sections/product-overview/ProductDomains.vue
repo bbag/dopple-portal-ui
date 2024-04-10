@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-import Motorcycle from '@/assets/img/motorcycle.jpg'
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div>

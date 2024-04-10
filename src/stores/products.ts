@@ -1,6 +1,18 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+import BikeThumbnail from '@/assets/img/bike.jpg'
+import BoatThumbnail from '@/assets/img/boat.jpg'
+import GenericThumbnail from '@/assets/img/generic.jpg'
+import JacketThumbnail from '@/assets/img/jacket.jpg'
+import LuggageThumbnail from '@/assets/img/luggage.jpg'
+import MixerThumbnail from '@/assets/img/mixer.jpg'
+import MotorcycleThumbnail from '@/assets/img/motorcycle.jpg'
+import PurseThumbnail from '@/assets/img/purse.jpg'
+import RingThumbnail from '@/assets/img/ring.jpg'
+import SneakerThumbnail from '@/assets/img/sneaker.jpg'
+import SofaThumbnail from '@/assets/img/sofa.jpg'
+
 export interface IProduct {
   id: string
   title: string
@@ -8,6 +20,7 @@ export interface IProduct {
   workspace: string
   status: 'draft' | 'published'
   label: string
+  thumbnail: string
   dateCreated: Date
   dateModified: Date
   models: string[]
@@ -37,6 +50,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      thumbnail: MotorcycleThumbnail,
       dateCreated: new Date('2024-04-03T13:01:51'),
       dateModified: new Date('2024-04-03T13:01:51'),
       models: ['0wRtfJqUrw', 'bIEoS3Ad9g'],
@@ -75,6 +89,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      thumbnail: PurseThumbnail,
       dateCreated: new Date('2024-04-02T12:08:59'),
       dateModified: new Date('2024-04-02T12:08:59'),
       models: ['7fC431d8dB'],
@@ -119,6 +134,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: JacketThumbnail,
       dateCreated: new Date('2024-03-29T20:03:27'),
       dateModified: new Date('2024-03-29T20:03:27'),
       models: ['F0601aA92d'],
@@ -139,6 +155,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: BoatThumbnail,
       dateCreated: new Date('2024-03-29T18:40:03'),
       dateModified: new Date('2024-03-29T18:40:03'),
       models: [],
@@ -159,6 +176,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'rh-assets',
       status: 'published',
       label: 'client',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-03-26T08:27:31'),
       dateModified: new Date('2024-03-26T08:27:31'),
       models: [],
@@ -179,6 +197,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'crate-barrel-assets',
       status: 'published',
       label: 'client',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-03-12T17:16:44'),
       dateModified: new Date('2024-03-12T17:16:44'),
       models: [],
@@ -199,6 +218,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: BikeThumbnail,
       dateCreated: new Date('2024-03-07T23:58:21'),
       dateModified: new Date('2024-03-07T23:58:21'),
       models: [],
@@ -219,6 +239,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: LuggageThumbnail,
       dateCreated: new Date('2024-02-14T12:34:56'),
       dateModified: new Date('2024-02-14T12:34:56'),
       models: [],
@@ -239,6 +260,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: MixerThumbnail,
       dateCreated: new Date('2024-02-12T09:36:50'),
       dateModified: new Date('2024-02-12T09:36:50'),
       models: [],
@@ -259,6 +281,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      thumbnail: SofaThumbnail,
       dateCreated: new Date('2024-02-09T20:05:15'),
       dateModified: new Date('2024-02-09T20:05:15'),
       models: [],
@@ -279,6 +302,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: SneakerThumbnail,
       dateCreated: new Date('2024-01-30T13:02:45'),
       dateModified: new Date('2024-01-30T13:02:45'),
       models: [],
@@ -299,6 +323,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'published',
       label: 'demo',
+      thumbnail: RingThumbnail,
       dateCreated: new Date('2024-01-30T13:01:51'),
       dateModified: new Date('2024-01-30T13:01:51'),
       models: [],
@@ -319,6 +344,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-30T12:58:19'),
       dateModified: new Date('2024-01-30T12:58:19'),
       models: [],
@@ -339,6 +365,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-29T17:04:30'),
       dateModified: new Date('2024-01-29T17:04:30'),
       models: [],
@@ -359,6 +386,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-11T11:22:33'),
       dateModified: new Date('2024-01-11T11:22:33'),
       models: [],
@@ -379,6 +407,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-12-25T07:30:31'),
       dateModified: new Date('2023-12-25T07:30:31'),
       models: [],
@@ -399,6 +428,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-12-04T14:53:00'),
       dateModified: new Date('2023-12-04T14:53:00'),
       models: [],
@@ -419,6 +449,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-11-27T14:01:28'),
       dateModified: new Date('2023-11-27T14:01:28'),
       models: [],
