@@ -4,6 +4,7 @@ import { RouterLink, useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import WorkspaceSelect from './WorkspaceSelect.vue'
 
 import { routes } from './navRoutes'
 
@@ -37,7 +38,6 @@ const filteredSidenavItems = computed(() => {
     class="inset-y fixed left-0 z-2 flex h-full flex-col border-r"
     :class="[$props.isCollapsed ? 'w-16' : 'w-64']"
   >
-    <!-- <pre>{{ routes }}</pre> -->
     <RouterLink to="/">
       <component
         :is="DoppleLogoStacked"
@@ -54,6 +54,9 @@ const filteredSidenavItems = computed(() => {
         <path d="M10 3l-5 5 5 5" />
       </svg>
     </button>
+    <div v-show="!isCollapsed" class="px-4 mb-4">
+      <WorkspaceSelect />
+    </div>
     <nav class="overflow-y-auto" :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
       <TooltipProvider>
         <div

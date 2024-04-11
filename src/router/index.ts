@@ -4,6 +4,8 @@ import NotFound from '../views/NotFound.vue'
 import WorkspacesRootView from '../views/workspaces/WorkspacesRootView.vue'
 import WorkspaceView from '../views/workspaces/WorkspaceView.vue'
 
+import { useWorkspacesStore } from '@/stores/workspaces'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -130,6 +132,21 @@ const router = createRouter({
       component: NotFound
     }
   ]
+})
+
+// Used for updating the currently-selected workspace in the side-nav
+router.beforeEach((to, from, next) => {
+  const workspacesStore = useWorkspacesStore()
+  if (to.params.workspace) {
+    if (typeof to.params.workspace === 'string') {
+      workspacesStore.currentWorkspace = to.params.workspace
+    } else {
+      workspacesStore.currentWorkspace = to.params.workspace[0]
+    }
+  } else {
+    workspacesStore.currentWorkspace = ''
+  }
+  next()
 })
 
 export default router

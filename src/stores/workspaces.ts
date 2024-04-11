@@ -7,6 +7,7 @@ export interface IWorkspace {
 }
 
 export const useWorkspacesStore = defineStore('workspaces', () => {
+  const currentWorkspace = ref<string>('demo-assets')
   const workspaces = ref<IWorkspace[]>([
     {
       name: 'crate-barrel-assets',
@@ -26,5 +27,5 @@ export const useWorkspacesStore = defineStore('workspaces', () => {
     }
   ])
 
-  return { workspaces }
+  return { currentWorkspace, workspaces }
 })
