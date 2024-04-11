@@ -49,6 +49,27 @@ const inviteMember = ref({
       <div class="grid gap-4">
         <Card>
           <CardHeader>
+            <CardTitle>Organization</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead class="whitespace-nowrap">Org Name</TableHead>
+                  <TableHead class="w-full">Client ID</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{{ useClientStore().client.orgName }}</TableCell>
+                  <TableCell class="font-mono">{{ useClientStore().client.clientId }}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
             <CardTitle>Manage Members</CardTitle>
             <CardDescription>Add, edit, or remove members on your team.</CardDescription>
           </CardHeader>

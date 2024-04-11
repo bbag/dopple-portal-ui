@@ -8,7 +8,6 @@ import SectionAnalytics from '@/components/sections/product-overview/ProductAnal
 import SectionVersionHistory from '@/components/sections/product-overview/VersionHistory.vue'
 import SectionAssets from '@/components/sections/product-overview/ProductAssets.vue'
 import SectionEmbedCode from '@/components/sections/product-overview/EmbedCode.vue'
-import SectionDomains from '@/components/sections/product-overview/ProductDomains.vue'
 import SectionManage from '@/components/sections/product-overview/ManageProduct.vue'
 
 import { Button } from '@/components/ui/button'
@@ -86,12 +85,6 @@ const productOverviewSections: SectionData[] = [
     linkId: 'embed-code',
     component: SectionEmbedCode,
     description: 'Will display the embed code for this product.'
-  },
-  {
-    title: 'Domains',
-    linkId: 'domains',
-    component: SectionDomains,
-    description: 'Will list out domains that this product is authorized to be used on.'
   },
   {
     title: 'Manage',

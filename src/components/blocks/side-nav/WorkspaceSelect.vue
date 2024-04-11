@@ -42,6 +42,7 @@ watch(
         role="combobox"
         :aria-expanded="open"
         class="w-full justify-between"
+        :class="[selectedValue ? '' : 'text-slate-500']"
       >
         {{
           selectedValue
