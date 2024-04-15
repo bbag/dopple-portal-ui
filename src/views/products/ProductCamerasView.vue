@@ -1,26 +1,49 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useProductsStore } from '@/stores/products'
+import { useProductsStore, type ICamera } from '@/stores/products'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 
 import CamerasLockedLines from '@/components/sections/product-cameras/CamerasLockedLines.vue'
 
-import { IconVideo } from '@tabler/icons-vue'
+import { IconDeviceFloppy, IconEdit, IconTrash, IconVideo } from '@tabler/icons-vue'
 
 const product = useProductsStore().products.find(
   (product) => product.name === useRoute().params.name
 )
-const thumbnail = product?.thumbnail
-const cameras = product?.cameras || []
 
-const activeCameraIndex = ref(0)
+const selectedCameraName = ref('')
+
+onMounted(() => {
+  selectedCameraName.value = product?.cameras[0].name || ''
+})
+
+const isEditingName = ref(false)
+
+function handleEditName() {
+  isEditingName.value = !isEditingName.value
+  nextTick(() => {
+    if (isEditingName.value) {
+      console.log('focusing')
+      document.getElementById('camera-name')?.focus()
+    }
+  })
+}
 </script>
 
 <template>
@@ -28,12 +51,24 @@ const activeCameraIndex = ref(0)
     <div class="p-8">
       <Card
         class="w-full h-full bg-no-repeat bg-contain bg-center"
-        :style="{ backgroundImage: `url(${thumbnail})` }"
+        :style="{ backgroundImage: `url(${product?.thumbnail})` }"
       />
     </div>
     <div class="bg-white border-l p-8 space-y-4 overflow-y-auto">
       <h1 class="text-2xl font-bold">Cameras</h1>
-      <Table>
+      <Select v-model="selectedCameraName">
+        <SelectTrigger>
+          <SelectValue placeholder="Select camera..." />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem v-for="camera in product?.cameras" :key="camera.id" :value="camera.name">
+              {{ camera.name }}
+            </SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <!-- <Table>
         <TableBody>
           <TableRow v-for="camera in cameras" :key="camera.id">
             <TableCell class="p-2">
@@ -45,9 +80,36 @@ const activeCameraIndex = ref(0)
             </TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> -->
       <Separator />
-      <h2 class="text-lg font-bold">{{ cameras[activeCameraIndex]?.name }}:</h2>
+      <h2 class="text-lg font-bold">Camera Settings</h2>
+      <div>
+        <Label class="text-xs text-slate-700" for="camera-name">Camera Name</Label>
+        <div class="relative flex gap-2">
+          <Input
+            ref="cameraNameInput"
+            class="pl-10 pr-16"
+            :class="{ 'disabled:cursor-default': !isEditingName }"
+            type="text"
+            id="camera-name"
+            v-model="selectedCameraName"
+            :disabled="!isEditingName"
+          />
+          <IconVideo class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+          <Button variant="outline" size="icon" class="w-14" @click="handleEditName">
+            <IconEdit v-if="!isEditingName" class="w-5 h-5" />
+            <IconDeviceFloppy v-else class="w-5 h-5" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            class="w-14 text-rose-600 hover:text-rose-600 hover:bg-rose-100 hover:bg-opacity-50 hover:border-rose-200"
+          >
+            <IconTrash class="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+      <Separator />
       <div>
         <h3 class="font-bold mt-6">Zoom</h3>
         <div class="flex gap-2">
@@ -72,7 +134,8 @@ const activeCameraIndex = ref(0)
             </div>
           </div>
         </div>
-        <CamerasLockedLines :is-locked="cameras[activeCameraIndex]?.zoom.locked" />
+        <CamerasLockedLines />
+        <!-- <CamerasLockedLines :is-locked="selectedCamera.zoom.locked" /> -->
       </div>
       <div>
         <h3 class="font-bold mt-6">Horizontal Angle</h3>
@@ -98,7 +161,8 @@ const activeCameraIndex = ref(0)
             </div>
           </div>
         </div>
-        <CamerasLockedLines :is-locked="cameras[activeCameraIndex]?.hAngle.locked" />
+        <CamerasLockedLines />
+        <!-- <CamerasLockedLines :is-locked="selectedCamera.hAngle.locked" /> -->
       </div>
       <div>
         <h3 class="font-bold mt-6">Vertical Angle</h3>
@@ -124,7 +188,8 @@ const activeCameraIndex = ref(0)
             </div>
           </div>
         </div>
-        <CamerasLockedLines :is-locked="cameras[activeCameraIndex]?.vAngle.locked" />
+        <CamerasLockedLines />
+        <!-- <CamerasLockedLines :is-locked="selectedCamera.vAngle.locked" /> -->
       </div>
       <div>
         <h3 class="font-bold mt-6">Target</h3>

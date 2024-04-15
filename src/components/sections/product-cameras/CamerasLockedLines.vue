@@ -2,7 +2,7 @@
 import { IconLock, IconLockOpen } from '@tabler/icons-vue'
 
 defineProps<{
-  isLocked: boolean
+  isLocked?: boolean
 }>()
 </script>
 
