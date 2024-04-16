@@ -2,20 +2,46 @@
 import { type Ref, ref } from 'vue'
 import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
 
-import { IconCalendarMonth } from '@tabler/icons-vue'
-import type { DateRange } from 'radix-vue'
-import { RangeCalendar } from '@/components/ui/range-calendar'
 import { Button } from '@/components/ui/button'
+import type { DateRange } from 'radix-vue'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { RangeCalendar } from '@/components/ui/range-calendar'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
+
+import { IconCalendarMonth } from '@tabler/icons-vue'
 
 const df = new DateFormatter('en-US', {
   dateStyle: 'medium'
 })
 
+const today = new Date()
+
 const value = ref({
-  start: new CalendarDate(2022, 1, 20),
-  end: new CalendarDate(2022, 1, 20).add({ days: 20 })
+  start: new CalendarDate(today.getFullYear(), today.getMonth(), today.getDate()).subtract({
+    months: 6
+  }),
+  end: new CalendarDate(today.getFullYear(), today.getMonth(), today.getDate())
 }) as Ref<DateRange>
+
+const dateRanges = [
+  'Past 24 hours',
+  'Past 7 days',
+  'Past 30 days',
+  'Past 6 months',
+  'Past year',
+  'All time',
+  'Custom'
+]
+
+const currentDateRange = ref(dateRanges[3])
 
 // Charts
 import { use } from 'echarts/core'
@@ -55,7 +81,7 @@ use([
   ToolboxComponent
 ])
 
-const dates = [
+const legend = [
   'Oct, 2023',
   'Nov, 2023',
   'Dec, 2023',
@@ -101,7 +127,7 @@ const dummyOption = {
   },
   xAxis: {
     type: 'category',
-    data: dates,
+    data: legend,
     axisLabel: {
       fontWeight: 'bold',
       color: 'rgb(107 114 128)'
@@ -167,38 +193,52 @@ const dummyOption = {
 </script>
 
 <template>
-  <Popover>
-    <PopoverTrigger as-child>
-      <Button
-        variant="outline"
-        :class="[
-          'w-[280px] justify-start text-left font-normal',
-          !value && 'text-muted-foreground'
-        ]"
-      >
-        <IconCalendarMonth class="mr-2 h-5 w-5" />
-        <template v-if="value.start">
-          <template v-if="value.end">
-            {{ df.format(value.start.toDate(getLocalTimeZone())) }} -
-            {{ df.format(value.end.toDate(getLocalTimeZone())) }}
+  <div class="flex flex-wrap gap-4">
+    <Select v-model="currentDateRange">
+      <SelectTrigger class="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectItem v-for="option in dateRanges" :key="option" :value="option">
+            {{ option }}
+          </SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    <Popover>
+      <PopoverTrigger as-child>
+        <Button
+          variant="outline"
+          :class="[
+            'w-[280px] justify-start text-left font-normal',
+            !value && 'text-muted-foreground'
+          ]"
+          :disabled="currentDateRange !== 'Custom'"
+        >
+          <IconCalendarMonth class="mr-2 h-5 w-5" />
+          <template v-if="value.start">
+            <template v-if="value.end">
+              {{ df.format(value.start.toDate(getLocalTimeZone())) }} -
+              {{ df.format(value.end.toDate(getLocalTimeZone())) }}
+            </template>
+            <template v-else>
+              {{ df.format(value.start.toDate(getLocalTimeZone())) }}
+            </template>
           </template>
-
-          <template v-else>
-            {{ df.format(value.start.toDate(getLocalTimeZone())) }}
-          </template>
-        </template>
-        <template v-else> Pick a date </template>
-      </Button>
-    </PopoverTrigger>
-    <PopoverContent class="w-auto p-0">
-      <RangeCalendar
-        v-model="value"
-        initial-focus
-        :number-of-months="2"
-        :placeholder="value?.start"
-        @update:start-value="(startDate) => (value.start = startDate)"
-      />
-    </PopoverContent>
-  </Popover>
+          <template v-else> Pick a date </template>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent class="w-auto p-0">
+        <RangeCalendar
+          v-model="value"
+          initial-focus
+          :number-of-months="2"
+          :placeholder="value?.start"
+          @update:start-value="(startDate) => (value.start = startDate)"
+        />
+      </PopoverContent>
+    </Popover>
+  </div>
   <v-chart class="h-[40vh] w-full" :option="dummyOption" autoresize />
 </template>

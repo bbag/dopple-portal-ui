@@ -64,9 +64,7 @@ const productOverviewSections: SectionData[] = [
   {
     title: 'Analytics',
     linkId: 'analytics',
-    component: SectionAnalytics,
-    description:
-      'Will show how many times this product has been viewed over the last 24 hours, 7 days, month, etc.'
+    component: SectionAnalytics
   },
   {
     title: 'Version History',
@@ -77,14 +75,14 @@ const productOverviewSections: SectionData[] = [
     title: 'Assets',
     linkId: 'assets',
     component: SectionAssets,
-    description:
-      'Will list any assets (models, materias, textures) that are associated with this product.'
+    description: 'Any assets (models, materias, textures) that are associated with this product.'
   },
   {
     title: 'Embed Code',
     linkId: 'embed-code',
     component: SectionEmbedCode,
-    description: 'Will display the embed code for this product.'
+    description:
+      'Copy/paste the code below into your page’s HTML/JavaScript to display this product.'
   },
   {
     title: 'Manage',
@@ -104,7 +102,7 @@ function scrollToSection(linkId: string) {
 
 <template>
   <div id="product-overview" class="p-8 overflow-x-hidden overflow-y-auto">
-    <div class="max-w-4xl mx-auto grid gap-8 grid-cols-[minmax(0,_1fr)_auto]">
+    <div class="max-w-5xl mx-auto grid gap-8 grid-cols-[minmax(0,_1fr)_auto]">
       <div class="text-sm order-last">
         <ul class="sticky top-0">
           <li class="mb-2 font-bold border-b pb-2">Sections:</li>
