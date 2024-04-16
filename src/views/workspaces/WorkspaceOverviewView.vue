@@ -1,17 +1,5 @@
 <script setup lang="ts">
-// import { Button } from '@/components/ui/button'
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger
-// } from '@/components/ui/dialog'
-// import { Input } from '@/components/ui/input'
-// import { Label } from '@/components/ui/label'
-
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 import {
@@ -47,6 +35,13 @@ const sections = [
 <template>
   <div class="p-8 max-w-[104rem] mx-auto">
     <h1 class="text-3xl font-bold mb-8">{{ $route.params.workspace }}</h1>
+    <Alert variant="warning" class="mb-8 w-max">
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        This entire screen is just a placeholder for now. It'll eventually be the workspace
+        overview.
+      </AlertDescription>
+    </Alert>
     <div class="mb-4">
       <Select>
         <SelectTrigger class="w-[180px]">

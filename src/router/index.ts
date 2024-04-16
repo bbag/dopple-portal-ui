@@ -71,17 +71,38 @@ const router = createRouter({
         {
           path: 'models',
           name: 'Models',
-          component: () => import('@/views/models/ModelsRootView.vue')
+          component: () => import('@/views/models/ModelsRootView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'ModelsList',
+              component: () => import('@/views/models/ModelsListView.vue')
+            }
+          ]
         },
         {
           path: 'materials',
           name: 'Materials',
-          component: () => import('@/views/materials/MaterialsRootView.vue')
+          component: () => import('@/views/materials/MaterialsRootView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'MaterialsList',
+              component: () => import('@/views/materials/MaterialsListView.vue')
+            }
+          ]
         },
         {
           path: 'textures',
           name: 'Textures',
-          component: () => import('@/views/textures/TexturesRootView.vue')
+          component: () => import('@/views/textures/TexturesRootView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'TexturesList',
+              component: () => import('@/views/textures/TexturesListView.vue')
+            }
+          ]
         },
         {
           path: 'analytics',
