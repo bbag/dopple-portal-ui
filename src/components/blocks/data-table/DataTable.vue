@@ -32,6 +32,7 @@ import {
 } from '@/components/ui/table'
 
 import { type IProduct } from '@/stores/products'
+import { version } from 'os'
 
 interface DataTableProps {
   columns: ColumnDef<IProduct, any>[]
@@ -48,7 +49,8 @@ const sorting = ref<SortingState>([
 ])
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({
-  dateCreated: false,
+  status: false,
+  versions: false,
   workspace: false
 })
 const rowSelection = ref({})

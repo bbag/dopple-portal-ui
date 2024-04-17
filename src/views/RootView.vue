@@ -50,13 +50,13 @@ const domains = computed(() => useDomainsStore().domains.slice(0, domainDisplayC
   <LayoutMain>
     <div class="p-8 max-w-[104rem] mx-auto">
       <header class="flex justify-between gap-4 mb-8">
-        <h1 class="text-3xl font-bold">Welcome!</h1>
+        <h1 class="text-3xl font-bold">Welcome to Dopple!</h1>
       </header>
       <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(31rem,1fr))]">
         <Card class="flex flex-col">
           <CardHeader>
-            <CardTitle class="flex items-center">
-              <IconWorkspaces class="inline-block w-6 h-6 mr-2" />
+            <CardTitle class="relative pr-8">
+              <IconWorkspaces class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
               Workspaces
             </CardTitle>
             <CardDescription>Manage workspaces for your 3D products and assets.</CardDescription>
@@ -106,8 +106,8 @@ const domains = computed(() => useDomainsStore().domains.slice(0, domainDisplayC
         </Card>
         <Card class="flex flex-col">
           <CardHeader>
-            <CardTitle class="flex items-center">
-              <IconWorld class="inline-block w-6 h-6 mr-2" />
+            <CardTitle class="relative pr-8">
+              <IconWorld class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
               Domains
             </CardTitle>
             <CardDescription>
@@ -145,8 +145,8 @@ const domains = computed(() => useDomainsStore().domains.slice(0, domainDisplayC
         </Card>
         <Card class="flex flex-col">
           <CardHeader>
-            <CardTitle class="flex items-center">
-              <IconUsers class="inline-block w-6 h-6 mr-2" />
+            <CardTitle class="relative pr-8">
+              <IconUsers class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
               Team
             </CardTitle>
             <CardDescription> Manage roles and permissions for your team. </CardDescription>

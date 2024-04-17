@@ -103,6 +103,10 @@ body {
   stroke-width: 1.5;
 }
 
+:is(.tabler-icon, .line-icon) :is(circle, ellipse, line, path, polygon, polyline, rect) {
+  vector-effect: non-scaling-stroke;
+}
+
 .shiki {
   @apply p-4 rounded text-sm;
 }

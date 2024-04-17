@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import SectionPreview from '@/components/sections/product-overview/ProductPreview.vue'
@@ -24,7 +24,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-import { IconSlideshow } from '@tabler/icons-vue'
+import { IconEyeCode, IconSlideshow } from '@tabler/icons-vue'
 import IconUiBuilder from '@/assets/icons/ui-builder.svg'
 
 import { useProductsStore } from '@/stores/products'
@@ -39,11 +39,15 @@ const product = ref({
   prodWorkspace: productData?.workspace
 })
 
-const productStatus = ref('published')
-const isEditingProduct = ref(false)
+const productVersions = ref(productData?.versions.reverse() || [])
+const currentProductVersion = ref(
+  productVersions.value
+    .find((v) => v.draftRevision !== null && v.publishedVersion)
+    ?.draftRevision?.toString() || 'Unknown'
+)
 
 interface SectionData {
-  title: string
+  title?: string
   linkId: string
   component: any
   description?: string
@@ -51,7 +55,6 @@ interface SectionData {
 
 const productOverviewSections: SectionData[] = [
   {
-    title: 'Preview',
     linkId: 'preview',
     component: SectionPreview
   },
@@ -117,7 +120,30 @@ function scrollToSection(linkId: string) {
           <h1 class="text-3xl font-bold">{{ productData?.title }}</h1>
         </header>
         <div class="flex flex-wrap gap-4 justify-between">
+          <Select id="product-status" v-model="currentProductVersion">
+            <SelectTrigger class="w-48">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem
+                  v-for="(version, i) in productVersions"
+                  :key="(version.draftRevision || '') + i.toString()"
+                  :value="version.draftRevision?.toString() || 'Unknown'"
+                >
+                  {{
+                    `Version ${version.draftRevision}${version.isDefault ? ' (default)' : ''}` ||
+                    'Unknown Version'
+                  }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
           <div class="flex flex-wrap gap-4">
+            <Button variant="outline">
+              <IconEyeCode class="w-6 h-6 mr-2" />
+              Live Preview
+            </Button>
             <Button variant="outline">
               <IconSlideshow class="w-6 h-6 mr-2" />
               Open in Virtual Studio
@@ -127,20 +153,6 @@ function scrollToSection(linkId: string) {
               Open in UI Builder
             </Button>
           </div>
-          <div class="flex gap-4 items-center">
-            <Label for="product-status">Status:</Label>
-            <Select id="product-status" v-model="productStatus">
-              <SelectTrigger class="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="draft"> Draft </SelectItem>
-                  <SelectItem value="published"> Published </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
         <Card
           v-for="section in productOverviewSections"
@@ -148,12 +160,19 @@ function scrollToSection(linkId: string) {
           :id="section.linkId"
           class="overflow-hidden"
         >
-          <CardHeader>
+          <CardHeader v-if="section.title">
             <CardTitle>{{ section.title }}</CardTitle>
             <CardDescription v-if="section.description">{{ section.description }}</CardDescription>
           </CardHeader>
           <CardContent>
-            <component :is="section.component" />
+            <component
+              :is="section.component"
+              :draft-version="currentProductVersion"
+              :published-version="
+                productVersions.find((v) => v.draftRevision === +currentProductVersion)
+                  ?.publishedVersion
+              "
+            />
           </CardContent>
         </Card>
       </div>

@@ -37,8 +37,9 @@ export interface IHotspot {
 
 export interface IVersion {
   isDefault: boolean
-  draftRevision: number
-  published: number
+  draftRevision: number | null
+  publishedVersion: number | null
+  createdBy: string
   dateCreated: Date
 }
 
@@ -72,19 +73,22 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: false,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
           draftRevision: 2,
-          published: 2,
+          publishedVersion: null,
+          createdBy: 'Jane Fonda',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: true,
           draftRevision: 3,
-          published: 3,
+          publishedVersion: 2,
+          createdBy: 'Smitty Werbenjägermanjensen (he was #1)',
           dateCreated: new Date('2024-03-21T02:54:40')
         }
       ],
@@ -161,31 +165,36 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: false,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'H.M. “Howlin’ Mad” Murdock',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
           draftRevision: 2,
-          published: 2,
+          publishedVersion: 2,
+          createdBy: 'John “Hannibal” Smith',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
           draftRevision: 3,
-          published: 3,
+          publishedVersion: 3,
+          createdBy: 'Templeton “Faceman” Peck',
           dateCreated: new Date('2024-03-21T12:54:40')
         },
         {
-          isDefault: false,
+          isDefault: true,
           draftRevision: 4,
-          published: 4,
+          publishedVersion: 4,
+          createdBy: 'H.M. “Howlin’ Mad” Murdock',
           dateCreated: new Date('2024-03-21T12:57:51')
         },
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 5,
-          published: 5,
+          publishedVersion: null,
+          createdBy: 'B. A. Baracus',
           dateCreated: new Date('2024-03-26T20:03:27')
         }
       ],
@@ -220,8 +229,30 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Ice-T',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: 3,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-20T00:15:47')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 4,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-21T12:54:40')
         }
       ],
       cameras: [
@@ -253,10 +284,53 @@ export const useProductsStore = defineStore('products', () => {
       models: [],
       versions: [
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Rey Mysterio',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: null,
+          createdBy: 'Andre The Giant',
+          dateCreated: new Date('2024-03-21T12:54:40')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 3,
+          createdBy: 'Stone Cold Steve Austin',
+          dateCreated: new Date('2024-03-21T12:57:51')
+        },
+        {
+          isDefault: false,
+          draftRevision: 5,
+          publishedVersion: null,
+          createdBy: 'Triple H',
+          dateCreated: new Date('2024-03-26T20:03:27')
+        },
+        {
+          isDefault: false,
+          draftRevision: 6,
+          publishedVersion: null,
+          createdBy: 'The Undertaker',
+          dateCreated: new Date('2024-03-31T02:10:05')
+        },
+        {
+          isDefault: true,
+          draftRevision: 7,
+          publishedVersion: 4,
+          createdBy: 'Macho Man Randy Savage',
+          dateCreated: new Date('2024-04-03T11:56:22')
         }
       ],
       cameras: [
@@ -290,8 +364,30 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Ice-T',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: 3,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-20T00:15:47')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 4,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-21T12:54:40')
         }
       ],
       cameras: [
@@ -323,10 +419,25 @@ export const useProductsStore = defineStore('products', () => {
       models: [],
       versions: [
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 1,
-          published: 1,
-          dateCreated: new Date('2024-02-12T11:04:11')
+          publishedVersion: 1,
+          createdBy: 'Spider-Woman',
+          dateCreated: new Date('2024-02-27T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: null,
+          createdBy: 'Jean Grey',
+          dateCreated: new Date('2024-03-21T08:29:34')
+        },
+        {
+          isDefault: true,
+          draftRevision: 3,
+          publishedVersion: 2,
+          createdBy: 'Wonder Woman',
+          dateCreated: new Date('2024-04-10T12:54:40')
         }
       ],
       cameras: [
@@ -360,7 +471,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -395,8 +507,30 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Ice-T',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: 3,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-20T00:15:47')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 4,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-21T12:54:40')
         }
       ],
       cameras: [
@@ -430,7 +564,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -465,7 +600,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -498,10 +634,53 @@ export const useProductsStore = defineStore('products', () => {
       models: [],
       versions: [
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Rey Mysterio',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: null,
+          createdBy: 'Andre The Giant',
+          dateCreated: new Date('2024-03-21T12:54:40')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 3,
+          createdBy: 'Stone Cold Steve Austin',
+          dateCreated: new Date('2024-03-21T12:57:51')
+        },
+        {
+          isDefault: false,
+          draftRevision: 5,
+          publishedVersion: null,
+          createdBy: 'Triple H',
+          dateCreated: new Date('2024-03-26T20:03:27')
+        },
+        {
+          isDefault: false,
+          draftRevision: 6,
+          publishedVersion: null,
+          createdBy: 'The Undertaker',
+          dateCreated: new Date('2024-03-31T02:10:05')
+        },
+        {
+          isDefault: true,
+          draftRevision: 7,
+          publishedVersion: 4,
+          createdBy: 'Macho Man Randy Savage',
+          dateCreated: new Date('2024-04-03T11:56:22')
         }
       ],
       cameras: [
@@ -535,8 +714,30 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Ice-T',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: 3,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-20T00:15:47')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 4,
+          createdBy: 'Mr. T',
+          dateCreated: new Date('2024-03-21T12:54:40')
         }
       ],
       cameras: [
@@ -568,10 +769,25 @@ export const useProductsStore = defineStore('products', () => {
       models: [],
       versions: [
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 1,
-          published: 1,
-          dateCreated: new Date('2024-02-12T11:04:11')
+          publishedVersion: 1,
+          createdBy: 'Spider-Woman',
+          dateCreated: new Date('2024-02-27T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: null,
+          createdBy: 'Jean Grey',
+          dateCreated: new Date('2024-03-21T08:29:34')
+        },
+        {
+          isDefault: true,
+          draftRevision: 3,
+          publishedVersion: 2,
+          createdBy: 'Wonder Woman',
+          dateCreated: new Date('2024-04-10T12:54:40')
         }
       ],
       cameras: [
@@ -605,7 +821,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -640,7 +857,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -675,7 +893,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],
@@ -708,10 +927,53 @@ export const useProductsStore = defineStore('products', () => {
       models: [],
       versions: [
         {
-          isDefault: true,
+          isDefault: false,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftRevision: 2,
+          publishedVersion: 2,
+          createdBy: 'Rey Mysterio',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: false,
+          draftRevision: 3,
+          publishedVersion: null,
+          createdBy: 'Andre The Giant',
+          dateCreated: new Date('2024-03-21T12:54:40')
+        },
+        {
+          isDefault: false,
+          draftRevision: 4,
+          publishedVersion: 3,
+          createdBy: 'Stone Cold Steve Austin',
+          dateCreated: new Date('2024-03-21T12:57:51')
+        },
+        {
+          isDefault: false,
+          draftRevision: 5,
+          publishedVersion: null,
+          createdBy: 'Triple H',
+          dateCreated: new Date('2024-03-26T20:03:27')
+        },
+        {
+          isDefault: false,
+          draftRevision: 6,
+          publishedVersion: null,
+          createdBy: 'The Undertaker',
+          dateCreated: new Date('2024-03-31T02:10:05')
+        },
+        {
+          isDefault: true,
+          draftRevision: 7,
+          publishedVersion: 4,
+          createdBy: 'Macho Man Randy Savage',
+          dateCreated: new Date('2024-04-03T11:56:22')
         }
       ],
       cameras: [
@@ -745,7 +1007,8 @@ export const useProductsStore = defineStore('products', () => {
         {
           isDefault: true,
           draftRevision: 1,
-          published: 1,
+          publishedVersion: 1,
+          createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
         }
       ],

@@ -16,10 +16,7 @@ defineProps<{
       stroke-width="1"
       viewBox="0 0 100 6"
     >
-      <path
-        d="M 1 0 V 1 C 1 2 2 3 3 3 H 94 C 95 3 96 2 96 1 V 0"
-        vector-effect="non-scaling-stroke"
-      />
+      <path d="M 1 0 V 1 C 1 2 2 3 3 3 H 94 C 95 3 96 2 96 1 V 0" />
     </svg>
     <template v-if="isLocked">
       <IconLock class="bg-background w-6 h-4 absolute left-12 top-1/2 -translate-y-1/2 px-1" />

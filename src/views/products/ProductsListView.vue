@@ -16,7 +16,7 @@ import IconPlusSmall from '@/assets/icons/plus-small.svg'
 </script>
 
 <template>
-  <div class="p-8">
+  <div class="p-8 max-w-[104rem] mx-auto">
     <header class="flex justify-between mb-2">
       <h1 class="text-3xl mb-4 font-bold">Products</h1>
       <Button>

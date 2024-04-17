@@ -26,7 +26,7 @@ const dummyAssets = [
   },
   {
     id: '2210dc16-efcc-4727-85fd-d56c25465d79',
-    name: 'Carbon Fiber',
+    name: 'carbon_fiber',
     type: 'material',
     shortId: '47Qvs0zJC2',
     latestVersion: 1

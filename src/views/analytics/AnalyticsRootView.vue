@@ -5,7 +5,7 @@ import DummyAnalytics from '@/components/blocks/dummy-analytics/DummyAnalytics.v
 </script>
 
 <template>
-  <div class="p-8">
+  <div class="p-8 max-w-[104rem] mx-auto">
     <h1 class="text-3xl font-bold mb-8">Analytics</h1>
     <Card>
       <CardHeader>
