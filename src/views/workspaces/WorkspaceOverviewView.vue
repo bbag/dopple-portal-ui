@@ -40,11 +40,13 @@ import {
   TableRow
 } from '@/components/ui/table'
 
+import DummyAnalytics from '@/components/blocks/dummy-analytics/DummyAnalytics.vue'
+
 import { IconArrowNarrowRight, IconBox, IconChartDots } from '@tabler/icons-vue'
 import IconGltfEditor from '@/assets/icons/gltf-editor.svg'
-import IconMaterial from '@/assets/icons/material.svg'
+// import IconMaterial from '@/assets/icons/material.svg'
 import IconShoppingBag from '@/assets/icons/shopping-bag.svg'
-import IconTexture from '@/assets/icons/texture.svg'
+// import IconTexture from '@/assets/icons/texture.svg'
 
 // const sections = [
 //   {
@@ -75,8 +77,10 @@ import IconTexture from '@/assets/icons/texture.svg'
         $route.params.workspace
       }}</span>
     </h1>
-    <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(32rem,1fr))] grid-flow-row-dense">
-      <Card class="flex flex-col">
+    <div
+      class="grid gap-4 auto-rows-auto grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,3fr),minmax(0,2fr)] grid-flow-row-dense"
+    >
+      <Card class="flex flex-col col-span-1 xl:row-span-2 xl:col-span-2 2xl:col-span-1">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Products
@@ -125,7 +129,50 @@ import IconTexture from '@/assets/icons/texture.svg'
           </RouterLink>
         </CardFooter>
       </Card>
-      <Card class="flex flex-col">
+      <Card class="flex flex-col col-span-1 row-span-1">
+        <CardHeader>
+          <CardTitle class="relative pr-8">
+            Assets
+            <IconBox class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="flex-grow">
+          Will show info and links to models, materials, and textures soon...
+        </CardContent>
+      </Card>
+      <Card class="flex flex-col col-span-1 row-span-1">
+        <CardHeader>
+          <CardTitle class="relative pr-8">
+            Tools
+            <IconGltfEditor class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="flex-grow">
+          Will show links to glTF Editor, Virtual Studio, and UI Builder soon...
+        </CardContent>
+      </Card>
+      <Card class="flex flex-col col-span-1 row-span-1 xl:col-span-2">
+        <CardHeader>
+          <CardTitle class="relative pr-8">
+            Analytics
+            <IconChartDots class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="flex-grow">
+          <DummyAnalytics />
+        </CardContent>
+        <CardFooter class="justify-end">
+          <RouterLink
+            :to="`/w/${$route.params.workspace}/analytics`"
+            :class="buttonVariants({ variant: 'default' })"
+          >
+            View Analytics
+            <IconArrowNarrowRight class="w-6 h-6 ml-2" />
+          </RouterLink>
+        </CardFooter>
+      </Card>
+
+      <!-- <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Models
@@ -247,7 +294,7 @@ import IconTexture from '@/assets/icons/texture.svg'
             <IconArrowNarrowRight class="w-6 h-6 ml-2" />
           </RouterLink>
         </CardFooter>
-      </Card>
+      </Card> -->
     </div>
 
     <!-- <Alert variant="warning" class="mb-8 w-max">
