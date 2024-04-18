@@ -53,14 +53,27 @@ function handleDeleteHotspot(i: number) {
         class="w-full h-full bg-no-repeat bg-contain bg-center relative"
         :style="{ backgroundImage: `url(${thumbnail})` }"
       >
-        <button
-          v-for="(hotspot, i) in product?.hotspots"
-          :key="hotspot.id"
-          v-show="hotspotStates[i].isVisible"
-          class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center bg-blue-600 border border-2 border-white rounded-full ring-[0.375rem] ring-white/20"
-          :style="{ left: `${hotspot.position.x * 100}%`, top: `${hotspot.position.y * 100}%` }"
-          @click="hotspotStates[i].isOpen = true"
-        ></button>
+        <TooltipProvider>
+          <Tooltip v-for="(hotspot, i) in product?.hotspots" :key="hotspot.id">
+            <TooltipTrigger as-child>
+              <button
+                v-show="hotspotStates[i].isVisible"
+                class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-5 h-5 xl:w-6 xl:h-6 flex items-center justify-center text-white text-[0.6875rem] xl:text-xs font-medium bg-blue-600 border border-2 border-white rounded-full ring-[0.375rem] ring-white/20"
+                :class="[hotspotStates[i].isOpen ? 'bg-[#EF5493]' : '']"
+                :style="{
+                  left: `${hotspot.position.x * 100}%`,
+                  top: `${hotspot.position.y * 100}%`
+                }"
+                @click="hotspotStates[i].isOpen = true"
+              >
+                {{ i + 1 }}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{{ hotspot.title }}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </Card>
     </div>
     <div class="bg-white border-l p-8 space-y-4 overflow-y-auto">
