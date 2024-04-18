@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>Virtual Studio</div>
+  <LayoutMain>
+    <RouterView />
+  </LayoutMain>
 </template>
 
 <style scoped></style>

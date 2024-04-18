@@ -112,17 +112,53 @@ const router = createRouter({
         {
           path: 'editor',
           name: 'glTF Editor',
-          component: () => import('@/views/tools/GltfEditorView.vue')
+          component: () => import('@/views/tools/GltfEditorView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'glTF Editor Home',
+              component: () => import('@/views/tools/GltfEditorRootView.vue')
+            },
+            {
+              path: ':name',
+              name: 'Product (glTF Editor)',
+              component: () => import('@/views/tools/GltfEditorProductView.vue')
+            }
+          ]
         },
         {
           path: 'studio',
           name: 'Virtual Studio',
-          component: () => import('@/views/tools/VirtualStudioView.vue')
+          component: () => import('@/views/tools/VirtualStudioView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'Virtual Studio Home',
+              component: () => import('@/views/tools/VirtualStudioRootView.vue')
+            },
+            {
+              path: ':name',
+              name: 'Product (Virtual Studio)',
+              component: () => import('@/views/tools/VirtualStudioProductView.vue')
+            }
+          ]
         },
         {
           path: 'ui-builder',
           name: 'UI Builder',
-          component: () => import('@/views/tools/UiBuilderView.vue')
+          component: () => import('@/views/tools/UiBuilderView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'UI Builder Home',
+              component: () => import('@/views/tools/UiBuilderRootView.vue')
+            },
+            {
+              path: ':name',
+              name: 'Product (UI Builder)',
+              component: () => import('@/views/tools/UiBuilderProductView.vue')
+            }
+          ]
         }
       ]
     },

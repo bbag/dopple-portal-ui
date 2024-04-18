@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>glTF Editor</div>
+  <LayoutMain>
+    <RouterView />
+  </LayoutMain>
 </template>
 
 <style scoped></style>
