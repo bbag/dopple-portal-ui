@@ -11,18 +11,15 @@ export interface IMember {
   name: string
   email: string
   role: string
+  workspaces: string[]
+  customPermissions: string[]
 }
 
 export const roles = [
-  {
-    title: 'Admin'
-  },
-  {
-    title: 'Editor'
-  },
-  {
-    title: 'Viewer'
-  }
+  { title: 'Admin' },
+  { title: 'Editor' },
+  { title: 'Viewer' },
+  { title: 'Custom' }
 ]
 
 export const permissions = [
@@ -56,32 +53,44 @@ export const useClientStore = defineStore('client', () => {
       {
         name: 'Amanda Admin',
         email: 'amanda@example.com',
-        role: 'Admin'
+        role: 'Admin',
+        workspaces: [],
+        customPermissions: []
       },
       {
         name: 'Adam Admin',
         email: 'adam@example.com',
-        role: 'Admin'
+        role: 'Admin',
+        workspaces: [],
+        customPermissions: []
       },
       {
         name: 'Webdev Wayne',
         email: 'wayne@example.com',
-        role: 'Editor'
+        role: 'Editor',
+        workspaces: [],
+        customPermissions: []
       },
       {
         name: 'Artie Artist',
         email: 'artie@example.com',
-        role: 'Editor'
+        role: 'Editor',
+        workspaces: [],
+        customPermissions: []
       },
       {
         name: 'Marketing Mary',
         email: 'mary@example.com',
-        role: 'Viewer'
+        role: 'Viewer',
+        workspaces: [],
+        customPermissions: []
       },
       {
         name: 'Product Paul',
         email: 'paul@example.com',
-        role: 'Editor'
+        role: 'Editor',
+        workspaces: [],
+        customPermissions: []
       }
     ]
   })

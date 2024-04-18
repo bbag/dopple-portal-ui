@@ -103,7 +103,7 @@ function handleEditName() {
           <Button
             variant="outline"
             size="icon"
-            class="w-14 text-rose-600 hover:text-rose-600 hover:bg-rose-100 hover:bg-opacity-50 hover:border-rose-200"
+            class="w-14 hover:text-rose-600 hover:bg-rose-100 hover:bg-opacity-50 hover:border-rose-200"
           >
             <IconTrash class="w-5 h-5" />
           </Button>

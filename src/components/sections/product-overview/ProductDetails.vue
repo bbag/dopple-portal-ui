@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 import { IconCopy, IconDeviceFloppy, IconPencil } from '@tabler/icons-vue'
 
@@ -18,15 +19,16 @@ const productData = useProductsStore().products.find(
 const product = ref({
   prodTitle: productData?.title || '',
   prodName: productData?.name || '',
-  prodWorkspace: productData?.workspace || ''
+  prodWorkspace: productData?.workspace || '',
+  prodDescription: productData?.description || ''
 })
 
 const isEditingProduct = ref(false)
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="grid w-full max-w-sm items-center gap-1.5">
+  <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 lg:grid-flow-col-dense items-start">
+    <div class="grid w-full items-center gap-1.5">
       <Label for="product-title">Title</Label>
       <div class="relative">
         <Input
@@ -46,7 +48,7 @@ const isEditingProduct = ref(false)
         </Button>
       </div>
     </div>
-    <div class="grid w-full max-w-sm items-center gap-1.5">
+    <div class="grid w-full items-center gap-1.5">
       <Label for="product-name">Name</Label>
       <div class="relative">
         <Input
@@ -66,7 +68,7 @@ const isEditingProduct = ref(false)
         </Button>
       </div>
     </div>
-    <div class="grid w-full max-w-sm items-center gap-1.5">
+    <div class="grid w-full items-center gap-1.5">
       <Label for="product-workspace">Workspace</Label>
       <div class="relative">
         <Input
@@ -86,14 +88,23 @@ const isEditingProduct = ref(false)
         </Button>
       </div>
     </div>
+    <div class="grid w-full items-center gap-1.5 row-span-3">
+      <Label for="product-description">Description</Label>
+      <Textarea
+        id="product-description"
+        class="h-24 lg:h-48"
+        v-model="product.prodDescription"
+        :disabled="!isEditingProduct"
+      />
+    </div>
   </div>
-  <div class="flex justify-end">
+  <div class="flex justify-end mt-4">
     <Button variant="secondary" v-if="!isEditingProduct" @click="isEditingProduct = true">
-      <IconPencil class="w-6 h-6 mr-2" />
+      <IconPencil class="w-5 h-5 mr-2" />
       Edit
     </Button>
     <Button v-if="isEditingProduct" @click="isEditingProduct = false">
-      <IconDeviceFloppy class="w-6 h-6 mr-2" />
+      <IconDeviceFloppy class="w-5 h-5 mr-2" />
       Save
     </Button>
   </div>

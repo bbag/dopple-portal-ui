@@ -20,6 +20,7 @@ export interface IProduct {
   workspace: string
   status: 'draft' | 'published'
   label: string
+  description: string
   thumbnail: string
   dateCreated: Date
   dateModified: Date
@@ -30,14 +31,14 @@ export interface IProduct {
 }
 
 export interface IHotspot {
-  name: string
+  id: string
   title: string
   position: { x: number; y: number; z: number }
 }
 
 export interface IVersion {
   isDefault: boolean
-  draftRevision: number | null
+  draftVersion: number | null
   publishedVersion: number | null
   createdBy: string
   dateCreated: Date
@@ -65,6 +66,7 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      description: 'Vroom vroom I go zoom zoom.',
       thumbnail: MotorcycleThumbnail,
       dateCreated: new Date('2024-04-03T13:01:51'),
       dateModified: new Date('2024-04-03T13:01:51'),
@@ -72,23 +74,23 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
-          createdBy: 'John Doe',
+          createdBy: 'Product Paul',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: null,
-          createdBy: 'Jane Fonda',
+          createdBy: 'Webdev Wayne',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: true,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 2,
-          createdBy: 'Smitty Werbenjägermanjensen (he was #1)',
+          createdBy: 'Marketing Mary',
           dateCreated: new Date('2024-03-21T02:54:40')
         }
       ],
@@ -143,11 +145,11 @@ export const useProductsStore = defineStore('products', () => {
         }
       ],
       hotspots: [
-        { name: 'motor', title: 'Motor', position: { x: 0.5, y: 0.5, z: 0 } },
-        { name: 'suspension', title: 'Suspension', position: { x: 0.5, y: 0.5, z: 0.5 } },
-        { name: 'handlebars', title: 'Handlebars', position: { x: 0.5, y: 0.5, z: 1 } },
-        { name: 'tire_front', title: 'Front Tire', position: { x: 0.5, y: 0.5, z: 1.5 } },
-        { name: 'tire_rear', title: 'Rear Tire', position: { x: 0.5, y: 0.5, z: 2 } }
+        { id: 'motor', title: 'Motor', position: { x: 0.479, y: 0.584, z: 0 } },
+        { id: 'suspension', title: 'Suspension', position: { x: 0.611, y: 0.482, z: 0.5 } },
+        { id: 'handlebars', title: 'Handlebars', position: { x: 0.469, y: 0.258, z: 1 } },
+        { id: 'tire_front', title: 'Front Tire', position: { x: 0.767, y: 0.603, z: 1.5 } },
+        { id: 'tire_rear', title: 'Rear Tire', position: { x: 0.241, y: 0.626, z: 2 } }
       ]
     },
     {
@@ -157,6 +159,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: PurseThumbnail,
       dateCreated: new Date('2024-04-02T12:08:59'),
       dateModified: new Date('2024-04-02T12:08:59'),
@@ -164,35 +168,35 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'H.M. “Howlin’ Mad” Murdock',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
           createdBy: 'John “Hannibal” Smith',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 3,
           createdBy: 'Templeton “Faceman” Peck',
           dateCreated: new Date('2024-03-21T12:54:40')
         },
         {
           isDefault: true,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 4,
           createdBy: 'H.M. “Howlin’ Mad” Murdock',
           dateCreated: new Date('2024-03-21T12:57:51')
         },
         {
           isDefault: false,
-          draftRevision: 5,
+          draftVersion: 5,
           publishedVersion: null,
           createdBy: 'B. A. Baracus',
           dateCreated: new Date('2024-03-26T20:03:27')
@@ -221,6 +225,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: JacketThumbnail,
       dateCreated: new Date('2024-03-29T20:03:27'),
       dateModified: new Date('2024-03-29T20:03:27'),
@@ -228,28 +234,28 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
           createdBy: 'Ice-T',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 3,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-20T00:15:47')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 4,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-21T12:54:40')
@@ -278,6 +284,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: BoatThumbnail,
       dateCreated: new Date('2024-03-29T18:40:03'),
       dateModified: new Date('2024-03-29T18:40:03'),
@@ -285,49 +293,49 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
-          createdBy: 'Rey Mysterio',
+          createdBy: 'Rhea Ripley',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: null,
-          createdBy: 'Andre The Giant',
+          createdBy: 'Randy Orton',
           dateCreated: new Date('2024-03-21T12:54:40')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 3,
           createdBy: 'Stone Cold Steve Austin',
           dateCreated: new Date('2024-03-21T12:57:51')
         },
         {
           isDefault: false,
-          draftRevision: 5,
+          draftVersion: 5,
           publishedVersion: null,
           createdBy: 'Triple H',
           dateCreated: new Date('2024-03-26T20:03:27')
         },
         {
           isDefault: false,
-          draftRevision: 6,
+          draftVersion: 6,
           publishedVersion: null,
           createdBy: 'The Undertaker',
           dateCreated: new Date('2024-03-31T02:10:05')
         },
         {
           isDefault: true,
-          draftRevision: 7,
+          draftVersion: 7,
           publishedVersion: 4,
           createdBy: 'Macho Man Randy Savage',
           dateCreated: new Date('2024-04-03T11:56:22')
@@ -356,6 +364,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'rh-assets',
       status: 'published',
       label: 'client',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-03-26T08:27:31'),
       dateModified: new Date('2024-03-26T08:27:31'),
@@ -363,28 +373,28 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
           createdBy: 'Ice-T',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 3,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-20T00:15:47')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 4,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-21T12:54:40')
@@ -413,6 +423,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'crate-barrel-assets',
       status: 'published',
       label: 'client',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-03-12T17:16:44'),
       dateModified: new Date('2024-03-12T17:16:44'),
@@ -420,21 +432,21 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'Spider-Woman',
           dateCreated: new Date('2024-02-27T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: null,
           createdBy: 'Jean Grey',
           dateCreated: new Date('2024-03-21T08:29:34')
         },
         {
           isDefault: true,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 2,
           createdBy: 'Wonder Woman',
           dateCreated: new Date('2024-04-10T12:54:40')
@@ -463,17 +475,33 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: BikeThumbnail,
       dateCreated: new Date('2024-03-07T23:58:21'),
       dateModified: new Date('2024-03-07T23:58:21'),
       models: [],
       versions: [
         {
-          isDefault: true,
-          draftRevision: 1,
+          isDefault: false,
+          draftVersion: 1,
           publishedVersion: 1,
-          createdBy: 'John Doe',
+          createdBy: 'Squilliam Fancyson',
           dateCreated: new Date('2024-02-12T11:04:11')
+        },
+        {
+          isDefault: false,
+          draftVersion: 2,
+          publishedVersion: null,
+          createdBy: 'The Hash-slinging Slasher',
+          dateCreated: new Date('2024-03-19T08:29:34')
+        },
+        {
+          isDefault: true,
+          draftVersion: 3,
+          publishedVersion: 2,
+          createdBy: 'Smitty Werbenjägermanjensen (he was #1)',
+          dateCreated: new Date('2024-03-21T02:54:40')
         }
       ],
       cameras: [
@@ -499,6 +527,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: LuggageThumbnail,
       dateCreated: new Date('2024-02-14T12:34:56'),
       dateModified: new Date('2024-02-14T12:34:56'),
@@ -506,28 +536,28 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
           createdBy: 'Ice-T',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 3,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-20T00:15:47')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 4,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-21T12:54:40')
@@ -556,6 +586,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: MixerThumbnail,
       dateCreated: new Date('2024-02-12T09:36:50'),
       dateModified: new Date('2024-02-12T09:36:50'),
@@ -563,7 +595,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
@@ -592,6 +624,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: SofaThumbnail,
       dateCreated: new Date('2024-02-09T20:05:15'),
       dateModified: new Date('2024-02-09T20:05:15'),
@@ -599,7 +633,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
@@ -628,6 +662,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: SneakerThumbnail,
       dateCreated: new Date('2024-01-30T13:02:45'),
       dateModified: new Date('2024-01-30T13:02:45'),
@@ -635,49 +671,49 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
-          createdBy: 'Rey Mysterio',
+          createdBy: 'Rhea Ripley',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: null,
-          createdBy: 'Andre The Giant',
+          createdBy: 'Randy Orton',
           dateCreated: new Date('2024-03-21T12:54:40')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 3,
           createdBy: 'Stone Cold Steve Austin',
           dateCreated: new Date('2024-03-21T12:57:51')
         },
         {
           isDefault: false,
-          draftRevision: 5,
+          draftVersion: 5,
           publishedVersion: null,
           createdBy: 'Triple H',
           dateCreated: new Date('2024-03-26T20:03:27')
         },
         {
           isDefault: false,
-          draftRevision: 6,
+          draftVersion: 6,
           publishedVersion: null,
           createdBy: 'The Undertaker',
           dateCreated: new Date('2024-03-31T02:10:05')
         },
         {
           isDefault: true,
-          draftRevision: 7,
+          draftVersion: 7,
           publishedVersion: 4,
           createdBy: 'Macho Man Randy Savage',
           dateCreated: new Date('2024-04-03T11:56:22')
@@ -706,6 +742,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'published',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: RingThumbnail,
       dateCreated: new Date('2024-01-30T13:01:51'),
       dateModified: new Date('2024-01-30T13:01:51'),
@@ -713,28 +751,28 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'T-Pain',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
           createdBy: 'Ice-T',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 3,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-20T00:15:47')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 4,
           createdBy: 'Mr. T',
           dateCreated: new Date('2024-03-21T12:54:40')
@@ -763,6 +801,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-30T12:58:19'),
       dateModified: new Date('2024-01-30T12:58:19'),
@@ -770,21 +810,21 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'Spider-Woman',
           dateCreated: new Date('2024-02-27T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: null,
           createdBy: 'Jean Grey',
           dateCreated: new Date('2024-03-21T08:29:34')
         },
         {
           isDefault: true,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: 2,
           createdBy: 'Wonder Woman',
           dateCreated: new Date('2024-04-10T12:54:40')
@@ -813,6 +853,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'test-workspace',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-29T17:04:30'),
       dateModified: new Date('2024-01-29T17:04:30'),
@@ -820,7 +862,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
@@ -849,6 +891,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'published',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2024-01-11T11:22:33'),
       dateModified: new Date('2024-01-11T11:22:33'),
@@ -856,7 +900,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
@@ -885,6 +929,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-12-25T07:30:31'),
       dateModified: new Date('2023-12-25T07:30:31'),
@@ -892,7 +938,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')
@@ -921,6 +967,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-12-04T14:53:00'),
       dateModified: new Date('2023-12-04T14:53:00'),
@@ -928,49 +976,49 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'Hulk Hogan',
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           publishedVersion: 2,
-          createdBy: 'Rey Mysterio',
+          createdBy: 'Rhea Ripley',
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           publishedVersion: null,
-          createdBy: 'Andre The Giant',
+          createdBy: 'Randy Orton',
           dateCreated: new Date('2024-03-21T12:54:40')
         },
         {
           isDefault: false,
-          draftRevision: 4,
+          draftVersion: 4,
           publishedVersion: 3,
           createdBy: 'Stone Cold Steve Austin',
           dateCreated: new Date('2024-03-21T12:57:51')
         },
         {
           isDefault: false,
-          draftRevision: 5,
+          draftVersion: 5,
           publishedVersion: null,
           createdBy: 'Triple H',
           dateCreated: new Date('2024-03-26T20:03:27')
         },
         {
           isDefault: false,
-          draftRevision: 6,
+          draftVersion: 6,
           publishedVersion: null,
           createdBy: 'The Undertaker',
           dateCreated: new Date('2024-03-31T02:10:05')
         },
         {
           isDefault: true,
-          draftRevision: 7,
+          draftVersion: 7,
           publishedVersion: 4,
           createdBy: 'Macho Man Randy Savage',
           dateCreated: new Date('2024-04-03T11:56:22')
@@ -999,6 +1047,8 @@ export const useProductsStore = defineStore('products', () => {
       workspace: 'demo-assets',
       status: 'draft',
       label: 'demo',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ducimus consequuntur, ratione, dolores praesentium atque nulla inventore, dolore aspernatur doloribus illo eligendi qui pariatur.',
       thumbnail: GenericThumbnail,
       dateCreated: new Date('2023-11-27T14:01:28'),
       dateModified: new Date('2023-11-27T14:01:28'),
@@ -1006,7 +1056,7 @@ export const useProductsStore = defineStore('products', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           publishedVersion: 1,
           createdBy: 'John Doe',
           dateCreated: new Date('2024-02-12T11:04:11')

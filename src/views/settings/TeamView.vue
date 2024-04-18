@@ -4,19 +4,13 @@ import { ref } from 'vue'
 import { permissions, roles, useClientStore } from '@/stores/client'
 
 import LayoutMain from '@/components/layouts/LayoutMain.vue'
+import MemberSettingsPanel from '@/components/sections/team-settings/MemberSettingsPanel.vue'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -25,6 +19,16 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet'
 import {
   Table,
   TableBody,
@@ -34,7 +38,7 @@ import {
   TableRow
 } from '@/components/ui/table'
 
-import { IconCircleCheck, IconDots } from '@tabler/icons-vue'
+import { IconCircleCheck, IconSettings } from '@tabler/icons-vue'
 
 const inviteMember = ref({
   email: '',
@@ -78,49 +82,49 @@ const inviteMember = ref({
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>
-                  <TableHead class="w-full">Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead class="w-full">Role</TableHead>
+                  <TableHead>Manage</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow v-for="person in useClientStore().client.members" :key="person.email">
-                  <TableCell class="font-medium whitespace-nowrap">
-                    {{ person.name }}
-                  </TableCell>
-                  <TableCell class="whitespace-nowrap">
-                    {{ person.email }}
-                  </TableCell>
-                  <TableCell>
-                    <Select v-model="person.role">
-                      <SelectTrigger class="w-32">
-                        <SelectValue placeholder="Select a role" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem v-for="role in roles" :key="role.title" :value="role.title">
-                            {{ role.title }}
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </TableCell>
-                  <TableCell class="text-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <Button variant="ghost" size="icon-sm">
-                          <IconDots class="w-4 h-4" />
+                <TableRow
+                  v-for="(person, i) in useClientStore().client.members"
+                  :key="person.email"
+                >
+                  <Sheet>
+                    <TableCell class="font-medium whitespace-nowrap">
+                      {{ person.name }}
+                    </TableCell>
+                    <TableCell class="whitespace-nowrap">
+                      {{ person.email }}
+                    </TableCell>
+                    <TableCell>
+                      {{ person.role }}
+                    </TableCell>
+                    <TableCell class="text-center">
+                      <SheetTrigger>
+                        <Button variant="outline" size="icon">
+                          <IconSettings class="w-5 h-5" />
                         </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem> Edit </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem class="text-red-600"> Delete </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
+                      </SheetTrigger>
+                    </TableCell>
+                    <SheetContent class="flex flex-col max-w-sm md:max-w-[32rem]">
+                      <SheetHeader>
+                        <SheetTitle>Member Settings</SheetTitle>
+                      </SheetHeader>
+                      <Separator />
+                      <ScrollArea class="-m-2">
+                        <MemberSettingsPanel :personIndex="i" />
+                      </ScrollArea>
+                      <Separator />
+                      <SheetFooter>
+                        <SheetClose as-child>
+                          <Button> Save changes </Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
                 </TableRow>
               </TableBody>
             </Table>

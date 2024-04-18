@@ -57,7 +57,6 @@ const selectedValues = computed(() => new Set(props.column?.getFilterValue() as 
             >
               {{ selectedValues.size }} selected
             </Badge>
-
             <template v-else>
               <Badge
                 v-for="option in options.filter((option) => selectedValues.has(option.value))"

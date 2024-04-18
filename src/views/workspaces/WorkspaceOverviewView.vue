@@ -76,7 +76,7 @@ import IconTexture from '@/assets/icons/texture.svg'
       }}</span>
     </h1>
     <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(32rem,1fr))] grid-flow-row-dense">
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Products
@@ -84,7 +84,7 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>{{ products.length }} total</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent class="flex-grow">
           <Table>
             <TableHeader>
               <TableRow>
@@ -125,7 +125,7 @@ import IconTexture from '@/assets/icons/texture.svg'
           </RouterLink>
         </CardFooter>
       </Card>
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Models
@@ -133,7 +133,7 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>Description here.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent class="flex-grow">
           <Table>
             <TableHeader>
               <TableRow>
@@ -172,7 +172,7 @@ import IconTexture from '@/assets/icons/texture.svg'
           </RouterLink>
         </CardFooter>
       </Card>
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Materials
@@ -180,9 +180,18 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>Description here.</CardDescription>
         </CardHeader>
-        <CardContent> Content coming soon... </CardContent>
+        <CardContent class="flex-grow"> Content coming soon... </CardContent>
+        <CardFooter class="justify-end">
+          <RouterLink
+            :to="`/w/${$route.params.workspace}/models`"
+            :class="buttonVariants({ variant: 'default' })"
+          >
+            Call To Action
+            <IconArrowNarrowRight class="w-6 h-6 ml-2" />
+          </RouterLink>
+        </CardFooter>
       </Card>
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Textures
@@ -190,9 +199,18 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>Description here.</CardDescription>
         </CardHeader>
-        <CardContent> Content coming soon... </CardContent>
+        <CardContent class="flex-grow"> Content coming soon... </CardContent>
+        <CardFooter class="justify-end">
+          <RouterLink
+            :to="`/w/${$route.params.workspace}/models`"
+            :class="buttonVariants({ variant: 'default' })"
+          >
+            Call To Action
+            <IconArrowNarrowRight class="w-6 h-6 ml-2" />
+          </RouterLink>
+        </CardFooter>
       </Card>
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Analytics
@@ -200,9 +218,18 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>Description here.</CardDescription>
         </CardHeader>
-        <CardContent> Content coming soon... </CardContent>
+        <CardContent class="flex-grow"> Content coming soon... </CardContent>
+        <CardFooter class="justify-end">
+          <RouterLink
+            :to="`/w/${$route.params.workspace}/models`"
+            :class="buttonVariants({ variant: 'default' })"
+          >
+            Call To Action
+            <IconArrowNarrowRight class="w-6 h-6 ml-2" />
+          </RouterLink>
+        </CardFooter>
       </Card>
-      <Card>
+      <Card class="flex flex-col">
         <CardHeader>
           <CardTitle class="relative pr-8">
             Tools
@@ -210,7 +237,16 @@ import IconTexture from '@/assets/icons/texture.svg'
           </CardTitle>
           <CardDescription>Description here.</CardDescription>
         </CardHeader>
-        <CardContent> Content coming soon... </CardContent>
+        <CardContent class="flex-grow"> Content coming soon... </CardContent>
+        <CardFooter class="justify-end">
+          <RouterLink
+            :to="`/w/${$route.params.workspace}/models`"
+            :class="buttonVariants({ variant: 'default' })"
+          >
+            Call To Action
+            <IconArrowNarrowRight class="w-6 h-6 ml-2" />
+          </RouterLink>
+        </CardFooter>
       </Card>
     </div>
 

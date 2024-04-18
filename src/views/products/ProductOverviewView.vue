@@ -12,14 +12,11 @@ import SectionManage from '@/components/sections/product-overview/ManageProduct.
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  // SelectLabel,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
@@ -42,8 +39,8 @@ const product = ref({
 const productVersions = ref(productData?.versions.reverse() || [])
 const currentProductVersion = ref(
   productVersions.value
-    .find((v) => v.draftRevision !== null && v.publishedVersion)
-    ?.draftRevision?.toString() || 'Unknown'
+    .find((v) => v.draftVersion !== null && v.publishedVersion)
+    ?.draftVersion?.toString() || 'Unknown'
 )
 
 interface SectionData {
@@ -121,20 +118,17 @@ function scrollToSection(linkId: string) {
         </header>
         <div class="flex flex-wrap gap-4 justify-between">
           <Select id="product-status" v-model="currentProductVersion">
-            <SelectTrigger class="w-48">
+            <SelectTrigger class="w-36">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectItem
                   v-for="(version, i) in productVersions"
-                  :key="(version.draftRevision || '') + i.toString()"
-                  :value="version.draftRevision?.toString() || 'Unknown'"
+                  :key="(version.draftVersion || '') + i.toString()"
+                  :value="version.draftVersion?.toString() || 'Unknown'"
                 >
-                  {{
-                    `Version ${version.draftRevision}${version.isDefault ? ' (default)' : ''}` ||
-                    'Unknown Version'
-                  }}
+                  {{ `Draft v${version.draftVersion}` || 'Unknown Version' }}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -169,7 +163,7 @@ function scrollToSection(linkId: string) {
               :is="section.component"
               :draft-version="currentProductVersion"
               :published-version="
-                productVersions.find((v) => v.draftRevision === +currentProductVersion)
+                productVersions.find((v) => v.draftVersion === +currentProductVersion)
                   ?.publishedVersion
               "
             />

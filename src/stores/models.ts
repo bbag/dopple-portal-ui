@@ -17,7 +17,7 @@ export interface IProduct {
 
 export interface IVersion {
   isDefault: boolean
-  draftRevision: number
+  draftVersion: number
   published: number
   dateCreated: Date
 }
@@ -36,25 +36,25 @@ export const useModelsStore = defineStore('models', () => {
       versions: [
         {
           isDefault: false,
-          draftRevision: 1,
+          draftVersion: 1,
           published: 1,
           dateCreated: new Date('2024-02-12T11:04:11')
         },
         {
           isDefault: false,
-          draftRevision: 2,
+          draftVersion: 2,
           published: 2,
           dateCreated: new Date('2024-03-19T08:29:34')
         },
         {
           isDefault: false,
-          draftRevision: 3,
+          draftVersion: 3,
           published: 3,
           dateCreated: new Date('2024-03-21T02:54:40')
         },
         {
           isDefault: true,
-          draftRevision: 4,
+          draftVersion: 4,
           published: 4,
           dateCreated: new Date('2024-04-03T19:03:28')
         }
@@ -72,7 +72,7 @@ export const useModelsStore = defineStore('models', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           published: 1,
           dateCreated: new Date('2024-02-12T11:04:11')
         }
@@ -90,7 +90,7 @@ export const useModelsStore = defineStore('models', () => {
       versions: [
         {
           isDefault: true,
-          draftRevision: 1,
+          draftVersion: 1,
           published: 1,
           dateCreated: new Date('2024-02-12T11:04:11')
         }
