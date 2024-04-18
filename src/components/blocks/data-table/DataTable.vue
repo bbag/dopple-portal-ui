@@ -116,7 +116,7 @@ const table = useVueTable({
               <TableCell
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
-                class="[&:first-child]:w-12 [&:first-child]:pr-0"
+                class="[&:first-child]:w-8 [&:first-child]:pr-0 [&:nth-child(2)]:w-12 [&:nth-child(2)]:pr-0"
               >
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
               </TableCell>

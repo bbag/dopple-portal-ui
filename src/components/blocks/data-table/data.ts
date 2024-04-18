@@ -22,6 +22,19 @@ export const labels = [
   }
 ]
 
+export const favorites = [
+  {
+    value: true,
+    label: 'Favorite',
+    icon: h(IconCircleCheck, { class: 'text-emerald-600' })
+  },
+  {
+    value: false,
+    label: 'Non-Favorite',
+    icon: h(IconCircle, { class: 'text-amber-500' })
+  }
+]
+
 export const statuses = [
   {
     value: 'published',

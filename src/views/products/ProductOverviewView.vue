@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import SectionPreview from '@/components/sections/product-overview/ProductPreview.vue'
@@ -12,6 +12,7 @@ import SectionManage from '@/components/sections/product-overview/ManageProduct.
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import {
   Select,
   SelectContent,
@@ -21,8 +22,10 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-import { IconEyeCode, IconSlideshow } from '@tabler/icons-vue'
+import { IconEyeCode, IconSlideshow, IconStar, IconStarFilled } from '@tabler/icons-vue'
 import IconUiBuilder from '@/assets/icons/ui-builder.svg'
+
+import { toast } from 'vue-sonner'
 
 import { useProductsStore } from '@/stores/products'
 const { name, workspace } = useRoute().params
@@ -98,6 +101,30 @@ function scrollToSection(linkId: string) {
     sectionElement.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+function toggleIsFavorite() {
+  console.log('toggling favorite')
+  if (!productData) return
+  if (productData?.isFavorite) {
+    productData.isFavorite = false
+    toast('✖ Removed from favorites.', {
+      description: `${productData.title} has been removed from your favorites.`
+      // action: {
+      //   label: 'Undo',
+      //   onClick: () => console.log('Undo')
+      // }
+    })
+  } else if (!productData?.isFavorite) {
+    productData.isFavorite = true
+    toast('⭐ Added to favorites!', {
+      description: `${productData.title} has been added to your favorites.`
+      // action: {
+      //   label: 'Undo',
+      //   onClick: () => console.log('Undo')
+      // }
+    })
+  }
+}
 </script>
 
 <template>
@@ -108,13 +135,28 @@ function scrollToSection(linkId: string) {
           <li class="mb-2 font-bold border-b pb-2">Sections:</li>
           <li v-for="button in productOverviewSections" :key="button.linkId">
             <button @click="scrollToSection(button.linkId)">{{ button.title }}</button>
-            <!-- <button>{{ button.title }}</button> -->
           </li>
         </ul>
       </div>
       <div class="order-first grid gap-4">
-        <header class="flex gap-4 justify-between">
+        <header class="flex gap-4 items-center justify-between">
           <h1 class="text-3xl font-bold">{{ productData?.title }}</h1>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger as-child>
+                <Button variant="ghost" size="icon-xs" @click="toggleIsFavorite">
+                  <IconStarFilled
+                    v-if="productData?.isFavorite"
+                    class="w-5 h-5 text-amber-400 hover:text-amber-500"
+                  />
+                  <IconStar v-else class="w-5 h-5 text-slate-400 hover:text-slate-600" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Favorite</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </header>
         <div class="flex flex-wrap gap-4 justify-between">
           <Select id="product-status" v-model="currentProductVersion">

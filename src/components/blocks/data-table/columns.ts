@@ -4,14 +4,19 @@ import { h } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import { labels, statuses } from './data'
-import { type IProduct, type IVersion } from '@/stores/products'
+import { useProductsStore, type IProduct, type IVersion } from '@/stores/products'
 import DataTableColumnHeader from './DataTableColumnHeader.vue'
 import DataTableRowActions from './DataTableRowActions.vue'
 // import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
+import { IconStar, IconStarFilled } from '@tabler/icons-vue'
+
 import IconInfo from '@/assets/icons/info.svg'
+
+import { toast } from 'vue-sonner'
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -23,7 +28,55 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
   hour12: true
 })
 
+/** */
+function toggleFavorite(workspace: string, name: string) {
+  const product = useProductsStore().products.find(
+    (p) => p.name === name && p.workspace === workspace
+  )
+
+  if (product && product.isFavorite) {
+    product.isFavorite = false
+    toast('✖ Removed from favorites.', {
+      description: `${product.title} has been removed from your favorites.`
+      // action: {
+      //   label: 'Undo',
+      //   onClick: () => console.log('Undo')
+      // }
+    })
+  } else if (product && !product.isFavorite) {
+    product.isFavorite = true
+    toast('⭐ Added to favorites!', {
+      description: `${product.title} has been added to your favorites.`
+      // action: {
+      //   label: 'Undo',
+      //   onClick: () => console.log('Undo')
+      // }
+    })
+  }
+}
+
 export const columns: ColumnDef<IProduct>[] = [
+  {
+    id: 'favorite',
+    header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
+    cell: ({ row }) =>
+      h(
+        'button',
+        {
+          variant: 'ghost',
+          size: 'icon-xs',
+          class: row.original.isFavorite
+            ? 'w-6 h-6 p-0 flex items-center justify-center text-amber-400 hover:text-amber-500'
+            : 'w-6 h-6 p-0 flex items-center justify-center text-slate-300 hover:text-slate-400',
+          onClick: () => toggleFavorite(row.getValue('workspace'), row.getValue('name'))
+        },
+        row.original.isFavorite
+          ? h(IconStarFilled, { class: 'h-4 w-4' })
+          : h(IconStar, { class: 'h-4 w-4' })
+      ),
+    enableSorting: false,
+    enableHiding: false
+  },
   {
     id: 'thumbnail',
     header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
@@ -44,7 +97,7 @@ export const columns: ColumnDef<IProduct>[] = [
         ),
         h(
           PopoverContent,
-          { class: 'w-72' },
+          { class: 'w-72', align: 'center', side: 'right' },
           h('img', { src: row.original.thumbnail, class: 'w-full h-auto' })
         )
       ]),
@@ -123,7 +176,7 @@ export const columns: ColumnDef<IProduct>[] = [
       const currentVersion = row
         .getValue<Array<IVersion>>('versions')
         .find((version) => version.isDefault)
-      return h('div', { class: 'w-10 text-right' }, currentVersion?.draftRevision)
+      return h('div', { class: 'w-10 text-right' }, currentVersion?.draftVersion?.toString())
     },
     enableSorting: false
   },

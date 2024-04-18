@@ -3,7 +3,7 @@ import type { Table } from '@tanstack/vue-table'
 import { computed } from 'vue'
 import { type IProduct } from '@/stores/products'
 
-import { workspaces, statuses } from './data'
+import { favorites, workspaces, statuses } from './data'
 import DataTableFacetedFilter from './DataTableFacetedFilter.vue'
 import DataTableViewOptions from './DataTableViewOptions.vue'
 import { IconX } from '@tabler/icons-vue'
@@ -33,6 +33,12 @@ const isFiltered = computed(() => props.table.getState().columnFilters.length > 
         :column="table.getColumn('workspace')"
         title="Workspace"
         :options="workspaces"
+      /> -->
+      <!-- <DataTableFacetedFilter
+        v-if="table.getColumn('favorite')"
+        :column="table.getColumn('favorite')"
+        title="Favorite"
+        :options="favorites"
       /> -->
       <DataTableFacetedFilter
         v-if="table.getColumn('status')"

@@ -96,11 +96,18 @@ body {
 
 .tabler-icon,
 .line-icon {
-  fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.5;
+}
+
+.tabler-icon[stroke='none'] {
+  stroke: none;
+}
+
+.line-icon {
+  fill: none;
 }
 
 :is(.tabler-icon, .line-icon) :is(circle, ellipse, line, path, polygon, polyline, rect) {

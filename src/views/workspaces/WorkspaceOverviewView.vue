@@ -135,6 +135,9 @@ import IconShoppingBag from '@/assets/icons/shopping-bag.svg'
             Assets
             <IconBox class="w-5 h-5 absolute right-0 top-0 text-muted-foreground" />
           </CardTitle>
+          <CardDescription>
+            Upload and manage all models, materials, and textures for your 3D products.
+          </CardDescription>
         </CardHeader>
         <CardContent class="flex-grow">
           Will show info and links to models, materials, and textures soon...

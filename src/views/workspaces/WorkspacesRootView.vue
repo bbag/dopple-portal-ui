@@ -6,7 +6,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
-import { useProductsStore } from '@/stores/products'
+import { useWorkspacesStore } from '@/stores/workspaces'
 
 import LayoutMain from '@/components/layouts/LayoutMain.vue'
 
@@ -44,27 +44,7 @@ import { toast } from '@/components/ui/toast'
 import { IconDots } from '@tabler/icons-vue'
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
 
-const workspaces = useProductsStore()
-  .products.reduce(
-    (acc, obj) => {
-      if (!acc.some((item) => item.value === obj.workspace)) {
-        acc.push({
-          productCount: 0,
-          value: obj.workspace
-        })
-      }
-      return acc
-    },
-    [] as { productCount: number; value: string }[]
-  )
-  .sort((a, b) => a.value.localeCompare(b.value))
-
-// Update the product count for each workspace
-workspaces.forEach((workspace) => {
-  workspace.productCount = useProductsStore().products.filter(
-    (product) => product.workspace === workspace.value
-  ).length
-})
+const workspaces = useWorkspacesStore().workspaces
 
 const newWorkspaceName = ref('')
 
@@ -134,11 +114,11 @@ const onSubmit = handleSubmit((values) => {
         </Dialog>
       </header>
       <ul class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(22rem,1fr))]">
-        <li v-for="workspace in workspaces" :key="workspace.value">
+        <li v-for="workspace in workspaces" :key="workspace.name">
           <Card id="product-details">
             <CardHeader>
               <CardTitle class="relative pr-10">
-                {{ workspace.value }}
+                {{ workspace.name }}
                 <div class="absolute -right-2 -top-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -163,7 +143,7 @@ const onSubmit = handleSubmit((values) => {
             </CardHeader>
             <CardContent class="grid gap-4">
               <RouterLink
-                :to="`/w/${workspace.value}`"
+                :to="`/w/${workspace.name}`"
                 :class="buttonVariants({ variant: 'outline' })"
               >
                 Open Workspace
