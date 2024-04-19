@@ -195,6 +195,12 @@ function handleDeleteHotspot(i: number) {
           </div>
         </CollapsibleContent>
       </Collapsible>
+      <div
+        v-if="!product?.hotspots?.length"
+        class="text-sm text-center mt-4 py-8 px-2 border border-slate-300 rounded-lg border-dashed text-muted-foreground bg-muted/50"
+      >
+        No hotspots yet. Add a new one to begin!
+      </div>
       <div class="mt-4">
         <Button @click="handleAddHotspot">
           <IconPlus class="w-4 h-4 mr-2" />
