@@ -113,6 +113,16 @@ onBeforeMount(() => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger as-child>
+                  <Button size="icon-sm" variant="outline">
+                    <IconVideo class="w-5 h-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>View</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger as-child>
                   <CollapsibleTrigger>
                     <Button size="icon-sm" variant="outline">
                       <IconSettings class="w-5 h-5" />
