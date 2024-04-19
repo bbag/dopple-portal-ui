@@ -47,7 +47,7 @@ function handleEditName() {
 </script>
 
 <template>
-  <div class="grid gap-8 grid-cols-[minmax(0,_1fr)_32rem]">
+  <div class="grid grid-cols-[minmax(0,_1fr)_32rem]">
     <div class="p-8">
       <Card
         class="w-full h-full bg-no-repeat bg-contain bg-center"

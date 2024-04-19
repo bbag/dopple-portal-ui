@@ -35,7 +35,7 @@ const products = useProductsStore().products.filter((p) => p.workspace === works
           <ul class="space-y-0">
             <li v-for="product in products" :key="product.id">
               <RouterLink
-                :to="`/w/${workspace}/studio/${product.name}`"
+                :to="`/w/${workspace}/editor/${product.name}`"
                 :class="buttonVariants({ variant: 'link', size: 'sm' })"
               >
                 {{ product.title }}
