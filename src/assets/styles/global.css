@@ -117,3 +117,7 @@ body {
 .shiki {
   @apply p-4 rounded text-sm;
 }
+
+[data-sonner-toaster] {
+  font-family: inherit !important;
+}

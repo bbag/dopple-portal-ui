@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 
 import SectionPreview from '@/components/sections/product-overview/ProductPreview.vue'
 import SectionDetails from '@/components/sections/product-overview/ProductDetails.vue'
@@ -10,7 +10,7 @@ import SectionAssets from '@/components/sections/product-overview/ProductAssets.
 import SectionEmbedCode from '@/components/sections/product-overview/EmbedCode.vue'
 import SectionManage from '@/components/sections/product-overview/ManageProduct.vue'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import {
@@ -176,18 +176,27 @@ function toggleIsFavorite() {
             </SelectContent>
           </Select>
           <div class="flex flex-wrap gap-4">
-            <Button variant="outline">
+            <RouterLink
+              :to="`/w/${workspace}/products/${name}/preview`"
+              :class="buttonVariants({ variant: 'outline' })"
+            >
               <IconEyeCode class="w-6 h-6 mr-2" />
               Live Preview
-            </Button>
-            <Button variant="outline">
+            </RouterLink>
+            <RouterLink
+              :to="`/w/${workspace}/studio/${name}`"
+              :class="buttonVariants({ variant: 'outline' })"
+            >
               <IconSlideshow class="w-6 h-6 mr-2" />
               Open in Virtual Studio
-            </Button>
-            <Button variant="outline">
+            </RouterLink>
+            <RouterLink
+              :to="`/w/${workspace}/ui-builder/${name}`"
+              :class="buttonVariants({ variant: 'outline' })"
+            >
               <IconUiBuilder class="w-6 h-6 mr-2" />
               Open in UI Builder
-            </Button>
+            </RouterLink>
           </div>
         </div>
         <Card

@@ -84,8 +84,10 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'collapsible-down': 'collapsible-down 0.2s ease-in-out',
-        'collapsible-up': 'collapsible-up 0.2s ease-in-out'
+        'collapsible-down': 'collapsible-down 250ms cubic-bezier(0.3, 0.07, 0.1, 1);',
+        'collapsible-up': 'collapsible-up 250ms cubic-bezier(0.3, 0.07, 0.1, 1);'
+        // 'collapsible-down': 'collapsible-down 350ms cubic-bezier(0.7, 0, 0.1, 1);',
+        // 'collapsible-up': 'collapsible-up 350ms cubic-bezier(0.7, 0, 0.1, 1);'
       }
     }
   },

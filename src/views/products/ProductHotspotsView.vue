@@ -31,7 +31,7 @@ function handleAddHotspot() {
   hotspotStates.value.push({ isOpen: true, isVisible: true })
   product?.hotspots.push({
     title: `Hotspot #${product?.hotspots.length + 1}`,
-    id: crypto.randomUUID(),
+    id: `hotspot_${crypto.randomUUID().substring(0, 4)}`,
     position: {
       x: Math.floor(Math.random() * 100) / 100,
       y: Math.floor(Math.random() * 100) / 100,
@@ -76,20 +76,21 @@ function handleDeleteHotspot(i: number) {
         </TooltipProvider>
       </Card>
     </div>
-    <div class="bg-white border-l p-8 space-y-4 overflow-y-auto">
+    <div class="bg-white border-l p-8 overflow-y-auto">
       <h1 class="text-2xl font-bold">Hotspots</h1>
       <Collapsible
         v-for="(hotspot, i) in product?.hotspots"
         :key="hotspot.id"
         v-model:open="hotspotStates[i].isOpen"
       >
-        <div class="flex justify-between w-full items-center">
+        <div
+          class="group flex justify-between w-full items-center rounded hover:bg-slate-50 -mx-2 px-2 py-2 transition-all"
+        >
           <CollapsibleTrigger>
-            <div
-              class="font-medium flex justify-start items-center gap-4"
-              :class="{ 'text-muted-foreground': !hotspotStates[i].isVisible }"
-            >
-              <span class="text-sm w-6 h-6 flex items-center justify-center rounded bg-muted">
+            <div class="font-medium flex justify-start items-center gap-4">
+              <span
+                class="text-sm w-6 h-6 flex items-center justify-center rounded bg-slate-100 group-hover:bg-slate-200 transition-all"
+              >
                 {{ i + 1 }}
               </span>
               {{ hotspot.title || hotspot.id || `Hotspot #${i + 1}` }}
@@ -142,7 +143,7 @@ function handleDeleteHotspot(i: number) {
             </TooltipProvider>
           </div>
         </div>
-        <CollapsibleContent class="-mx-2">
+        <CollapsibleContent class="-mr-2 border-l pl-4 ml-3">
           <div class="p-2 pt-4 space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div class="grid w-full items-center gap-1.5">
@@ -193,12 +194,13 @@ function handleDeleteHotspot(i: number) {
             </div>
           </div>
         </CollapsibleContent>
-        <Separator class="my-4" />
       </Collapsible>
-      <Button @click="handleAddHotspot">
-        <IconPlus class="w-4 h-4 mr-2" />
-        Add Hotspot
-      </Button>
+      <div class="mt-4">
+        <Button @click="handleAddHotspot">
+          <IconPlus class="w-4 h-4 mr-2" />
+          New Hotspot
+        </Button>
+      </div>
     </div>
   </div>
 </template>

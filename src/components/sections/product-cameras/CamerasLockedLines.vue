@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="relative px-4 mt-2 -mb-2" :class="isLocked ? '' : 'text-slate-500'">
+  <div class="relative px-4 mt-2 -mb-2" :class="isLocked ? '' : 'text-foreground/30'">
     <svg
       fill="none"
       style="width: 100%"

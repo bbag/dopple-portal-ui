@@ -48,14 +48,30 @@ export interface IVersion {
 export interface ICamera {
   name: string
   id: string
-  zoom: { min: number | null; max: number | null; val: number; locked: boolean }
-  hAngle: { min: number | null; max: number | null; val: number; locked: boolean }
-  vAngle: { min: number | null; max: number | null; val: number; locked: boolean }
+  zoom: {
+    min: number | string | undefined
+    max: number | string | undefined
+    val: number
+  }
+  hAngle: {
+    min: number | string | undefined
+    max: number | string | undefined
+    val: number
+  }
+  vAngle: {
+    min: number | string | undefined
+    max: number | string | undefined
+    val: number
+  }
   target: { x: number; y: number; z: number }
-  clipDistance: { far: number | null; near: number | null }
-  sensitivity: { pan: number | null; rotate: number | null; zoom: number | null }
+  clipDistance: { far: number | string | undefined; near: number | string | undefined }
+  sensitivity: {
+    pan: number | string | undefined
+    rotate: number | string | undefined
+    zoom: number | string | undefined
+  }
   limitRadiusUsingBounds: boolean
-  precision: { pinch: number | null; wheel: number | null }
+  precision: { pinch: number | string | undefined; wheel: number | string | undefined }
 }
 
 export const useProductsStore = defineStore('products', () => {
@@ -100,9 +116,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '5f67d5f6-e66e-404e-874c-ee2b6cd257dc',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: 0.05, val: 2.5, max: 5.5 },
+          hAngle: { min: '', val: 45, max: '' },
+          vAngle: { min: 0, val: 98, max: 178 },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -112,9 +128,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'front_view',
           id: 'ce25883e-1648-4864-9569-69624e77c6bc',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -124,9 +140,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'side_view',
           id: '57bed3bc-988f-42fa-9cac-afcae730d2e4',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -136,9 +152,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'top_view',
           id: 'f6ad2659-8a9b-4b41-b156-24b3638da6f9',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -209,9 +225,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '96ed3e12-db70-4fbb-9947-211bf4a2a443',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -269,9 +285,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'ad87c7a4-3a3b-4748-9b49-16b606675b67',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -350,9 +366,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '56009829-b29b-4022-a943-459beae2f5e6',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -410,9 +426,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '288c232b-82df-41f8-8e89-da5da77278bc',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -463,9 +479,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'eb29f80e-a3a2-4c2c-89e5-6658c09c1756',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -516,9 +532,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '4844dc42-88b3-4504-a8e4-9fad6564f3ad',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -576,9 +592,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'a1c9c3db-c683-4c1d-8f90-457643b76cfc',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -615,9 +631,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'f3e183e4-fe8c-428e-8427-7a25a6e4c13c',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -654,9 +670,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '73a4bd13-2e76-4bd5-b025-1fe63e01cc94',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -735,9 +751,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '6a0f6f74-5e1b-44c1-970e-0be9980cf087',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -795,9 +811,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'a55b2718-abd5-48ce-a219-e5d32a21ae2b',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -848,9 +864,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '770a2b98-c24c-419d-98ea-df015aed3c90',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -887,9 +903,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'd5ca8506-a495-4cdd-bfe5-5bfe3a3ce5c0',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -926,9 +942,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: 'f4cd72b1-5ed7-489d-aa4e-1f4844ca09e8',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -965,9 +981,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '4ef20152-8b3e-462a-ab28-ee84517b8ae4',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -1046,9 +1062,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '09c17ae1-d4fb-4343-953d-5ffb2620814d',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },
@@ -1085,9 +1101,9 @@ export const useProductsStore = defineStore('products', () => {
         {
           name: 'default_camera',
           id: '489ac835-bc2f-430e-b370-f00c4a521f8f',
-          zoom: { min: null, val: 2.5, max: null, locked: false },
-          hAngle: { min: null, val: 0, max: null, locked: false },
-          vAngle: { min: null, val: 0, max: null, locked: false },
+          zoom: { min: '', val: 2.5, max: '' },
+          hAngle: { min: '', val: 0, max: '' },
+          vAngle: { min: '', val: 0, max: '' },
           target: { x: 0, y: 0, z: 0 },
           clipDistance: { far: 2250.5, near: 0.01 },
           sensitivity: { pan: 1000, rotate: 1000, zoom: 1000 },

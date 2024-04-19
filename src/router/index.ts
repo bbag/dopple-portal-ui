@@ -63,6 +63,11 @@ const router = createRouter({
                   path: 'configuration',
                   name: 'Configuration',
                   component: () => import('@/views/products/ProductConfigurationView.vue')
+                },
+                {
+                  path: 'preview',
+                  name: 'Live Preview',
+                  component: () => import('@/views/products/ProductLivePreviewView.vue')
                 }
               ]
             }

@@ -34,7 +34,15 @@ const breadcrumbs = computed<BreadcrumbOutputItem[]>(() => {
     const hasExistingPath = arr.find((crumb) => crumb.path === formattedPath)
     if (!hasExistingPath) {
       let itemName = match.name as RouteRecordName
-      if (itemName === 'Product' || itemName === 'Product (Virtual Studio)') {
+      if (
+        typeof itemName === 'string' &&
+        [
+          'Product',
+          'Product (glTF Editor)', // [ ] TODO: This will eventually change from Product to Model
+          'Product (UI Builder)',
+          'Product (Virtual Studio)'
+        ].includes(itemName)
+      ) {
         itemName =
           useProductsStore().products.find(
             (product) =>

@@ -14,8 +14,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 import { IconStar, IconStarFilled } from '@tabler/icons-vue'
 
-import IconInfo from '@/assets/icons/info.svg'
-
 import { toast } from 'vue-sonner'
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
