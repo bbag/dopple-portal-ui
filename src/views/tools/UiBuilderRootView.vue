@@ -24,7 +24,7 @@ const products = useProductsStore().products.filter((p) => p.workspace === works
   <LayoutMain>
     <div class="p-8 max-w-[104rem] mx-auto">
       <header class="flex justify-between gap-4 mb-8">
-        <h1 class="text-3xl font-bold">Virtual Studio</h1>
+        <h1 class="text-3xl font-bold">UI Builder</h1>
       </header>
       <Card>
         <CardHeader>
