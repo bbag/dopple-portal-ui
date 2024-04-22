@@ -1,26 +1,80 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+
 import BreadCrumbs from '@/components/blocks/breadcrumbs/BreadCrumbs.vue'
 import UserDropdown from './UserDropdown.vue'
 
-import { IconCloudUp } from '@tabler/icons-vue'
+import { IconArrowNarrowLeft, IconArrowNarrowRight, IconCloudUp } from '@tabler/icons-vue'
 
 defineProps<{
   hideBreadcrumbs?: boolean
 }>()
+
+import { useNavHistoryStore } from '@/stores/navHistory'
+
+function handleBack() {
+  if (useNavHistoryStore().canGoBack) {
+    router.back()
+  }
+}
+
+function handleForward() {
+  if (useNavHistoryStore().canGoForward) {
+    router.forward()
+  }
+}
 </script>
 
 <template>
   <div class="h-12 bg-white border-b flex items-center gap-4 px-8">
-    <!-- <div class="bg-white border-b gap-4 px-8"> -->
-    <BreadCrumbs v-if="!hideBreadcrumbs" />
-    <div class="flex gap-4 ml-auto">
-      <Button variant="outline" size="sm">
-        <IconCloudUp size="20" class="mr-2" />
-        Upload
-      </Button>
-      <UserDropdown />
-    </div>
+    <TooltipProvider>
+      <div class="flex gap-1 items-center">
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              @click="handleBack"
+              :disabled="!useNavHistoryStore().canGoBack"
+            >
+              <IconArrowNarrowLeft size="24" class="" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p class="text-sm">Back</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              @click="handleForward"
+              :disabled="!useNavHistoryStore().canGoForward"
+            >
+              <IconArrowNarrowRight size="24" class="" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p class="text-sm">Forward</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+      <Separator orientation="vertical" />
+      <BreadCrumbs v-if="!hideBreadcrumbs" />
+      <div class="flex gap-4 ml-auto">
+        <Button variant="outline" size="sm">
+          <IconCloudUp size="20" class="mr-2" />
+          Upload
+        </Button>
+        <UserDropdown />
+      </div>
+    </TooltipProvider>
   </div>
   <!-- <pre>{{ breadcrumbs }}</pre> -->
 </template>

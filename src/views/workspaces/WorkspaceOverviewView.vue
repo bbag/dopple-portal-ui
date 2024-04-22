@@ -157,17 +157,19 @@ const assetsTable = computed(() => [
           <Table>
             <TableBody>
               <TableRow v-for="row in assetsTable" :key="row.title">
-                <TableCell class="pr-0">
+                <TableCell class="py-2 pr-0">
                   <component :is="row.icon" class="inline w-5 h-5 text-muted-foreground" />
                 </TableCell>
-                <TableCell class="p-2 whitespace-nowrap font-medium">
+                <TableCell class="py-2 p-2 whitespace-nowrap font-medium">
                   {{ row.title }}
                 </TableCell>
-                <TableCell class="w-full text-muted-foreground">({{ row.count }} total)</TableCell>
-                <TableCell>
+                <TableCell class="py-2 w-full text-muted-foreground"
+                  >({{ row.count }} total)</TableCell
+                >
+                <TableCell class="py-2">
                   <RouterLink
                     :to="row.href"
-                    :class="buttonVariants({ variant: 'default', size: 'xs' })"
+                    :class="buttonVariants({ variant: 'default', size: 'sm' })"
                   >
                     View All
                   </RouterLink>
