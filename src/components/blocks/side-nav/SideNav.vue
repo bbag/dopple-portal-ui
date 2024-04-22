@@ -38,27 +38,38 @@ const filteredSidenavItems = computed(() => {
     class="inset-y fixed left-0 z-2 flex h-full flex-col border-r"
     :class="[$props.isCollapsed ? 'w-16' : 'w-64']"
   >
-    <RouterLink to="/">
-      <component
-        :is="DoppleLogoStacked"
-        v-show="!isCollapsed"
-        class="max-w-24 mx-auto my-4 h-auto"
-      />
-      <component :is="DoppleLogoIcon" v-show="isCollapsed" class="w-6 mx-auto my-4 h-auto" />
-    </RouterLink>
-    <button
-      @click="$emit('toggle-collapsed')"
-      class="w-6 h-6 absolute top-3 -right-3 border bg-white rounded-lg p-1"
-    >
-      <svg viewBox="0 0 16 16" class="line-icon" :class="$props.isCollapsed ? 'rotate-180' : ''">
-        <path d="M10 3l-5 5 5 5" />
-      </svg>
-    </button>
-    <div v-show="!isCollapsed" class="px-4 mb-4">
-      <WorkspaceSelect />
-    </div>
-    <nav class="overflow-y-auto" :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
-      <TooltipProvider>
+    <TooltipProvider>
+      <RouterLink to="/">
+        <component
+          :is="DoppleLogoStacked"
+          v-show="!isCollapsed"
+          class="max-w-24 mx-auto my-4 h-auto"
+        />
+        <component :is="DoppleLogoIcon" v-show="isCollapsed" class="w-6 mx-auto my-4 h-auto" />
+      </RouterLink>
+      <Tooltip>
+        <TooltipTrigger as-child>
+          <button
+            @click="$emit('toggle-collapsed')"
+            class="w-6 h-6 absolute top-3 -right-3 border bg-white rounded-lg p-1"
+          >
+            <svg
+              viewBox="0 0 16 16"
+              class="line-icon"
+              :class="$props.isCollapsed ? 'rotate-180' : ''"
+            >
+              <path d="M10 3l-5 5 5 5" />
+            </svg>
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="right">
+          <p class="text-sm">{{ $props.isCollapsed ? 'Expand' : 'Collapse' }} Sidebar</p>
+        </TooltipContent>
+      </Tooltip>
+      <div v-show="!isCollapsed" class="px-4 mb-4">
+        <WorkspaceSelect />
+      </div>
+      <nav class="overflow-y-auto" :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
         <div
           v-for="(category, categoryIndex) in filteredSidenavItems"
           :key="categoryIndex"
@@ -124,8 +135,8 @@ const filteredSidenavItems = computed(() => {
             </Tooltip>
           </template>
         </div>
-      </TooltipProvider>
-    </nav>
+      </nav>
+    </TooltipProvider>
   </aside>
 </template>
 

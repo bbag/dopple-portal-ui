@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useNavHistoryStore } from '@/stores/navHistory'
+
 import RootView from '../views/RootView.vue'
 import NotFound from '../views/NotFound.vue'
 import WorkspacesRootView from '../views/workspaces/WorkspacesRootView.vue'
@@ -209,6 +211,11 @@ router.beforeEach((to, from, next) => {
     workspacesStore.currentWorkspace = ''
   }
   next()
+})
+
+router.afterEach(() => {
+  useNavHistoryStore().canGoBack = router.options.history.state.back ? true : false
+  useNavHistoryStore().canGoForward = router.options.history.state.forward ? true : false
 })
 
 export default router
