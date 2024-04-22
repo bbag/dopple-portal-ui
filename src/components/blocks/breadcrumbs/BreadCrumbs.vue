@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, type ComputedRef } from 'vue'
+import { computed } from 'vue'
 import { useRoute, type RouteParams, type RouteRecordName } from 'vue-router'
 
 import { useProductsStore } from '@/stores/products'
+import { useModelsStore } from '@/stores/models'
 
 import {
   Breadcrumb,
@@ -36,18 +37,19 @@ const breadcrumbs = computed<BreadcrumbOutputItem[]>(() => {
       let itemName = match.name as RouteRecordName
       if (
         typeof itemName === 'string' &&
-        [
-          'Product',
-          'Product (glTF Editor)', // [ ] TODO: This will eventually change from Product to Model
-          'Product (UI Builder)',
-          'Product (Virtual Studio)'
-        ].includes(itemName)
+        ['Product', 'Product (UI Builder)', 'Product (Virtual Studio)'].includes(itemName)
       ) {
         itemName =
           useProductsStore().products.find(
             (product) =>
               product.name === route.params.name && product.workspace === route.params.workspace
           )?.title || 'N/A'
+      } else if (typeof itemName === 'string' && ['Model (glTF Editor)'].includes(itemName)) {
+        itemName =
+          useModelsStore().models.find(
+            (model) =>
+              model.shortId === route.params.shortId && model.workspace === route.params.workspace
+          )?.name || 'N/A'
       } else if (itemName === 'Workspace') {
         itemName = route.params.workspace.toString()
       }

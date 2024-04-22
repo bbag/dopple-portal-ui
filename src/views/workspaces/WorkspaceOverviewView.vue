@@ -84,6 +84,27 @@ const assetsTable = computed(() => [
     href: `/w/${workspace}/textures`
   }
 ])
+
+const toolsTable = computed(() => [
+  {
+    icon: IconGltfEditor,
+    title: 'glTF Editor',
+    href: `/w/${workspace}/editor`,
+    description: 'Edit and preview models and environments.'
+  },
+  {
+    icon: IconSlideshow,
+    title: 'Virtual Studio',
+    href: `/w/${workspace}/studio`,
+    description: 'Capture images of product configurations.'
+  },
+  {
+    icon: IconUiBuilder,
+    title: 'UI Builder',
+    href: `/w/${workspace}/ui-builder`,
+    description: 'Design configurator UIs for your products.'
+  }
+])
 </script>
 
 <template>
@@ -189,28 +210,17 @@ const assetsTable = computed(() => [
         <CardContent class="flex-grow">
           <div class="grid grid-cols-3 gap-4">
             <RouterLink
-              :to="`/w/${workspace}/editor`"
+              v-for="tool in toolsTable"
+              :key="tool.title"
+              :to="tool.href"
               :class="buttonVariants({ variant: 'outline' })"
-              class="flex flex-col h-28"
+              class="flex flex-col py-6 h-auto"
             >
-              <IconGltfEditor class="w-8 h-8 text-muted-foreground" />
-              <p class="mt-1">glTF Editor</p>
-            </RouterLink>
-            <RouterLink
-              :to="`/w/${workspace}/studio`"
-              :class="buttonVariants({ variant: 'outline' })"
-              class="flex flex-col h-28"
-            >
-              <IconSlideshow class="w-8 h-8 text-muted-foreground" />
-              <p class="mt-1">Virtual Studio</p>
-            </RouterLink>
-            <RouterLink
-              :to="`/w/${workspace}/ui-builder`"
-              :class="buttonVariants({ variant: 'outline' })"
-              class="flex flex-col h-28"
-            >
-              <IconUiBuilder class="w-8 h-8 text-muted-foreground" />
-              <p class="mt-1">UI Builder</p>
+              <component :is="tool.icon" class="inline w-8 h-8 text-muted-foreground" />
+              <p class="mt-1 mb-2 text-center font-medium text-base">{{ tool.title }}</p>
+              <p class="whitespace-normal text-center text-xs text-balance text-slate-600">
+                {{ tool.description }}
+              </p>
             </RouterLink>
           </div>
         </CardContent>

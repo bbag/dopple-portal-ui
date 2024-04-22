@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import LayoutMain from '@/components/layouts/LayoutMain.vue'
-
 import SideNav from '@/components/blocks/side-nav/SideNav.vue'
 import TopBar from '@/components/blocks/top-bar/TopBar.vue'
 

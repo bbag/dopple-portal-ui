@@ -21,31 +21,29 @@ const products = useProductsStore().products.filter((p) => p.workspace === works
 </script>
 
 <template>
-  <LayoutMain>
-    <div class="p-8 max-w-[104rem] mx-auto">
-      <header class="flex justify-between gap-4 mb-8">
-        <h1 class="text-3xl font-bold">UI Builder</h1>
-      </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Products</CardTitle>
-          <CardDescription>This is still super placeholdery. More coming soon...</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul class="space-y-0">
-            <li v-for="product in products" :key="product.id">
-              <RouterLink
-                :to="`/w/${workspace}/ui-builder/${product.name}`"
-                :class="buttonVariants({ variant: 'link', size: 'sm' })"
-              >
-                {{ product.title }}
-              </RouterLink>
-            </li>
-          </ul>
-        </CardContent>
-      </Card>
-    </div>
-  </LayoutMain>
+  <div class="p-8 max-w-[104rem] mx-auto">
+    <header class="flex justify-between gap-4 mb-8">
+      <h1 class="text-3xl font-bold">UI Builder</h1>
+    </header>
+    <Card>
+      <CardHeader>
+        <CardTitle>Products</CardTitle>
+        <CardDescription>This is still super placeholdery. More coming soon...</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ul class="space-y-0">
+          <li v-for="product in products" :key="product.id">
+            <RouterLink
+              :to="`/w/${workspace}/ui-builder/${product.name}`"
+              :class="buttonVariants({ variant: 'link', size: 'sm' })"
+            >
+              {{ product.title }}
+            </RouterLink>
+          </li>
+        </ul>
+      </CardContent>
+    </Card>
+  </div>
 </template>
 
 <style scoped></style>

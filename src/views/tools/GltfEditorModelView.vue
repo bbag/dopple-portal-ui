@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useProductsStore } from '@/stores/products'
+import { useModelsStore } from '@/stores/models'
 
 import { Card } from '@/components/ui/card'
 
-const product = useProductsStore().products.find(
-  (product) => product.name === useRoute().params.name
-)
-const thumbnail = product?.thumbnail
+const model = useModelsStore().models.find((model) => model.shortId === useRoute().params.shortId)
+const thumbnail = model?.thumbnail
 </script>
 
 <template>
@@ -21,7 +19,7 @@ const thumbnail = product?.thumbnail
     </div>
     <div class="bg-white border-l p-8 space-y-4 overflow-y-auto">
       <h1 class="text-2xl font-bold">glTF Editor</h1>
-      <p>Product: {{ product?.name }}</p>
+      <p>Model: {{ model?.name }}</p>
       <p>This UI will change <em>drastically</em> soon... this is just a placeholder for now.</p>
     </div>
   </div>
