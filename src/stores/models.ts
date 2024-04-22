@@ -12,11 +12,11 @@ export interface IModel {
   thumbnail: string
   dateCreated: Date
   dateModified: Date
-  versions: IVersion[]
+  versions: IModelVersion[]
   materials: string[]
 }
 
-export interface IVersion {
+export interface IModelVersion {
   isDefault: boolean
   draftVersion: number
   published: number

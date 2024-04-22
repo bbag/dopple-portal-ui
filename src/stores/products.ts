@@ -26,7 +26,7 @@ export interface IProduct {
   dateCreated: Date
   dateModified: Date
   models: string[]
-  versions: IVersion[]
+  versions: IProductVersion[]
   cameras: ICamera[]
   hotspots: IHotspot[]
 }
@@ -37,7 +37,7 @@ export interface IHotspot {
   position: { x: number; y: number; z: number }
 }
 
-export interface IVersion {
+export interface IProductVersion {
   isDefault: boolean
   draftVersion: number | null
   publishedVersion: number | null

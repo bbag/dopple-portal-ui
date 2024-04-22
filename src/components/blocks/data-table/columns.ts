@@ -4,7 +4,7 @@ import { h } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import { labels, statuses } from './data'
-import { useProductsStore, type IProduct, type IVersion } from '@/stores/products'
+import { useProductsStore, type IProduct, type IProductVersion } from '@/stores/products'
 import DataTableColumnHeader from './DataTableColumnHeader.vue'
 import DataTableRowActions from './DataTableRowActions.vue'
 // import { Checkbox } from '@/components/ui/checkbox'
@@ -172,7 +172,7 @@ export const columns: ColumnDef<IProduct>[] = [
     // },
     cell: ({ row }) => {
       const currentVersion = row
-        .getValue<Array<IVersion>>('versions')
+        .getValue<Array<IProductVersion>>('versions')
         .find((version) => version.isDefault)
       return h('div', { class: 'w-10 text-right' }, currentVersion?.draftVersion?.toString())
     },

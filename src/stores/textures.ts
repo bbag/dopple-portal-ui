@@ -13,10 +13,10 @@ export interface ITexture {
   thumbnail: string
   dateCreated: Date
   dateModified: Date
-  versions: IVersion[]
+  versions: ITextureVersion[]
 }
 
-export interface IVersion {
+export interface ITextureVersion {
   isDefault: boolean
   draftVersion: number
   published: number
