@@ -10,16 +10,16 @@ const tabs = [
     path: `/w/${workspace}/products/${name}`
   },
   {
-    name: 'Hotspots',
-    path: `/w/${workspace}/products/${name}/hotspots`
-  },
-  {
     name: 'Cameras',
     path: `/w/${workspace}/products/${name}/cameras`
   },
   {
     name: 'Environment',
     path: `/w/${workspace}/products/${name}/environment`
+  },
+  {
+    name: 'Hotspots',
+    path: `/w/${workspace}/products/${name}/hotspots`
   },
   {
     name: 'Configuration',
@@ -37,7 +37,7 @@ const tabs = [
         </RouterLink>
       </li>
       <li class="ml-auto">
-        <Button size="sm" disabled variant="outline"> Save </Button>
+        <Button size="sm" variant="default"> Save </Button>
       </li>
     </ul>
     <RouterView />
