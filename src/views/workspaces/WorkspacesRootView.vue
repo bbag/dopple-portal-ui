@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 
 import { RouterLink } from 'vue-router'
 import { useForm } from 'vee-validate'
@@ -39,12 +39,56 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { toast } from '@/components/ui/toast'
 
-import { IconDots } from '@tabler/icons-vue'
+import { IconArrowsSort, IconDots, IconSearch } from '@tabler/icons-vue'
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
 
-const workspaces = useWorkspacesStore().workspaces
+const sortOptions = ['Alphabetical', 'Date Created', 'Date Modified', 'Product Count']
+const workspaceSortBy = ref('Alphabetical')
+const workspaceSearchQuery = ref('')
+
+const sortedWorkspaces = computed(() => {
+  let workspacesList = useWorkspacesStore().workspaces
+
+  switch (workspaceSortBy.value) {
+    case 'Alphabetical':
+      workspacesList = workspacesList.sort((a, b) => a.name.localeCompare(b.name))
+      break
+    case 'Date Added':
+      workspacesList = workspacesList.sort(
+        (a, b) => b.dateCreated.getTime() - a.dateCreated.getTime()
+      )
+      break
+    case 'Date Modified':
+      workspacesList = workspacesList.sort(
+        (a, b) => b.dateModified.getTime() - a.dateModified.getTime()
+      )
+      break
+    case 'Product Count':
+      workspacesList = workspacesList.sort((a, b) => b.productCount - a.productCount)
+      break
+  }
+
+  return workspacesList
+})
+
+const filteredWorkspaces = computed(() => {
+  if (workspaceSearchQuery.value) {
+    return sortedWorkspaces.value.filter((workspace) =>
+      workspace.name.toLowerCase().includes(workspaceSearchQuery.value.toLowerCase())
+    )
+  }
+  return sortedWorkspaces.value
+})
 
 const newWorkspaceName = ref('')
 
@@ -113,8 +157,33 @@ const onSubmit = handleSubmit((values) => {
           </DialogContent>
         </Dialog>
       </header>
+      <div class="mb-4 flex gap-2 items-center flex-wrap">
+        <div class="relative">
+          <Input placeholder="Search..." class="pl-10" v-model="workspaceSearchQuery" />
+          <IconSearch
+            class="w-5 h-5 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+          />
+        </div>
+        <div class="relative">
+          <Select v-model="workspaceSortBy">
+            <SelectTrigger class="pl-10 w-[11rem]">
+              <SelectValue placeholder="Sort by..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem v-for="option in sortOptions" :key="option" :value="option">
+                  {{ option }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <IconArrowsSort
+            class="w-5 h-5 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+          />
+        </div>
+      </div>
       <ul class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(22rem,1fr))]">
-        <li v-for="workspace in workspaces" :key="workspace.name">
+        <li v-for="workspace in filteredWorkspaces" :key="workspace.name">
           <Card id="product-details">
             <CardHeader>
               <CardTitle class="relative pr-10">
