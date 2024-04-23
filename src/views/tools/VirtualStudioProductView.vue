@@ -74,7 +74,7 @@ const environmentsList = [
 ]
 
 const isBgTransparent = ref(true)
-const bgColor = ref('#007BEE')
+const bgColor = ref('#FFFFFF')
 function handleSetBgColor(color: string) {
   bgColor.value = color.toUpperCase()
 }
