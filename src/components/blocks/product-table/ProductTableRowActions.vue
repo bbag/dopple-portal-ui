@@ -33,10 +33,10 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-interface DataTableRowActionsProps {
+interface ProductTableRowActionsProps {
   row: Row<IProduct>
 }
-const props = defineProps<DataTableRowActionsProps>()
+const props = defineProps<ProductTableRowActionsProps>()
 
 const product = computed(() => props.row.original)
 const activeLabel = ref('')
@@ -58,7 +58,7 @@ const inputDeleteWorkspace = ref('')
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" class="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuItem>Manage</DropdownMenuItem>
         <DropdownMenuItem>Duplicate</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />

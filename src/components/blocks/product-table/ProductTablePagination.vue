@@ -18,10 +18,10 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-interface DataTablePaginationProps {
+interface ProductTablePaginationProps {
   table: Table<IProduct>
 }
-defineProps<DataTablePaginationProps>()
+defineProps<ProductTablePaginationProps>()
 </script>
 
 <template>

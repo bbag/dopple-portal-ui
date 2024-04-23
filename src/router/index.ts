@@ -84,6 +84,18 @@ const router = createRouter({
               path: '',
               name: 'ModelsList',
               component: () => import('@/views/models/ModelsListView.vue')
+            },
+            {
+              path: ':shortId',
+              name: 'Model',
+              component: () => import('@/views/models/ModelView.vue'),
+              children: [
+                {
+                  path: '',
+                  name: 'Model Overview',
+                  component: () => import('@/views/models/ModelOverviewView.vue')
+                }
+              ]
             }
           ]
         },

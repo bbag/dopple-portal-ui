@@ -5,8 +5,8 @@ import { RouterLink } from 'vue-router'
 
 import { labels, statuses } from './data'
 import { useProductsStore, type IProduct, type IProductVersion } from '@/stores/products'
-import DataTableColumnHeader from './DataTableColumnHeader.vue'
-import DataTableRowActions from './DataTableRowActions.vue'
+import ProductTableColumnHeader from './ProductTableColumnHeader.vue'
+import ProductTableRowActions from './ProductTableRowActions.vue'
 // import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -56,7 +56,7 @@ function toggleFavorite(workspace: string, name: string) {
 export const columns: ColumnDef<IProduct>[] = [
   {
     id: 'favorite',
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: '' }),
     cell: ({ row }) =>
       h(
         'button',
@@ -77,7 +77,7 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   {
     id: 'thumbnail',
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: '' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: '' }),
     cell: ({ row }) =>
       h(Popover, {}, [
         h(
@@ -125,7 +125,7 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'title',
     meta: { displayName: 'Title' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Title' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Title' }),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
       return h(RouterLink, { to: `products/${row.original.name}`, class: 'flex space-x-2' }, [
@@ -137,7 +137,7 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   // {
   //   accessorKey: 'id',
-  //   header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Product ID' }),
+  //   header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Product ID' }),
   //   cell: ({ row }) => h('div', { class: 'w-20' }, row.getValue('id')),
   //   enableSorting: false,
   //   enableHiding: false
@@ -145,14 +145,14 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'name',
     meta: { displayName: 'Name' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Name' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Name' }),
     cell: ({ row }) => h('div', { class: 'w-30 font-mono' }, row.getValue('name')),
     enableSorting: true
   },
   {
     accessorKey: 'workspace',
     meta: { displayName: 'Workspace' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Workspace' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Workspace' }),
     cell: ({ row }) => h('div', { class: 'w-30 font-mono' }, row.getValue('workspace')),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
@@ -162,7 +162,7 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'versions',
     meta: { displayName: 'Version' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Version' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Version' }),
     // cell: ({ row }) => {
     //   const label = labels.find((label) => label.value === row.original.label)
     //   return h(RouterLink, { to: `products/${row.original.name}`, class: 'flex space-x-2' }, [
@@ -181,7 +181,7 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'status',
     meta: { displayName: 'Status' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Status' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Status' }),
     cell: ({ row }) => {
       const status = statuses.find((status) => status.value === row.getValue('status'))
       if (!status) return null
@@ -197,7 +197,7 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'dateCreated',
     meta: { displayName: 'Date Created' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Date Created' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Date Created' }),
     cell: ({ row }) =>
       h(
         'div',
@@ -209,7 +209,7 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: 'dateModified',
     meta: { displayName: 'Date Modified' },
-    header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Date Modified' }),
+    header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Date Modified' }),
     cell: ({ row }) =>
       h(
         'div',
@@ -220,7 +220,7 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   // {
   //   accessorKey: 'priority',
-  //   header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Priority' }),
+  //   header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Priority' }),
   //   cell: ({ row }) => {
   //     const priority = priorities.find((priority) => priority.value === row.getValue('priority'))
 
@@ -237,6 +237,6 @@ export const columns: ColumnDef<IProduct>[] = [
   // },
   {
     id: 'actions',
-    cell: ({ row }) => h(DataTableRowActions, { row })
+    cell: ({ row }) => h(ProductTableRowActions, { row })
   }
 ]

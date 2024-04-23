@@ -44,7 +44,10 @@ const breadcrumbs = computed<BreadcrumbOutputItem[]>(() => {
             (product) =>
               product.name === route.params.name && product.workspace === route.params.workspace
           )?.title || 'N/A'
-      } else if (typeof itemName === 'string' && ['Model (glTF Editor)'].includes(itemName)) {
+      } else if (
+        typeof itemName === 'string' &&
+        ['Model', 'Model (glTF Editor)'].includes(itemName)
+      ) {
         itemName =
           useModelsStore().models.find(
             (model) =>

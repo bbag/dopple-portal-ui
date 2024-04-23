@@ -9,8 +9,8 @@ const { products } = useProductsStore()
 const productsForCurrentWorkspace = products.filter((p) => p.workspace === workspace)
 
 import Button from '@/components/ui/button/Button.vue'
-import DataTable from '@/components/blocks/data-table/DataTable.vue'
-import { columns } from '@/components/blocks/data-table/columns'
+import ProductTable from '@/components/blocks/product-table/ProductTable.vue'
+import { columns } from '@/components/blocks/product-table/columns'
 
 import IconPlusSmall from '@/assets/icons/plus-small.svg'
 </script>
@@ -24,7 +24,7 @@ import IconPlusSmall from '@/assets/icons/plus-small.svg'
         Create Product
       </Button>
     </header>
-    <DataTable :data="productsForCurrentWorkspace" :columns="columns" />
+    <ProductTable :data="productsForCurrentWorkspace" :columns="columns" />
   </div>
   <RouterView />
 </template>

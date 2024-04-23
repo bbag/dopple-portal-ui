@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Table } from '@tanstack/vue-table'
 import { computed } from 'vue'
-import { type IProduct } from '@/stores/products'
+import { type IModel } from '@/stores/models'
 
 import { IconAdjustmentsHorizontal } from '@tabler/icons-vue'
 
@@ -15,11 +15,11 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
-interface DataTableViewOptionsProps {
-  table: Table<IProduct>
+interface ModelTableViewOptionsProps {
+  table: Table<IModel>
 }
 
-const props = defineProps<DataTableViewOptionsProps>()
+const props = defineProps<ModelTableViewOptionsProps>()
 
 const columns = computed(() =>
   props.table

@@ -18,10 +18,9 @@ import {
 
 import { ref } from 'vue'
 
-import DataTablePagination from './DataTablePagination.vue'
-import DataTableToolbar from './DataTableToolbar.vue'
+import ModelTablePagination from './ModelTablePagination.vue'
+import ModelTableToolbar from './ModelTableToolbar.vue'
 import { valueUpdater } from '@/lib/utils'
-import { HoverCard } from '@/components/ui/hover-card'
 import {
   Table,
   TableBody,
@@ -31,15 +30,14 @@ import {
   TableRow
 } from '@/components/ui/table'
 
-import { type IProduct } from '@/stores/products'
-import { version } from 'os'
+import { type IModel } from '@/stores/models'
 
-interface DataTableProps {
-  columns: ColumnDef<IProduct, any>[]
-  data: IProduct[]
+interface ModelTableProps {
+  columns: ColumnDef<IModel, any>[]
+  data: IModel[]
 }
 
-const props = defineProps<DataTableProps>()
+const props = defineProps<ModelTableProps>()
 
 const sorting = ref<SortingState>([
   {
@@ -50,7 +48,6 @@ const sorting = ref<SortingState>([
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({
   status: false,
-  versions: false,
   workspace: false
 })
 const rowSelection = ref({})
@@ -92,7 +89,7 @@ const table = useVueTable({
 
 <template>
   <div class="space-y-4">
-    <DataTableToolbar :table="table" />
+    <ModelTableToolbar :table="table" />
     <div class="rounded-md border bg-white">
       <Table>
         <TableHeader>
@@ -128,6 +125,6 @@ const table = useVueTable({
         </TableBody>
       </Table>
     </div>
-    <DataTablePagination :table="table" />
+    <ModelTablePagination :table="table" />
   </div>
 </template>

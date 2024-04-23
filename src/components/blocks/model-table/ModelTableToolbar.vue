@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import type { Table } from '@tanstack/vue-table'
 import { computed } from 'vue'
-import { type IProduct } from '@/stores/products'
+import { type IModel } from '@/stores/models'
 
 import { favorites, workspaces, statuses } from './data'
-import DataTableFacetedFilter from './DataTableFacetedFilter.vue'
-import DataTableViewOptions from './DataTableViewOptions.vue'
+import ModelTableFacetedFilter from './ModelTableFacetedFilter.vue'
+import ModelTableViewOptions from './ModelTableViewOptions.vue'
 import { IconX } from '@tabler/icons-vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-interface DataTableToolbarProps {
-  table: Table<IProduct>
+interface ModelTableToolbarProps {
+  table: Table<IModel>
 }
 
-const props = defineProps<DataTableToolbarProps>()
+const props = defineProps<ModelTableToolbarProps>()
 
 const isFiltered = computed(() => props.table.getState().columnFilters.length > 0)
 </script>
@@ -23,24 +23,24 @@ const isFiltered = computed(() => props.table.getState().columnFilters.length > 
   <div class="flex items-center justify-between">
     <div class="flex flex-1 items-center space-x-2">
       <Input
-        placeholder="Filter by title..."
-        :model-value="(table.getColumn('title')?.getFilterValue() as string) ?? ''"
+        placeholder="Filter by name..."
+        :model-value="(table.getColumn('name')?.getFilterValue() as string) ?? ''"
         class="h-8 w-[150px] lg:w-[250px]"
-        @input="table.getColumn('title')?.setFilterValue($event.target.value)"
+        @input="table.getColumn('name')?.setFilterValue($event.target.value)"
       />
-      <!-- <DataTableFacetedFilter
+      <!-- <ModelTableFacetedFilter
         v-if="table.getColumn('workspace')"
         :column="table.getColumn('workspace')"
         title="Workspace"
         :options="workspaces"
       /> -->
-      <!-- <DataTableFacetedFilter
+      <!-- <ModelTableFacetedFilter
         v-if="table.getColumn('favorite')"
         :column="table.getColumn('favorite')"
         title="Favorite"
         :options="favorites"
       /> -->
-      <DataTableFacetedFilter
+      <ModelTableFacetedFilter
         v-if="table.getColumn('status')"
         :column="table.getColumn('status')"
         title="Status"
@@ -56,6 +56,6 @@ const isFiltered = computed(() => props.table.getState().columnFilters.length > 
         <IconX class="ml-2 h-4 w-4" />
       </Button>
     </div>
-    <DataTableViewOptions :table="table" />
+    <ModelTableViewOptions :table="table" />
   </div>
 </template>
