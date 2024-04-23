@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 import type { Row } from '@tanstack/vue-table'
 import { labels } from './data'
 import { type IProduct } from '@/stores/products'
@@ -33,6 +36,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+import { IconInfoCircle, IconCopy, IconStar, IconTags, IconTrash } from '@tabler/icons-vue'
+
 interface ProductTableRowActionsProps {
   row: Row<IProduct>
 }
@@ -46,6 +51,13 @@ onMounted(() => {
 
 const inputDeleteName = ref('')
 const inputDeleteWorkspace = ref('')
+
+function handleActionManage() {
+  router.push({ name: 'Product Overview', params: { name: product.value.name } })
+}
+function handleActionToggleFavorite() {
+  product.value.isFavorite = !product.value.isFavorite
+}
 </script>
 
 <template>
@@ -58,12 +70,24 @@ const inputDeleteWorkspace = ref('')
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" class="w-[160px]">
-        <DropdownMenuItem>Manage</DropdownMenuItem>
-        <DropdownMenuItem>Duplicate</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem @click="handleActionManage">
+          <IconInfoCircle class="w-5 h-5 mr-2" />
+          Manage
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <IconCopy class="w-5 h-5 mr-2" />
+          Duplicate
+        </DropdownMenuItem>
+        <DropdownMenuItem @click="handleActionToggleFavorite">
+          <IconStar class="w-5 h-5 mr-2" />
+          Favorite
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>
+            <IconTags class="w-5 h-5 mr-2" />
+            Labels
+          </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup :value="product.label" v-model="activeLabel">
               <DropdownMenuRadioItem
@@ -78,6 +102,7 @@ const inputDeleteWorkspace = ref('')
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem class="text-red-600">
+          <IconTrash class="w-5 h-5 mr-2" />
           <AlertDialogTrigger class="w-full flex items-start">Delete</AlertDialogTrigger>
         </DropdownMenuItem>
       </DropdownMenuContent>

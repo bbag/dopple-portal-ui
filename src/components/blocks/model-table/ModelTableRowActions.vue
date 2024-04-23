@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 import type { Row } from '@tanstack/vue-table'
 import { labels } from './data'
 import { type IModel } from '@/stores/models'
@@ -33,19 +36,32 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+import { IconInfoCircle, IconCopy, IconPlus, IconStar, IconTrash } from '@tabler/icons-vue'
+import IconGtltfEditor from '@/assets/icons/gltf-editor.svg'
+
 interface ModelTableRowActionsProps {
   row: Row<IModel>
 }
 const props = defineProps<ModelTableRowActionsProps>()
 
 const model = computed(() => props.row.original)
-const activeLabel = ref('')
-onMounted(() => {
-  activeLabel.value = model.value.label
-})
+// const activeLabel = ref('')
+// onMounted(() => {
+//   activeLabel.value = model.value.label
+// })
 
 const inputDeleteName = ref('')
 const inputDeleteWorkspace = ref('')
+
+function handleActionManage() {
+  router.push({ name: 'Model Overview', params: { shortId: model.value.shortId } })
+}
+function handleActionToggleFavorite() {
+  model.value.isFavorite = !model.value.isFavorite
+}
+function handleActionEditGltf() {
+  router.push({ name: 'Model (glTF Editor)', params: { shortId: model.value.shortId } })
+}
 </script>
 
 <template>
@@ -58,11 +74,28 @@ const inputDeleteWorkspace = ref('')
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" class="w-[160px]">
-        <DropdownMenuItem>Manage</DropdownMenuItem>
-        <DropdownMenuItem>Duplicate</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem @click="handleActionManage">
+          <IconInfoCircle class="w-5 h-5 mr-2" />
+          Manage
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <IconPlus class="w-5 h-5 mr-2" />
+          Create Product
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <IconCopy class="w-5 h-5 mr-2" />
+          Duplicate
+        </DropdownMenuItem>
+        <DropdownMenuItem @click="handleActionToggleFavorite">
+          <IconStar class="w-5 h-5 mr-2" />
+          Favorite
+        </DropdownMenuItem>
+        <DropdownMenuItem @click="handleActionEditGltf">
+          <IconGtltfEditor class="w-5 h-5 mr-2" />
+          Edit glTF
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
+        <!-- <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup :value="model.label" v-model="activeLabel">
@@ -75,9 +108,10 @@ const inputDeleteWorkspace = ref('')
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
-        </DropdownMenuSub>
+        </DropdownMenuSub> -->
         <DropdownMenuSeparator />
         <DropdownMenuItem class="text-red-600">
+          <IconTrash class="w-5 h-5 mr-2" />
           <AlertDialogTrigger class="w-full flex items-start">Delete</AlertDialogTrigger>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -129,8 +163,9 @@ const inputDeleteWorkspace = ref('')
         <AlertDialogAction
           class="bg-rose-600 hover:bg-rose-700"
           :disabled="inputDeleteName !== model.name || inputDeleteWorkspace !== model.workspace"
-          >Delete</AlertDialogAction
         >
+          Delete
+        </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

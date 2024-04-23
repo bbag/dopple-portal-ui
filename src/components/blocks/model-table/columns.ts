@@ -245,8 +245,8 @@ export const columns: ColumnDef<IModel>[] = [
     cell: ({ row }) =>
       h(RouterLink, { to: `editor/${row.original.shortId}` }, [
         h(Button, { size: 'sm', variant: 'outline' }, [
-          h(IconGltfEditor, { class: 'mr-3 h-5 w-5 text-slate-600' }),
-          h('span', 'Edit')
+          // h(IconGltfEditor, { class: 'mr-3 h-5 w-5 text-slate-600' }),
+          h('span', 'Open in glTF Editor')
         ])
       ]),
     enableHiding: false,
