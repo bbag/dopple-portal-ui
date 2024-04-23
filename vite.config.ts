@@ -18,7 +18,17 @@ export default defineConfig({
       plugins: [tailwind(), autoprefixer()]
     }
   },
-  plugins: [vue(), svgLoader()],
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          // treat shoelace tags as custom elements
+          isCustomElement: (tag) => tag.includes('sl-')
+        }
+      }
+    }),
+    svgLoader()
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["@shoelace-style/shoelace/dist/types/vue"]
   },
   "files": [],
   "references": [

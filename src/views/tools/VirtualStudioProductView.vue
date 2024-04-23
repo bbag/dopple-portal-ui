@@ -3,6 +3,13 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useProductsStore } from '@/stores/products'
 
+// Shoelace (for color-picker component)
+import '@shoelace-style/shoelace/dist/themes/light.css'
+import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js'
+setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/')
+import '@shoelace-style/shoelace/dist/components/color-picker/color-picker.js'
+
+// Components
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -23,7 +30,8 @@ import {
   IconArrowsHorizontal,
   IconArrowsVertical,
   IconDeviceFloppy,
-  IconCamera
+  IconCamera,
+  IconCopy
 } from '@tabler/icons-vue'
 
 const product = useProductsStore().products.find(
@@ -57,6 +65,26 @@ const aspectRatioValues = computed(() => {
     return option ? { w: option.w, h: option.h } : { w: '1', h: '1' }
   }
 })
+
+const environment = ref('default')
+const environmentsList = [
+  { label: 'Default', value: 'default' },
+  { label: 'Street', value: 'Street' },
+  { label: 'Studio', value: 'studio' }
+]
+
+const isBgTransparent = ref(true)
+const bgColor = ref('#007BEE')
+function handleSetBgColor(color: string) {
+  bgColor.value = color.toUpperCase()
+}
+
+const filenamePrefix = ref('snapshot-')
+
+const scale = ref('1080p')
+const scalesList = ['4K (2160p)', '2K (1440p)', '1080p', '720p', '480p', '360p', 'Custom']
+const customScaleWidth = ref('1920')
+const customScaleHeight = ref('1080')
 </script>
 
 <template>
@@ -66,7 +94,8 @@ const aspectRatioValues = computed(() => {
         class="max-w-full max-h-[calc(100vh-7rem)] mx-auto bg-no-repeat bg-contain bg-center relative"
         :style="{
           aspectRatio: `${aspectRatioValues.w}/${aspectRatioValues.h}`,
-          backgroundImage: `url(${thumbnail})`
+          backgroundImage: `url(${thumbnail})`,
+          backgroundColor: bgColor || 'rgba(0, 0, 0, 0)'
         }"
       ></Card>
     </div>
@@ -158,11 +187,156 @@ const aspectRatioValues = computed(() => {
         </div>
         <div>
           <h2 class="text-lg font-bold">Environments</h2>
-          <p>Stuff coming soon...</p>
+          <table class="my-2">
+            <tbody>
+              <tr>
+                <td class="pr-4 py-1"><Label class="whitespace-nowrap">Environment:</Label></td>
+                <td class="py-1 w-full">
+                  <Select v-model="environment">
+                    <SelectTrigger class="w-60">
+                      <SelectValue placeholder="Select..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem
+                          v-for="option in environmentsList"
+                          :key="option.label"
+                          :value="option.value"
+                          class="tracking-wide"
+                        >
+                          {{ option.label }}
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </td>
+              </tr>
+              <tr>
+                <td class="pr-4 py-1"><Label class="whitespace-nowrap">Background:</Label></td>
+                <td class="py-1 w-full">
+                  <div class="w-60 flex gap-2 items-center">
+                    <sl-color-picker
+                      :disabled="isBgTransparent"
+                      id="bg-color-input"
+                      label="Select a color"
+                      size="small"
+                      :value="isBgTransparent ? 'transparent' : bgColor"
+                      @sl-input="($event: InputEvent) => handleSetBgColor($event?.target?.value)"
+                    ></sl-color-picker>
+                    <div
+                      class="w-56 h-10 pl-3 pr-1 inline-flex items-center justify-between gap-2 font-mono border border-input rounded-md bg-background text-sm overflow-ellipsis"
+                      :class="isBgTransparent ? 'opacity-80' : `bg-${bgColor}`"
+                    >
+                      <span>{{ isBgTransparent ? '' : bgColor }}</span>
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        class="text-slate-500 hover:text-slate-700"
+                        :disabled="isBgTransparent"
+                      >
+                        <IconCopy class="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex gap-2 items-center mt-2">
+            <Checkbox
+              id="terms1"
+              :checked="isBgTransparent"
+              @update:checked="() => (isBgTransparent = !isBgTransparent)"
+            />
+            <label
+              for="terms1"
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Transparent background
+            </label>
+          </div>
         </div>
         <div>
           <h2 class="text-lg font-bold">Output</h2>
-          <p>Stuff coming soon...</p>
+          <table class="my-2">
+            <tbody>
+              <tr>
+                <td class="pr-4 py-1">Format:</td>
+                <td class="py-1 w-full h-12">PNG</td>
+              </tr>
+              <tr>
+                <td class="pr-4 py-1">Filename:</td>
+                <td class="py-1 w-full">
+                  <Input v-model="filenamePrefix" />
+                </td>
+              </tr>
+              <tr>
+                <td class="pr-4 py-1">Scale:</td>
+                <td class="py-1 w-full">
+                  <Select v-model="scale">
+                    <SelectTrigger class="w-40">
+                      <SelectValue placeholder="Select..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem
+                          v-for="option in scalesList"
+                          :key="option"
+                          :value="option"
+                          class="tracking-wide"
+                        >
+                          {{ option }}
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td class="flex gap-2">
+                  <div v-if="scale === 'Custom'" class="relative">
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <IconArrowsHorizontal
+                          class="w-4 h-4 absolute top-1/2 left-3 -translate-y-1/2 text-slate-600 cursor-help"
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Width</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Input
+                      v-model="customScaleHeight"
+                      type="number"
+                      max="4096"
+                      min="1"
+                      class="w-32 pl-9"
+                    />
+                  </div>
+                  <div v-if="scale === 'Custom'" class="relative">
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <IconArrowsVertical
+                          class="w-4 h-4 absolute top-1/2 left-3 -translate-y-1/2 text-slate-600 cursor-help"
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Height</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Input
+                      v-model="customScaleWidth"
+                      type="number"
+                      max="4096"
+                      min="1"
+                      class="w-32 pl-9"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div>
           <h2 class="text-lg font-bold">Configurations</h2>
