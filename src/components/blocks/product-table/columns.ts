@@ -55,7 +55,8 @@ function toggleFavorite(workspace: string, name: string) {
 
 export const columns: ColumnDef<IProduct>[] = [
   {
-    id: 'favorite',
+    accessorKey: 'isFavorite',
+    meta: { displayName: 'Favorite' },
     header: ({ column }) => h(ProductTableColumnHeader, { column, title: '' }),
     cell: ({ row }) =>
       h(
@@ -72,8 +73,11 @@ export const columns: ColumnDef<IProduct>[] = [
           ? h(IconStarFilled, { class: 'h-4 w-4' })
           : h(IconStar, { class: 'h-4 w-4' })
       ),
-    enableSorting: false,
-    enableHiding: false
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+    enableSorting: false
+    // enableHiding: false
   },
   {
     id: 'thumbnail',
@@ -183,6 +187,8 @@ export const columns: ColumnDef<IProduct>[] = [
     meta: { displayName: 'Status' },
     header: ({ column }) => h(ProductTableColumnHeader, { column, title: 'Status' }),
     cell: ({ row }) => {
+      console.log('------------------- STATUS ROW -------------------')
+      console.log(row.getValue('status'))
       const status = statuses.find((status) => status.value === row.getValue('status'))
       if (!status) return null
       return h('div', { class: 'flex w-[6rem] items-center' }, [

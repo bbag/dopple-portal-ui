@@ -1,7 +1,7 @@
 import { h } from 'vue'
 
-import { useProductsStore, type IProduct } from '@/stores/products'
-const products = useProductsStore().products
+import { useModelsStore } from '@/stores/models'
+const models = useModelsStore().models
 
 import {
   IconArrowDown,
@@ -72,7 +72,7 @@ export const priorities = [
 //   { label: 'rh-assets', value: 'rh-assets' }
 // ]
 
-export const workspaces = products
+export const workspaces = models
   .reduce(
     (acc, obj) => {
       if (!acc.some((item) => item.value === obj.workspace)) {

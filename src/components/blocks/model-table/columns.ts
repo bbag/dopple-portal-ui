@@ -3,11 +3,10 @@ import { h } from 'vue'
 
 import { RouterLink } from 'vue-router'
 
-import { labels, statuses } from './data'
+import { statuses } from './data'
 import { useModelsStore, type IModel, type IModelVersion } from '@/stores/models'
 import ModelTableColumnHeader from './ModelTableColumnHeader.vue'
 import ModelTableRowActions from './ModelTableRowActions.vue'
-// import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
@@ -28,8 +27,10 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 })
 
 /** */
-function toggleFavorite(workspace: string, name: string) {
-  const model = useModelsStore().models.find((p) => p.name === name && p.workspace === workspace)
+function toggleFavorite(workspace: string, shortId: string) {
+  const model = useModelsStore().models.find(
+    (m) => m.shortId === shortId && m.workspace === workspace
+  )
 
   if (model && model.isFavorite) {
     model.isFavorite = false
@@ -54,7 +55,8 @@ function toggleFavorite(workspace: string, name: string) {
 
 export const columns: ColumnDef<IModel>[] = [
   {
-    id: 'favorite',
+    accessorKey: 'isFavorite',
+    meta: { displayName: 'Favorite' },
     header: ({ column }) => h(ModelTableColumnHeader, { column, title: '' }),
     cell: ({ row }) =>
       h(
@@ -65,14 +67,17 @@ export const columns: ColumnDef<IModel>[] = [
           class: row.original.isFavorite
             ? 'w-6 h-6 p-0 flex items-center justify-center text-amber-400 hover:text-amber-500'
             : 'w-6 h-6 p-0 flex items-center justify-center text-slate-300 hover:text-slate-400',
-          onClick: () => toggleFavorite(row.getValue('workspace'), row.getValue('name'))
+          onClick: () => toggleFavorite(row.getValue('workspace'), row.getValue('shortId'))
         },
         row.original.isFavorite
           ? h(IconStarFilled, { class: 'h-4 w-4' })
           : h(IconStar, { class: 'h-4 w-4' })
       ),
-    enableSorting: false,
-    enableHiding: false
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+    enableSorting: false
+    // enableHiding: false
   },
   // {
   //   id: 'thumbnail',
@@ -241,7 +246,7 @@ export const columns: ColumnDef<IModel>[] = [
       h(RouterLink, { to: `editor/${row.original.shortId}` }, [
         h(Button, { size: 'sm', variant: 'outline' }, [
           h(IconGltfEditor, { class: 'mr-3 h-5 w-5 text-slate-600' }),
-          h('span', 'Edit glTF')
+          h('span', 'Edit')
         ])
       ]),
     enableHiding: false,

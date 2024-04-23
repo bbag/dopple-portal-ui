@@ -78,7 +78,7 @@ const productOverviewSections: SectionData[] = [
     title: 'Assets',
     linkId: 'assets',
     component: SectionAssets,
-    description: 'Any assets (models, materials, textures) that are associated with this product.'
+    description: 'Any assets (models, materias, textures) that are associated with this product.'
   },
   {
     title: 'Embed Code',

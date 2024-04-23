@@ -1,6 +1,6 @@
 import { h } from 'vue'
 
-import { useProductsStore, type IProduct } from '@/stores/products'
+import { useProductsStore } from '@/stores/products'
 const products = useProductsStore().products
 
 import {

@@ -27,7 +27,7 @@ interface ModelTableFacetedFilter {
   title?: string
   options: {
     label: string
-    value: string
+    value: string | boolean
     icon?: Component
   }[]
 }
@@ -35,7 +35,9 @@ interface ModelTableFacetedFilter {
 const props = defineProps<ModelTableFacetedFilter>()
 
 const facets = computed(() => props.column?.getFacetedUniqueValues())
-const selectedValues = computed(() => new Set(props.column?.getFilterValue() as string[]))
+const selectedValues = computed(
+  () => new Set(props.column?.getFilterValue() as (string | boolean)[])
+)
 </script>
 
 <template>
@@ -60,7 +62,7 @@ const selectedValues = computed(() => new Set(props.column?.getFilterValue() as 
             <template v-else>
               <Badge
                 v-for="option in options.filter((option) => selectedValues.has(option.value))"
-                :key="option.value"
+                :key="option.value.toString()"
                 variant="secondary"
                 class="rounded-sm px-1 font-normal"
               >
@@ -84,7 +86,7 @@ const selectedValues = computed(() => new Set(props.column?.getFilterValue() as 
           <CommandGroup>
             <CommandItem
               v-for="option in options"
-              :key="option.value"
+              :key="option.value.toString()"
               :value="option"
               @select="
                 (e) => {

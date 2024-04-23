@@ -87,7 +87,7 @@ export const useProductsStore = defineStore('products', () => {
       thumbnail: MotorcycleThumbnail,
       isFavorite: true,
       dateCreated: new Date('2024-04-03T13:01:51'),
-      dateModified: new Date('2024-04-03T13:01:51'),
+      dateModified: new Date('2024-04-23T13:01:51'),
       models: ['0wRtfJqUrw', 'bIEoS3Ad9g'],
       versions: [
         {
@@ -109,7 +109,7 @@ export const useProductsStore = defineStore('products', () => {
           draftVersion: 3,
           publishedVersion: 2,
           createdBy: 'Marketing Mary',
-          dateCreated: new Date('2024-03-21T02:54:40')
+          dateCreated: new Date('2024-04-23T02:54:40')
         }
       ],
       cameras: [
@@ -182,7 +182,7 @@ export const useProductsStore = defineStore('products', () => {
       thumbnail: PurseThumbnail,
       isFavorite: false,
       dateCreated: new Date('2024-04-02T12:08:59'),
-      dateModified: new Date('2024-04-02T12:08:59'),
+      dateModified: new Date('2024-04-04T11:51:38'),
       models: ['7fC431d8dB'],
       versions: [
         {
