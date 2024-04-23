@@ -98,7 +98,7 @@ const models = ref([
 </script>
 
 <template>
-  <div class="bg-white overflow-x-auto">
+  <div class="bg-muted overflow-x-auto p-4">
     <table class="config-matrix-table">
       <thead>
         <tr>

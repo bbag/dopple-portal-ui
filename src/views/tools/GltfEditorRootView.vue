@@ -28,7 +28,11 @@ const models = useModelsStore().models.filter((p) => p.workspace === workspace)
     <Card>
       <CardHeader>
         <CardTitle>Models</CardTitle>
-        <CardDescription>This is still super placeholdery. More coming soon...</CardDescription>
+        <CardDescription>
+          <div class="w-max text-xs text-rose-600 bg-rose-600/10 px-3 py-2 mt-1 rounded">
+            <em>THIS IS JUST A PLACEHOLDER SCREEN — IT'S STILL A WORK-IN-PROGRESS!</em>
+          </div>
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ul class="space-y-0">

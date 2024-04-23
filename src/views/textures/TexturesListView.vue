@@ -19,7 +19,9 @@ import IconPlusSmall from '@/assets/icons/plus-small.svg'
         Upload Texture
       </Button>
     </header>
-    <p class="mb-8 text-slate-500">(Still super placeholder-y... more coming soon.)</p>
+    <div class="w-max text-xs text-rose-600 bg-rose-600/10 px-3 py-2 mt-1 mb-4 rounded">
+      <em>THIS IS JUST A PLACEHOLDER SCREEN — IT'S STILL A WORK-IN-PROGRESS!</em>
+    </div>
     <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(18rem,1fr))]">
       <Card v-for="texture in useTexturesStore().textures" :key="texture.id" class="p-4">
         <img :src="texture.thumbnail" class="w-full aspect-square" />
