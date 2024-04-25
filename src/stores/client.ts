@@ -14,8 +14,9 @@ export interface IMember {
   workspaces: string[]
   customPermissions: string[]
 }
+export type TRole = 'Admin' | 'Editor' | 'Viewer' | 'Custom'
 
-export const roles = [
+export const roles: { title: TRole }[] = [
   { title: 'Admin' },
   { title: 'Editor' },
   { title: 'Viewer' },

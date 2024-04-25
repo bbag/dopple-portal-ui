@@ -50,9 +50,6 @@ function handleIsDefaultClick(item: IProductVersion) {
     item !== v ? (v.isDefault = false) : (v.isDefault = true)
   })
 
-  console.log(`h(IconSquareCheckFilled, { class: 'h-4 w-4' })`)
-  console.log(h(IconSquareCheckFilled, { class: 'h-4 w-4' }))
-
   toast(
     h('span', { class: 'flex items-start' }, [
       h(IconSquareCheckFilled, { class: 'h-5 w-5 mr-2 text-green-500 shrink-0' }),

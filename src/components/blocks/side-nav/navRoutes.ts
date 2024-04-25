@@ -17,26 +17,37 @@ import IconTextureIcon from '@/assets/icons/texture.svg'
 import IconUiBuilder from '@/assets/icons/ui-builder.svg'
 import IconWorkspaces from '@/assets/icons/workspaces.svg'
 
-interface RouteCategory {
+export interface IRouteCategory {
   title: string
-  routes: Route[]
+  routes: IRoute[]
 }
 
-interface Route {
+export interface IRoute {
   name: string
   path: string
   icon?: any
-  subroutes?: Route[]
+  subroutes?: IRoute[]
 }
 
-export const routes: RouteCategory[] = [
+export const routes: IRouteCategory[] = [
   {
     title: '',
     routes: [
       {
-        name: 'Overview',
+        name: 'Home',
         icon: IconHomeIcon,
-        path: ''
+        path: '/'
+      },
+      {
+        name: 'Workspaces',
+        icon: IconWorkspaces,
+        path: '/workspaces',
+        subroutes: [
+          {
+            name: 'Workspace Overview',
+            path: ''
+          }
+        ]
       }
     ]
   },
@@ -123,11 +134,6 @@ export const routes: RouteCategory[] = [
   {
     title: 'Settings',
     routes: [
-      {
-        name: 'Workspaces',
-        icon: IconWorkspaces,
-        path: '/workspaces'
-      },
       {
         name: 'Domains',
         icon: IconWorld,
