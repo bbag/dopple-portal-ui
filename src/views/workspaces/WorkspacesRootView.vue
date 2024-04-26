@@ -7,6 +7,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
 import { useWorkspacesStore } from '@/stores/workspaces'
+import { useTestRolesStore } from '@/stores/testRoles'
 
 import LayoutMain from '@/components/layouts/LayoutMain.vue'
 

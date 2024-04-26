@@ -12,7 +12,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -39,8 +39,6 @@ function handleForward() {
     router.forward()
   }
 }
-
-const testRole = ref('Viewer')
 </script>
 
 <template>
@@ -53,7 +51,8 @@ const testRole = ref('Viewer')
               variant="ghost"
               size="icon-sm"
               @click="handleBack"
-              :disabled="!useNavHistoryStore().canGoBack">
+              :disabled="!useNavHistoryStore().canGoBack"
+            >
               <IconArrowNarrowLeft size="24" class="" />
             </Button>
           </TooltipTrigger>
@@ -67,7 +66,8 @@ const testRole = ref('Viewer')
               variant="ghost"
               size="icon-sm"
               @click="handleForward"
-              :disabled="!useNavHistoryStore().canGoForward">
+              :disabled="!useNavHistoryStore().canGoForward"
+            >
               <IconArrowNarrowRight size="24" class="" />
             </Button>
           </TooltipTrigger>
@@ -81,7 +81,7 @@ const testRole = ref('Viewer')
       <div class="flex gap-4 ml-auto">
         <div class="flex items-center gap-2">
           <span class="text-xs font-medium text-muted-foreground">Test role:</span>
-          <Select v-model="testRole">
+          <Select v-model="useTestRolesStore().currentTestRole">
             <SelectTrigger class="w-24 lg:w-28 h-8">
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>

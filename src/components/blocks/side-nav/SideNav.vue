@@ -5,6 +5,7 @@ import { routes, type IRoute, type IRouteCategory } from './navRoutes'
 import { useWorkspacesStore } from '@/stores/workspaces'
 
 import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import WorkspaceSelect from './WorkspaceSelect.vue'
 
@@ -111,50 +112,31 @@ function itemPath(path: string) {
           <template v-for="(item, itemIndex) in category.routes" :key="itemIndex">
             <Tooltip>
               <TooltipTrigger as-child v-show="!$props.isCollapsed">
-                <a
-                  v-if="item.path.startsWith('http')"
+                <component
+                  :is="item.path.startsWith('http') ? 'a' : RouterLink"
                   :href="item.path"
-                  target="_blank"
+                  :to="item.path.startsWith('http') ? undefined : itemPath(item.path)"
+                  :target="item.path.startsWith('http') ? '_blank' : undefined"
                   v-show="$props.isCollapsed"
                   class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 after:-left-3"
-                  :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
                 >
                   <component :is="item.icon" class="size-6 shrink-0" />
-                </a>
-                <RouterLink
-                  v-else
-                  :to="itemPath(item.path)"
-                  v-show="$props.isCollapsed"
-                  class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 after:-left-3"
-                  :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
-                >
-                  <component :is="item.icon" class="size-6 shrink-0" />
-                </RouterLink>
+                </component>
               </TooltipTrigger>
               <TooltipContent side="right" :side-offset="5">
                 {{ item.name }}
               </TooltipContent>
-              <a
-                v-if="item.path.startsWith('http')"
+              <component
+                :is="item.path.startsWith('http') ? 'a' : RouterLink"
                 :href="item.path"
-                target="_blank"
+                :to="item.path.startsWith('http') ? undefined : itemPath(item.path)"
+                :target="item.path.startsWith('http') ? '_blank' : undefined"
                 v-show="!$props.isCollapsed"
                 class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
-                :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
               >
                 <component :is="item.icon" class="size-6 shrink-0" />
                 <span class="truncate">{{ item.name }}</span>
-              </a>
-              <RouterLink
-                v-else
-                :to="itemPath(item.path)"
-                v-show="!$props.isCollapsed"
-                class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
-                :class="[item.name.toLowerCase() === 'overview' ? 'workspace-overview-link' : '']"
-              >
-                <component :is="item.icon" class="size-6 shrink-0" />
-                <span class="truncate">{{ item.name }}</span>
-              </RouterLink>
+              </component>
             </Tooltip>
             <ul v-if="item.subroutes && item.subroutes.length && !$props.isCollapsed" class="mb-4">
               <li
@@ -172,11 +154,13 @@ function itemPath(path: string) {
                     "
                     class="w-6 h-8 shrink-0 text-slate-300"
                   />
-                  <span class="truncate">{{
-                    subroute.name === 'Workspace Overview'
-                      ? useWorkspacesStore().currentWorkspace
-                      : subroute.name
-                  }}</span>
+                  <span class="truncate">
+                    {{
+                      subroute.name === 'Workspace Overview'
+                        ? useWorkspacesStore().currentWorkspace
+                        : subroute.name
+                    }}
+                  </span>
                 </RouterLink>
               </li>
             </ul>
@@ -191,12 +175,12 @@ function itemPath(path: string) {
 nav a::after {
   @apply content-[''] absolute top-0 h-full bg-blue-500 rounded-r-lg w-1 transition duration-500 -translate-x-[calc(100%+1px)];
 }
-nav a.router-link-exact-active,
-nav a.router-link-active:not(.workspace-overview-link) {
+
+nav a.router-link-exact-active {
   @apply text-blue-500 bg-opacity-5;
 }
-nav a.router-link-exact-active::after,
-nav a.router-link-active:not(.workspace-overview-link)::after {
+
+nav a.router-link-exact-active::after {
   @apply translate-x-0;
 }
 </style>
