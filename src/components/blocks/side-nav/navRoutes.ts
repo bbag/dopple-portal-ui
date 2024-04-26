@@ -1,3 +1,7 @@
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
+
 import {
   IconBox,
   IconChartDots,
@@ -19,6 +23,7 @@ import IconWorkspaces from '@/assets/icons/workspaces.svg'
 
 export interface IRouteCategory {
   title: string
+  categoryDisplayFn?: (route: RouteLocationNormalizedLoaded) => boolean
   routes: IRoute[]
 }
 
@@ -26,6 +31,8 @@ export interface IRoute {
   name: string
   path: string
   icon?: any
+  routeDisplayFn?: (route: RouteLocationNormalizedLoaded) => boolean
+  subroutesDisplayFn?: (route: RouteLocationNormalizedLoaded) => boolean
   subroutes?: IRoute[]
 }
 
@@ -42,6 +49,12 @@ export const routes: IRouteCategory[] = [
         name: 'Workspaces',
         icon: IconWorkspaces,
         path: '/workspaces',
+        // routeDisplayFn: (route) => {
+        //   return typeof route.params === 'object' && 'workspace' in route.params ? true : false
+        // },
+        subroutesDisplayFn: (route) => {
+          return typeof route.params === 'object' && 'workspace' in route.params ? true : false
+        },
         subroutes: [
           {
             name: 'Workspace Overview',
@@ -53,6 +66,9 @@ export const routes: IRouteCategory[] = [
   },
   {
     title: 'Asset Library',
+    categoryDisplayFn: (route) => {
+      return typeof route.params === 'object' && 'workspace' in route.params ? true : false
+    },
     routes: [
       {
         name: 'Products',
@@ -78,11 +94,18 @@ export const routes: IRouteCategory[] = [
   },
   {
     title: 'Tools & Insights',
+    categoryDisplayFn: (route) => {
+      return typeof route.params === 'object' && 'workspace' in route.params ? true : false
+    },
     routes: [
       {
         name: 'Analytics',
         icon: IconChartDots,
         path: 'analytics',
+        subroutesDisplayFn: (route) => {
+          console.log(route.matched)
+          return route.matched.some((m) => m.name === 'Analytics')
+        },
         subroutes: [
           {
             name: 'Sessions',
