@@ -133,6 +133,7 @@ function itemPath(path: string) {
                 :target="item.path.startsWith('http') ? '_blank' : undefined"
                 v-show="!$props.isCollapsed"
                 class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
+                :class="item.subroutes && item.subroutes.length ? 'has-subroutes' : ''"
               >
                 <component :is="item.icon" class="size-6 shrink-0" />
                 <span class="truncate">{{ item.name }}</span>
@@ -147,6 +148,7 @@ function itemPath(path: string) {
                 <RouterLink
                   :to="itemPath(subroute.path)"
                   class="inline-flex items-center justify-start gap-2 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
+                  :class="{ 'sidenav-workspace-name': subroute.name === 'Workspace Overview' }"
                 >
                   <component
                     :is="
@@ -176,11 +178,13 @@ nav a::after {
   @apply content-[''] absolute top-0 h-full bg-blue-500 rounded-r-lg w-1 transition duration-500 -translate-x-[calc(100%+1px)];
 }
 
-nav a.router-link-exact-active {
+nav a.router-link-exact-active,
+nav a.router-link-active:not(:is(.has-subroutes, .sidenav-workspace-name)) {
   @apply text-blue-500 bg-opacity-5;
 }
 
-nav a.router-link-exact-active::after {
+nav a.router-link-exact-active::after,
+nav a.router-link-active:not(:is(.has-subroutes, .sidenav-workspace-name))::after {
   @apply translate-x-0;
 }
 </style>

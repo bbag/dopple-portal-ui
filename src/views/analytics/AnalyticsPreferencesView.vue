@@ -5,7 +5,7 @@ import DummyAnalytics from '@/components/blocks/dummy-analytics/DummyAnalytics.v
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold mb-8">Analytics</h1>
+  <h1 class="text-3xl font-bold mb-8">Preferences</h1>
   <div class="w-max text-xs text-rose-600 bg-rose-600/10 px-3 py-2 mt-1 mb-4 rounded">
     <em>STILL IN-PROGRESS — MORE ANALYTICS SCREENS COMING SOON!</em>
   </div>

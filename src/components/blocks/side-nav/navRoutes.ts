@@ -1,5 +1,3 @@
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 
 import {
@@ -49,12 +47,8 @@ export const routes: IRouteCategory[] = [
         name: 'Workspaces',
         icon: IconWorkspaces,
         path: '/workspaces',
-        // routeDisplayFn: (route) => {
-        //   return typeof route.params === 'object' && 'workspace' in route.params ? true : false
-        // },
-        subroutesDisplayFn: (route) => {
-          return typeof route.params === 'object' && 'workspace' in route.params ? true : false
-        },
+        subroutesDisplayFn: (route) =>
+          typeof route.params === 'object' && 'workspace' in route.params ? true : false,
         subroutes: [
           {
             name: 'Workspace Overview',
@@ -66,9 +60,8 @@ export const routes: IRouteCategory[] = [
   },
   {
     title: 'Asset Library',
-    categoryDisplayFn: (route) => {
-      return typeof route.params === 'object' && 'workspace' in route.params ? true : false
-    },
+    categoryDisplayFn: (route) =>
+      typeof route.params === 'object' && 'workspace' in route.params ? true : false,
     routes: [
       {
         name: 'Products',
@@ -94,18 +87,14 @@ export const routes: IRouteCategory[] = [
   },
   {
     title: 'Tools & Insights',
-    categoryDisplayFn: (route) => {
-      return typeof route.params === 'object' && 'workspace' in route.params ? true : false
-    },
+    categoryDisplayFn: (route) =>
+      typeof route.params === 'object' && 'workspace' in route.params ? true : false,
     routes: [
       {
         name: 'Analytics',
         icon: IconChartDots,
         path: 'analytics',
-        subroutesDisplayFn: (route) => {
-          console.log(route.matched)
-          return route.matched.some((m) => m.name === 'Analytics')
-        },
+        subroutesDisplayFn: (route) => route.matched.some((m) => m.name === 'Analytics'),
         subroutes: [
           {
             name: 'Sessions',

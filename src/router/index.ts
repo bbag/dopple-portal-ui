@@ -126,7 +126,56 @@ const router = createRouter({
         {
           path: 'analytics',
           name: 'Analytics',
-          component: () => import('@/views/analytics/AnalyticsRootView.vue')
+          component: () => import('@/views/analytics/AnalyticsView.vue'),
+          children: [
+            {
+              path: '',
+              name: 'Analytics Overview',
+              component: () => import('@/views/analytics/AnalyticsRootView.vue')
+            },
+            {
+              path: 'sessions',
+              name: 'Session Analytics',
+              meta: { breadcrumbName: 'Sessions' },
+              component: () => import('@/views/analytics/AnalyticsSessionsView.vue')
+            },
+            {
+              path: 'conversions',
+              name: 'Conversion Analytics',
+              meta: { breadcrumbName: 'Conversions' },
+              component: () => import('@/views/analytics/AnalyticsConversionsView.vue')
+            },
+            {
+              path: 'products',
+              name: 'Product Analytics',
+              meta: { breadcrumbName: 'Products' },
+              component: () => import('@/views/analytics/AnalyticsProductsView.vue')
+            },
+            {
+              path: 'configurations',
+              name: 'Configuration Analytics',
+              meta: { breadcrumbName: 'Configurations' },
+              component: () => import('@/views/analytics/AnalyticsConfigurationsView.vue')
+            },
+            {
+              path: 'preferences',
+              name: 'Preference Analytics',
+              meta: { breadcrumbName: 'Preferences' },
+              component: () => import('@/views/analytics/AnalyticsPreferencesView.vue')
+            },
+            {
+              path: 'hotspots',
+              name: 'Hotspot Analytics',
+              meta: { breadcrumbName: 'Hotspots' },
+              component: () => import('@/views/analytics/AnalyticsHotspotsView.vue')
+            },
+            {
+              path: 'all-events',
+              name: 'All Analytics Events',
+              meta: { breadcrumbName: 'All Events' },
+              component: () => import('@/views/analytics/AnalyticsAllEventsView.vue')
+            }
+          ]
         },
         {
           path: 'editor',
