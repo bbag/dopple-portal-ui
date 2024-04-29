@@ -4,8 +4,9 @@ import { RouterLink, useRoute } from 'vue-router'
 import { routes, type IRoute, type IRouteCategory } from './navRoutes'
 import { useWorkspacesStore } from '@/stores/workspaces'
 
+import { cn } from '@/lib/utils'
+
 import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import WorkspaceSelect from './WorkspaceSelect.vue'
 
@@ -59,8 +60,12 @@ function itemPath(path: string) {
 
 <template>
   <aside
-    class="inset-y fixed left-0 z-2 flex h-full flex-col border-r"
-    :class="[$props.isCollapsed ? 'w-16' : 'w-64']"
+    :class="
+      cn(
+        'inset-y fixed left-0 z-2 flex h-full flex-col border-r',
+        $props.isCollapsed ? 'w-16' : 'w-64'
+      )
+    "
   >
     <TooltipProvider>
       <RouterLink to="/">
@@ -93,7 +98,7 @@ function itemPath(path: string) {
       <div v-show="!isCollapsed" class="px-4 mb-4">
         <WorkspaceSelect />
       </div>
-      <nav class="overflow-y-auto" :class="[$props.isCollapsed ? 'px-3' : 'px-4']">
+      <nav :class="cn('overflow-y-auto pb-4', $props.isCollapsed ? 'px-3' : 'px-4')">
         <div
           v-for="(category, categoryIndex) in sideNavItems"
           :key="categoryIndex"
@@ -132,8 +137,12 @@ function itemPath(path: string) {
                 :to="item.path.startsWith('http') ? undefined : itemPath(item.path)"
                 :target="item.path.startsWith('http') ? '_blank' : undefined"
                 v-show="!$props.isCollapsed"
-                class="inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
-                :class="item.subroutes && item.subroutes.length ? 'has-subroutes' : ''"
+                :class="
+                  cn(
+                    'inline-flex items-center justify-start gap-2 h-10 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4',
+                    { 'has-subroutes': item.subroutes && item.subroutes.length }
+                  )
+                "
               >
                 <component :is="item.icon" class="size-6 shrink-0" />
                 <span class="truncate">{{ item.name }}</span>
@@ -147,8 +156,12 @@ function itemPath(path: string) {
               >
                 <RouterLink
                   :to="itemPath(subroute.path)"
-                  class="inline-flex items-center justify-start gap-2 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4"
-                  :class="{ 'sidenav-workspace-name': subroute.name === 'Workspace Overview' }"
+                  :class="
+                    cn(
+                      'inline-flex items-center justify-start gap-2 px-2 w-full transition-colors relative rounded-lg bg-blue-500 bg-opacity-0 hover:text-blue-500 select-none after:-left-4',
+                      { 'sidenav-workspace-name': subroute.name === 'Workspace Overview' }
+                    )
+                  "
                 >
                   <component
                     :is="

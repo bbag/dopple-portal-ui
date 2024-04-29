@@ -79,7 +79,7 @@ function handleForward() {
       <Separator orientation="vertical" />
       <BreadCrumbs v-if="!hideBreadcrumbs" />
       <div class="flex gap-4 ml-auto">
-        <div class="flex items-center gap-2">
+        <!-- <div class="flex items-center gap-2">
           <span class="text-xs font-medium text-muted-foreground">Test role:</span>
           <Select v-model="useTestRolesStore().currentTestRole">
             <SelectTrigger class="w-24 lg:w-28 h-8">
@@ -91,7 +91,7 @@ function handleForward() {
               </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </div> -->
         <Button variant="outline" size="sm">
           <IconCloudUp size="20" class="mr-2" />
           Upload
