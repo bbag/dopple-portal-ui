@@ -109,24 +109,99 @@ const models = ref([
 
 <template>
   <div class="bg-muted overflow-x-auto p-4">
+    <Sheet>
+      <SheetTrigger as-child>
+        <Button variant="outline"> Open </Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here. Click save when you're done.
+          </SheetDescription>
+        </SheetHeader>
+        <div class="grid gap-4 py-4">
+          <div class="grid grid-cols-4 items-center gap-4">
+            <Label for="name" class="text-right"> Name </Label>
+            <Input id="name" value="Pedro Duarte" class="col-span-3" />
+          </div>
+          <div class="grid grid-cols-4 items-center gap-4">
+            <Label for="username" class="text-right"> Username </Label>
+            <Input id="username" value="@peduarte" class="col-span-3" />
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose as-child>
+            <Button type="submit"> Save changes </Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
     <table class="config-matrix-table">
       <thead>
         <tr>
-          <th></th>
-          <th colspan="2">Bed Base</th>
-          <th colspan="4">Mattress</th>
+          <td class="font-bold">
+            Configuration
+            <br />
+            <div class="text-xs text-rose-600 bg-rose-600/10 p-2 mt-1 rounded">
+              <em>STILL A SUPER WORK-IN-PROGRESS!</em>
+            </div>
+          </td>
+          <td v-for="col in cols" :key="col.id">
+            <Input size="sm" type="number" v-model="col.i" />
+            <Input size="sm" type="text" v-model="col.name" />
+          </td>
         </tr>
         <tr>
-          <td>Options:</td>
-          <td>Regular</td>
-          <td>Smart Base</td>
-          <td>Balance</td>
-          <td>Firm</td>
-          <td>Hybrid</td>
-          <td>None</td>
+          <td>
+            Add Choice
+            <Input size="sm" type="text" />
+          </td>
+          <td v-for="col in cols" :key="col.id">
+            Add Option
+            <Input size="sm" type="text" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <Button size="xs" variant="outline">Reset</Button>
+            <Button size="xs" variant="outline">Save</Button>
+            <Button size="xs" variant="outline">Download</Button>
+            <Button size="xs" variant="outline">Upload</Button>
+            <br />
+            <input size="sm" type="file" />
+          </td>
+          <td v-for="col in cols" :key="col.id" class="whitespace-nowrap space-x-2">
+            <input
+              data-vertical
+              class="[writing-mode:vertical-lr]"
+              size="sm"
+              type="text"
+              v-for="option in col.options"
+              :key="option.id"
+              v-model="option.name"
+            />
+          </td>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <tr>
+          <td class="font-bold">Hotspots</td>
+          <td></td>
+        </tr>
+        <tr v-for="hotspot in hotspots" :key="hotspot.id">
+          <td>{{ hotspot.name }}</td>
+          <td v-for="col in cols" :key="col.id">X</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Models</td>
+          <td></td>
+        </tr>
+        <tr v-for="model in models" :key="model.id">
+          <td>{{ model.name }}</td>
+          <td v-for="col in cols" :key="col.id">X</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
@@ -134,7 +209,7 @@ const models = ref([
 <style scoped>
 .config-matrix-table th,
 .config-matrix-table td {
-  @apply p-2 border bg-white;
+  @apply p-2;
   vertical-align: top;
 }
 
